@@ -1,0 +1,6 @@
+﻿@page "/"
+
+@foreach (var post in PostService.EnumeratePosts())
+{
+    <PostContent Content="post" CompactMode=true/>
+}

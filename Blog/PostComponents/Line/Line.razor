@@ -1,0 +1,15 @@
+﻿@if (Content is not null)
+{
+    @switch (Content.BlockType)
+    {
+        case Enums.BlockType.Content:
+            @Content.Text
+            break;
+        case Enums.BlockType.Inline:
+            <span class="@Content.Style.GetStyleClasses() @Content.TextPosition.GetTextPositionClass() @Content.GetAdditionalClasses()">@Content.Text</span>
+            break;
+        case Enums.BlockType.Normal:
+            <div class="@Content.Style.GetStyleClasses() @Content.TextPosition.GetTextPositionClass() @Content.GetAdditionalClasses()">@Content.Text</div>
+            break;
+    }    
+}

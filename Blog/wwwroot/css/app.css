@@ -1,0 +1,62 @@
+﻿@import url('icons/bootstrap-icons.css');
+
+.pointer {
+    cursor: pointer;
+}
+
+.color-header {
+    color: darkmagenta;
+}
+
+.color-quote {
+    color: dimgrey;
+}
+
+.color-link {
+    color: blue;
+}
+
+.keep-whitespace {
+    white-space: pre;
+}
+
+.code-keyword {
+    color: #569cd6;
+}
+
+.code-controlkeyword {
+    color: #d8a0df;
+}
+
+.code-string {
+    color: #ce9178;
+}
+
+.code-method {
+    color: #dcdcaa;
+}
+
+.code-block {
+    background-color: #2f2f2f;
+    color: #dcdcdc;
+}
+
+.mh-10 {
+    max-height: 10vh;
+}
+
+.mh-15 {
+    max-height: 15vh;
+}
+
+.mh-20 {
+    max-height: 20vh;
+}
+
+.hover {
+    transition: opacity 200ms;
+}
+
+    .hover:hover {
+        opacity: 0.5;
+    }

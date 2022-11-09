@@ -1,0 +1,33 @@
+﻿@using Blog.PostComponents.Compound
+@using Blog.PostComponents.Date
+@using Blog.PostComponents.Header
+@using Blog.PostComponents.Paragraph
+
+@if (Content is not null)
+{
+    if (CompactMode)
+    {
+        <a href="post/@Content.TitleId">a link?</a>
+        <Date Content="new DateContent { Date = Content.PostDate, Style = Enums.Style.Bold, DisplayType = DateDisplayType.LongDate, TextPosition = Enums.PositionType.Right }" />
+        <div class="mh-20 mb-4 p-2 border border-2 rounded overflow-hidden shadow user-select-none pointer hover" @onclick="SelectPost">  
+            <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = Enums.BlogColor.Header }" />           
+            @if (!string.IsNullOrEmpty(Content.SubTitle))
+            {
+                <Paragraph Content="new ParagraphContent { Style = Enums.Style.Italic, Text = Content.SubTitle }" />
+            }
+            <hr>
+            <Compound Content="Content.Content" />
+        </div>
+    }
+    else
+    {
+        <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = Enums.BlogColor.Header }" />
+        @if (!string.IsNullOrEmpty(Content.SubTitle))
+        {
+            <Paragraph Content="new ParagraphContent { Style = Enums.Style.Italic, Text = Content.SubTitle }" />
+        }
+        <hr>
+        <Compound Content="Content.Content" />
+    }
+    
+}
