@@ -6,10 +6,10 @@
             <a href="@Content.Href" target="@Target"> @Content.Text</a>
             break;
         case Enums.BlockType.Inline:
-            <span class="@Content.Style.GetStyleClasses() @Content.TextPosition.GetTextPositionClass() @Content.GetAdditionalClasses()"><a href="@Content.Href" target="@Target"> @Content.Text</a></span>
+            <span class="@Content.GetClasses()"><a href="@Content.Href" target="@Target"> @Content.Text</a></span>
             break;
         case Enums.BlockType.Normal:
-            <div class="@Content.Style.GetStyleClasses() @Content.TextPosition.GetTextPositionClass() @Content.GetAdditionalClasses()"><a href="@Content.Href" target="@Target"> @Content.Text</a></div>
+            <div class="@Content.GetClasses()"><a href="@Content.Href" target="@Target"> @Content.Text</a></div>
             break;
     }    
 }

@@ -39,6 +39,7 @@
 .code-block {
     background-color: #2f2f2f;
     color: #dcdcdc;
+    overflow-x: auto;
 }
 
 .mh-10 {
@@ -57,6 +58,10 @@
     transition: opacity 200ms;
 }
 
-    .hover:hover {
-        opacity: 0.5;
-    }
+.hover:hover {
+    opacity: 0.5;
+}
+
+.scroll-horizontal {
+    overflow-x: auto;
+}

@@ -3,78 +3,39 @@ using Blog.PostComponents;
 
 namespace Blog.Builders
 {
-    public class PostBuilder
+    public class PostBuilder : BuilderBase<PostBuilder, PostItem>
     {
-        private readonly PostItem _post;
         private PostItemContent? _currentItem;
-        private BlockType _blockType;
-        private PositionType _textAlignment;
-        private Style _style;
 
-        private PostBuilder()
+        protected PostBuilder() : base(new PostItem(), BlockType.Normal, PositionType.Inherit, Style.Normal)
         {
-            _blockType = BlockType.Normal;
-            _style = Style.Normal;
-            _textAlignment = PositionType.Inherit;
-            _post = new();
         }
 
         public static PostBuilder CreatePost()
         {
             return new PostBuilder();
-        }
-
-        public PostBuilder SetStyle(Style style)
-        {
-            _style = style;
-            return this;
-        }
-
-        public PostBuilder RemoveStyle(Style style)
-        {
-            _style &= ~style;
-            return this;
-        }
-
-        public PostBuilder AddToStyle(Style style)
-        {
-            if (_style == Style.Normal)
-            {
-                _style = style;
-            }
-            else if (!_style.HasFlag(style))
-            {
-                _style |= style;
-            }
-
-            return this;
-        }
-
-        public PostBuilder ResetStyle()
-        {
-            return SetStyle(Style.Normal);
-        }
+        }       
 
         public PostBuilder WithTitle(string title)
         {
-            if (!string.IsNullOrEmpty(_post.Title))
+            if (!string.IsNullOrEmpty(_result.Title))
             {
                 throw new InvalidOperationException("Can only set title once");
             }
 
-            _post.Title = title;
+            _result.Title = title;
 
             return this;
         }
 
         public PostBuilder WithSubTitle(string subTitle)
         {
-            if (!string.IsNullOrEmpty(_post.SubTitle))
+            if (!string.IsNullOrEmpty(_result.SubTitle))
             {
                 throw new InvalidOperationException("Can only set subTitle once");
             }
 
-            _post.SubTitle = subTitle;
+            _result.SubTitle = subTitle;
 
             return this;
         }
@@ -86,76 +47,23 @@ namespace Blog.Builders
 
         public PostBuilder WithDate(DateTime postDate)
         {
-            if (_post.PostDate != DateTime.MinValue)
+            if (_result.PostDate != DateTime.MinValue)
             {
                 throw new InvalidOperationException("Can only set post date once");
             }
 
-            _post.PostDate = postDate;
+            _result.PostDate = postDate;
 
             return this;
         }
-
-        public PostBuilder SetBlockType(BlockType type)
-        {
-            if (_blockType == type)
-            {
-                throw new InvalidOperationException($"Blocktype {type} already enabled!");
-            }
-
-            _blockType = type;
-            return this;
-        }
-
-        public PostBuilder ResetBlockType()
-        {
-            _blockType = BlockType.Normal;
-            return this;
-        }
-
-        public PostBuilder SetJustContent()
-        {
-            return SetBlockType(BlockType.Content);
-        }
-
-        public PostBuilder SetInline()
-        {
-            return SetBlockType(BlockType.Inline);
-        }
-
-        public PostBuilder SetBlocks()
-        {
-            return ResetBlockType();
-        }
-
-        public PostBuilder AlignText(PositionType type)
-        {
-            _textAlignment = type;
-            return this;
-        }
-
-        public PostBuilder AlignTextLeft()
-        {
-            return AlignText(PositionType.Left);
-        }
-
-        public PostBuilder AlignTextCenter()
-        {
-            return AlignText(PositionType.Center);
-        }
-
-        public PostBuilder AlignTextRight()
-        {
-            return AlignText(PositionType.Right);
-        }
-
-        public PostBuilder ResetTextAlignment()
-        {
-            return AlignText(PositionType.Inherit);
-        }
-
+       
         public PostBuilder StartContent(PostItemContent content)
         {
+            if (!content.SupportsCustomChildContent)
+            {
+                throw new InvalidOperationException("This content type does not support custom child content");
+            }
+
             AddContent(content);
             _currentItem = content;
 
@@ -166,7 +74,7 @@ namespace Blog.Builders
         {
             if (_currentItem is null)
             {
-                _post.Content.Add(content);
+                _result.Content.Add(content);
                 
             }
             else
@@ -174,20 +82,7 @@ namespace Blog.Builders
                 _currentItem.ChildContent.Add(content);
                 content.Parent = _currentItem;
             }
-            if (content.BlockType == BlockType.Normal)
-            {
-                content.BlockType = _blockType;
-            }
-            
-            if (content.TextPosition == PositionType.Inherit)
-            {
-                content.TextPosition = _textAlignment;
-            }
-            
-            if (content.Style == Style.Normal)
-            {
-                content.Style = _style;
-            }
+            SetContentProperties(content);
             
             return this;
         }
@@ -208,9 +103,14 @@ namespace Blog.Builders
             return this;
         }
 
-        public PostItem Build()
+        public TableBuilder CreateTable()
         {
-            return _post;
+            return TableBuilder.CreateTable(this, _blockType, _textAlignment, _style);
+        }
+
+        protected override PostBuilder This()
+        {
+            return this;
         }
     }
 }

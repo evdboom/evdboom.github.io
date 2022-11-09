@@ -7,28 +7,9 @@ namespace Blog.PostComponents.Code
 {
     public class CodeContent : ParagraphContent
     {
-        private string? _language;
-        public string? Language 
-        {
-            get => _language;
-            set
-            {
-                _language = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
-
-        public override string Text 
-        {
-            get => base.Text;
-            set
-            {
-                base.Text = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
+        public string? Language { get; set; }
+        public override ComponentType Type => ComponentType.Code;
+        public override bool SupportsCustomChildContent => false;
 
         public CodeContent() : base()
         {
@@ -38,6 +19,12 @@ namespace Blog.PostComponents.Code
             {
                 "code-block"
             };
+        }
+
+        public override void Build()
+        {
+            ChildContent = GetChildren()
+                .ToList();
         }
 
         private IEnumerable<PostItemContent> GetChildren()
@@ -75,9 +62,6 @@ namespace Blog.PostComponents.Code
                     yield return content;
                 }
             }
-        }
-
-        public override ComponentType Type => ComponentType.Code;
-        
+        }        
     }
 }

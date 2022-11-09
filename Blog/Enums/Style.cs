@@ -3,6 +3,7 @@
     [Flags]
     public enum Style
     {
+        Inherit = 0,
         Normal = 1,
         Bold = 2,
         Italic = 4,

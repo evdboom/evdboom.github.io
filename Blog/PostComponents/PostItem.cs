@@ -33,5 +33,15 @@
         public string DateId => _dateId ?? string.Empty;
         private string? _titleId;
         public string TitleId => _titleId ?? string.Empty;
+
+        public PostItem Build()
+        {
+            foreach(var item in Content)
+            {
+                item.Build();
+            }
+
+            return this;
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace Blog.Extensions
     {
         private static Dictionary<Style, string> _styles = new()
         {
+            { Style.Inherit, string.Empty },
             { Style.Normal, string.Empty },
             { Style.Bold, "fw-bold" },
             { Style.Italic, "fst-italic" },
@@ -21,12 +22,13 @@ namespace Blog.Extensions
             { Style.KeepWhiteSpace, "keep-whitespace" }
         };
 
-        public static string GetStyleClasses(this Style style)
+        public static IEnumerable<string> GetStyleClasses(this Style style)
         {
-            return string.Join(' ', Enum
+            return Enum
                 .GetValues<Style>()
                 .Where(e => style.HasFlag(e))
-                .Select(e => _styles[e]));
+                .Select(e => _styles[e])
+                .Where(s => !string.IsNullOrEmpty(s));
         }
     }
 }

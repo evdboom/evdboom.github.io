@@ -7,6 +7,7 @@ namespace Blog.PostComponents.Date
         public DateTimeOffset Date { get; set; }
         public DateDisplayType DisplayType { get; set; }        
         public override ComponentType Type => ComponentType.Date;
+        public override bool SupportsCustomChildContent => false;
         public override string Text
         {
             get => DisplayType switch

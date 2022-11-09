@@ -1,4 +1,5 @@
 ﻿using Blog.Enums;
+using Blog.Extensions;
 
 namespace Blog.PostComponents
 {
@@ -15,15 +16,45 @@ namespace Blog.PostComponents
         public PositionType BlockPosition { get; set; }
 
         public abstract ComponentType Type { get; }
+        public abstract bool SupportsCustomChildContent { get; }
 
-        public string GetAdditionalClasses()
+        public string GetClasses()
+        {           
+            return string.Join(' ', GetClassesList());            
+        }
+
+        protected virtual List<string> GetClassesList()
         {
-            if (!AdditionalClasses.Any())
+            var result = new List<string>();
+            var style = Style.GetStyleClasses();
+            if (style.Any())
             {
-                return string.Empty;
+                result.AddRange(style);
+            }
+            var color = Color.GetForegroundColorClass();
+            if (!string.IsNullOrEmpty(color))
+            {
+                result.Add(color);
+            }
+            var textPosition = TextPosition.GetTextPositionClass();
+            if (!string.IsNullOrEmpty(textPosition))
+            {
+                result.Add(textPosition);
+            }
+            if (AdditionalClasses.Any())
+            {
+                result.AddRange(AdditionalClasses);
             }
 
-            return string.Join(' ', AdditionalClasses);
+            return result;
+        }
+
+        public virtual void Build()
+        {
+            foreach(var item in ChildContent) 
+            {
+                item.Build();
+            }
         }
 
     }

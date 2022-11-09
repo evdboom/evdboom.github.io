@@ -1,4 +1,4 @@
 ﻿@if (Content is not null)
 {
-    <p class="@Content.Style.GetStyleClasses() @Content.Color.GetForegroundColorClass() @Content.HeaderSize.GetSizeClass() @Content.GetAdditionalClasses()">@Content.Text</p>
+    <p class="@Content.GetClasses()">@Content.Text</p>
 }

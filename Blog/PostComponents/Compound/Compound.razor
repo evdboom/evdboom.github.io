@@ -1,40 +1,8 @@
-﻿@using Blog.PostComponents.Code
-@using Blog.PostComponents.Date
-@using Blog.PostComponents.Header
-@using Blog.PostComponents.Link
-@using Blog.PostComponents.Paragraph
-@using Blog.PostComponents.Line
-@using Blog.PostComponents.Quote
+﻿
 @if (Content is not null)
 {
     @foreach(var item in Content)
     {
-        @switch(item.Type)
-        {
-            case ComponentType.Paragraph:
-                <Paragraph Content="(ParagraphContent)item" />
-                break;
-            case ComponentType.Header:
-                <Header Content="(HeaderContent)item" />
-                break;
-            case ComponentType.Link:
-                <Link Content="(LinkContent)item" />
-                break;
-            case ComponentType.Line:
-                <Line Content="(LineContent)item" />
-                break;
-            case ComponentType.Date:
-                <Date Content="(DateContent)item" /> 
-                break;
-            case ComponentType.Quote:
-                <Quote Content="(QuoteContent)item" />
-                break;
-            case ComponentType.Code:
-                <Code Content="(CodeContent)item" />
-                break;
-            case ComponentType.Break:
-                <br />
-                break;
-        }
+        <CompoundItem Content="item" />
     }
 }

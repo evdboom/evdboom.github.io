@@ -6,54 +6,18 @@ namespace Blog.PostComponents.Quote
 {
     public class QuoteContent : ParagraphContent
     {
-        private string? _title;
-        public string? Title
-        {
-            get => _title;
-            set
-            {
-                _title = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
-
-        private string? _source;
-        public string? Source
-        {
-            get => _source;
-            set
-            {
-                _source = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
-
-        private string? _link;
-        public string? Link
-        {
-            get => _link;
-            set
-            {
-                _link = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
-
-        public override string Text
-        {
-            get => base.Text;
-            set
-            {
-                base.Text = value;
-                ChildContent = GetChildren()
-                    .ToList();
-            }
-        }
+        public string? Title { get; set; }
+        public string? Source { get; set; }
+        public string? Link { get; set; }
 
         public override ComponentType Type => ComponentType.Quote;
+        public override bool SupportsCustomChildContent => false;
+
+        public override void Build()
+        {
+            ChildContent = GetChildren()
+                .ToList();
+        }
 
         public IEnumerable<PostItemContent> GetChildren()
         {
@@ -63,20 +27,22 @@ namespace Blog.PostComponents.Quote
                 {
                     Style = Enums.Style.Bold,
                     TextPosition = Enums.PositionType.Left,
-                    Text = Title
+                    Text = Title,
+                    Color = Enums.BlogColor.Header
                 };
             }
             yield return new LineContent
             {
                 Style = Enums.Style.Bordered | Enums.Style.Padded,
                 Text = $"\"{Text}\"",
-                TextPosition = Enums.PositionType.Center
+                TextPosition = Enums.PositionType.Center,
+                Color = Enums.BlogColor.Quote
             };
             if (!string.IsNullOrEmpty(Link))
             {
                 yield return new LinkContent
                 {
-                    TextPosition = Enums.PositionType.Right,
+                    TextPosition = Enums.PositionType.Center,
                     Text = Source ?? string.Empty,
                     Href = Link,
                     Style = Enums.Style.Italic,
