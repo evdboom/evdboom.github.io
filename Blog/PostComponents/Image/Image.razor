@@ -6,7 +6,7 @@
     {
         <Header Content="Content.HeaderContent" />
     }
-    <img src="@Content.Source" class="img-fluid rounded mx-auto d-block" alt="@(Content.Description ?? Content.Source)" title="@(Content.Description ?? Content.Source)"/>
+    <img src="@Content.Source" class="img-fluid rounded mx-auto d-block" alt="@Content.Title" title="@Content.Title" />
     @if (Content.FooterContent is not null)
     {
         <Line Content="Content.FooterContent" />

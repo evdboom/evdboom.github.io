@@ -57,6 +57,8 @@ namespace Blog.Posts
                 .AddRow("temp", null, true)
                 .Build()
             .AddImage("OptionALogoFull.png", "Something only we know", "My image", HeaderSize.Three, "Not from getty :)")
+            .AddParagraph("This was all made using just this code:")
+            .AddImage("postcontent.png")
             .Build();
         }
     }
