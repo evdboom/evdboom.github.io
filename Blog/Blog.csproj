@@ -18,4 +18,10 @@
     <Folder Include="wwwroot\css\" />
 	<Folder Include="wwwroot\images\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\CNAME">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
