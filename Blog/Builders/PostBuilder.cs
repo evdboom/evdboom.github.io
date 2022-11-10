@@ -102,10 +102,15 @@ namespace Blog.Builders
 
             return this;
         }
-
+       
         public TableBuilder CreateTable()
         {
             return TableBuilder.CreateTable(this, _blockType, _textAlignment, _style);
+        }
+
+        protected override void OnBuild()
+        {
+            _result.Build();
         }
 
         protected override PostBuilder This()
