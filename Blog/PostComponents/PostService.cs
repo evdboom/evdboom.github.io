@@ -1,4 +1,5 @@
 ﻿using Blog.Posts;
+using System.Reflection;
 
 namespace Blog.PostComponents
 {
@@ -8,6 +9,7 @@ namespace Blog.PostComponents
         private readonly Dictionary<string, PostItem> _postsByTitleId;
         private readonly Dictionary<DateTime, List<PostItem>> _postsByMonth;
 
+        private const string PostNamespace = "Blog.Posts";
 
         public PostService()
         {
@@ -15,11 +17,32 @@ namespace Blog.PostComponents
             _postsByTitleId = new();
             _postsByMonth = new();
 
-            AddPost(new Post20221103_SetupBlazor());            
+            var postType = typeof(IPost);
+
+            var posts = Assembly
+                .GetEntryAssembly()?
+                .GetTypes()
+                .Where(p => postType.IsAssignableFrom(p) && string.Equals(p.Namespace, PostNamespace))
+                .Select(p => Activator.CreateInstance(p) as IPost);
+
+            if (posts is null)
+            {
+                throw new InvalidOperationException("No posts found");
+            }
+
+            foreach (var post in posts)
+            {
+                AddPost(post);
+            }
         }
 
-        private void AddPost(IPost post)
+        private void AddPost(IPost? post)
         {
+            if (post is null)
+            {
+                return;
+            }
+
             _postsByDateId[post.Post.DateId] = post.Post;
             _postsByTitleId[post.Post.TitleId] = post.Post;
 

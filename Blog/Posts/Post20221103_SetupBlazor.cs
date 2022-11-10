@@ -11,13 +11,11 @@ using Blog.PostComponents.Table;
 
 namespace Blog.Posts
 {
-    public class Post20221103_SetupBlazor : IPost
+    public class Post20221103_SetupBlazor : PostBase
     {
-        public PostItem Post { get; }
-
-        public Post20221103_SetupBlazor()
+        protected override PostItem GeneratePost()
         {
-            Post = PostBuilder
+            return PostBuilder
             .CreatePost()
             .WithDate(2022, 11, 3)
             .WithTitle("My first Blog post")
@@ -44,6 +42,9 @@ namespace Blog.Posts
                                return x;
                                var testMeAsweel = $"{aa} asn more text";
                                var testMeMore = "yo yo sem";
+                               var hard = @"multi
+                               line
+                               string";
                            }
                            """)
             .CreateTable()
