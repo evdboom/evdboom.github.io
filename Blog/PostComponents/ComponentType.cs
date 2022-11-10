@@ -12,7 +12,6 @@
         Link,
         Line,
         Date,
-        Break,
         Row
     }
 }

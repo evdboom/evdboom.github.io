@@ -13,13 +13,14 @@ namespace Blog.PostComponents.Quote
         public override ComponentType Type => ComponentType.Quote;
         public override bool SupportsCustomChildContent => false;
 
-        public override void Build()
+        public override void Build(PostItem post)
         {
-            ChildContent = GetChildren()
+            Post = post;
+            ChildContent = GetChildren(post)
                 .ToList();
         }
 
-        public IEnumerable<PostItemContent> GetChildren()
+        public IEnumerable<PostItemContent> GetChildren(PostItem post)
         {
             if (!string.IsNullOrEmpty(Title))
             {
@@ -28,7 +29,8 @@ namespace Blog.PostComponents.Quote
                     Style = Enums.Style.Bold,
                     TextPosition = Enums.PositionType.Left,
                     Text = Title,
-                    Color = Enums.BlogColor.Header
+                    Color = Enums.BlogColor.Header,
+                    Post = post
                 };
             }
             yield return new LineContent
@@ -36,7 +38,8 @@ namespace Blog.PostComponents.Quote
                 Style = Enums.Style.Bordered | Enums.Style.Padded,
                 Text = $"\"{Text}\"",
                 TextPosition = Enums.PositionType.Center,
-                Color = Enums.BlogColor.Quote
+                Color = Enums.BlogColor.Quote,
+                Post = post
             };
             if (!string.IsNullOrEmpty(Link))
             {
@@ -46,7 +49,8 @@ namespace Blog.PostComponents.Quote
                     Text = Source ?? string.Empty,
                     Href = Link,
                     Style = Enums.Style.Italic,
-                    NewTab = true
+                    NewTab = true,
+                    Post = post
                 };
             }
             else
@@ -55,7 +59,8 @@ namespace Blog.PostComponents.Quote
                 {
                     TextPosition = Enums.PositionType.Right,
                     Text = Source ?? string.Empty,
-                    Style = Enums.Style.Italic
+                    Style = Enums.Style.Italic,
+                    Post = post
                 };
             }
 

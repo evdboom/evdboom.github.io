@@ -1,0 +1,14 @@
+﻿@using Blog.PostComponents.Header
+@using Blog.PostComponents.Line
+@if (Content is not null)
+{
+    @if (Content.HeaderContent is not null)
+    {
+        <Header Content="Content.HeaderContent" />
+    }
+    <img src="@Content.Source" class="img-fluid rounded mx-auto d-block" alt="@(Content.Description ?? Content.Source)" title="@(Content.Description ?? Content.Source)"/>
+    @if (Content.FooterContent is not null)
+    {
+        <Line Content="Content.FooterContent" />
+    }
+}

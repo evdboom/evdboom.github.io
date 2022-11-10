@@ -1,6 +1,7 @@
 ﻿@using Blog.PostComponents.Code
 @using Blog.PostComponents.Date
 @using Blog.PostComponents.Header
+@using Blog.PostComponents.Image
 @using Blog.PostComponents.Link
 @using Blog.PostComponents.Paragraph
 @using Blog.PostComponents.Line
@@ -31,11 +32,11 @@
             case ComponentType.Code:
                 <Code Content="(CodeContent)Content" />
                 break;
-            case ComponentType.Break:
-                <br />
-                break;
             case ComponentType.Table:
                 <Table Content="(TableContent)Content" />
                 break;
+            case ComponentType.Image:
+                <Image Content="(ImageContent)Content" />
+            break;
         }
 }

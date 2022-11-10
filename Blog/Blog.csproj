@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="wwwroot\css\bootstrap\" />
+    <Folder Include="wwwroot\css\" />
+	<Folder Include="wwwroot\images\" />
   </ItemGroup>
-
 </Project>

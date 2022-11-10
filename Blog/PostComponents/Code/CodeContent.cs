@@ -1,5 +1,4 @@
 ﻿using Blog.Enums;
-using Blog.PostComponents.Break;
 using Blog.PostComponents.Line;
 using Blog.PostComponents.Paragraph;
 
@@ -21,13 +20,14 @@ namespace Blog.PostComponents.Code
             };
         }
 
-        public override void Build()
+        public override void Build(PostItem post)
         {
-            ChildContent = GetChildren()
+            Post = post;
+            ChildContent = GetChildren(post)
                 .ToList();
         }
 
-        private IEnumerable<PostItemContent> GetChildren()
+        private IEnumerable<PostItemContent> GetChildren(PostItem post)
         {
             if (!string.IsNullOrEmpty(Language))
             {
@@ -35,33 +35,28 @@ namespace Blog.PostComponents.Code
                 {
                     Text = Language,
                     TextPosition = PositionType.Right,
-                    Style = Style.Bold | Style.FloatRight
+                    Style = Style.Bold | Style.FloatRight,
+                    Post = post
                 };
             }
 
-            foreach(var (part, type) in CodePartUtil.GetParts(Text))
+            foreach (var (part, type) in CodePartUtil.GetParts(Text))
             {
-                if (type == CodePart.NewLine)
+                var content = new LineContent
                 {
-                    yield return new BreakContent();
+                    Text = part,
+                    BlockType = type == CodePart.Text
+                        ? BlockType.Content
+                        : BlockType.Inline,
+                    Post = post
+                };
+                if (type != CodePart.Text)
+                {
+                    content.AdditionalClasses.Add(type.GetPartClass());
+                }
+                yield return content;
 
-                }
-                else
-                {
-                    var content = new LineContent
-                    {
-                        Text = part,
-                        BlockType = type == CodePart.Text
-                            ? BlockType.Content
-                            : BlockType.Inline
-                    };
-                    if (type != CodePart.Text)
-                    {
-                        content.AdditionalClasses.Add(type.GetPartClass());
-                    }
-                    yield return content;
-                }
             }
-        }        
+        }
     }
 }

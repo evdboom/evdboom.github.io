@@ -3,11 +3,11 @@ using Blog.Enums;
 using Blog.PostComponents;
 using Blog.PostComponents.Code;
 using Blog.PostComponents.Header;
+using Blog.PostComponents.Image;
 using Blog.PostComponents.Line;
 using Blog.PostComponents.Link;
 using Blog.PostComponents.Paragraph;
 using Blog.PostComponents.Quote;
-using Blog.PostComponents.Table;
 
 namespace Blog.Posts
 {
@@ -56,6 +56,7 @@ namespace Blog.Posts
                 .AddRow("Mijn naam is haas", "pie", false)
                 .AddRow("temp", null, true)
                 .Build()
+            .AddImage("OptionALogoFull.png", "Something only we know", "My image", HeaderSize.Three, "Not from getty :)")
             .Build();
         }
     }

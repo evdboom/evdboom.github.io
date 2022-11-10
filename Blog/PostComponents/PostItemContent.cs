@@ -5,6 +5,7 @@ namespace Blog.PostComponents
 {
     public abstract class PostItemContent
     {
+        public PostItem? Post { get; set; }
         public List<PostItemContent> ChildContent { get; set; } = new();
         public PostItemContent? Parent { get; set; }
         public List<string> AdditionalClasses { get; set; } = new();
@@ -49,11 +50,12 @@ namespace Blog.PostComponents
             return result;
         }
 
-        public virtual void Build()
+        public virtual void Build(PostItem post)
         {
+            Post = post;
             foreach(var item in ChildContent) 
             {
-                item.Build();
+                item.Build(post);
             }
         }
 

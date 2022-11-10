@@ -38,7 +38,7 @@
         {
             foreach(var item in Content)
             {
-                item.Build();
+                item.Build(this);
             }
 
             return this;

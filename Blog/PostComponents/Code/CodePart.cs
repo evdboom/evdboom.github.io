@@ -7,6 +7,5 @@
         Method,
         Keyword,
         ControlKeyword,
-        NewLine,
     }
 }
