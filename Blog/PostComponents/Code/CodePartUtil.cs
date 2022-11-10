@@ -138,141 +138,119 @@
             ')',
             '>',
             '{',
-            '}'
+            '}',
+            '=',
+            '!',
+            ';',
+            ',',
+            '|'
         };
+
+        private static readonly Dictionary<string, StringType> StringStarters = new()
+        {
+            { "\"", StringType.Normal },
+            { "@\"", StringType.Normal },
+            { "$\"", StringType.Interpolated },
+            { "$@\"", StringType.Interpolated },
+            { "@$\"", StringType.Interpolated }        
+        };        
 
         public static IEnumerable<(string Part, CodePart Type)> GetParts(string text)
         {
-            var lines = text.Split(Environment.NewLine);
-            bool first = true;
-            foreach (var line in lines)
+            var current = string.Empty;
+            while (!string.IsNullOrEmpty(text))
             {
-                if (!first)
+                var word = FindNextWord(text, out StringType stringType);
+                text = RemoveFromStart(text, word);
+
+                switch (stringType)
                 {
-                    yield return (string.Empty, CodePart.NewLine);
-                }
-                first = false;
-                
-                var workLine = line;
-                var current = string.Empty;
-                var stringStarted = false;
-                var interPolatedString = false;
-                while (!string.IsNullOrEmpty(workLine))
-                {
-                    var word = FindNextWord(workLine, out bool special, out bool isString);
-                    if (isString && !stringStarted)
-                    {
+                    case StringType.Normal:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            interPolatedString = current.EndsWith('$');
-                            if (interPolatedString)
-                            {
-                                current = current.TrimEnd('$');
-                            }
-
                             yield return (current, CodePart.Text);
-                            current = interPolatedString
-                                ? $"$"
-                                : string.Empty;
+                            current = string.Empty;
                         }
-                        stringStarted = true;
-                        current += word;
-                        workLine = RemoveFromStart(workLine, word);
-                    }
-                    else if (!isString && stringStarted)
-                    {
-                        current += word;
-                        workLine = RemoveFromStart(workLine, word);
-                    }
-                    else if (isString && stringStarted)
-                    {
-                        stringStarted = false;
-                        current += word;
-                        workLine = RemoveFromStart(workLine, word);
-
-                        if (interPolatedString)
+                        yield return (word, CodePart.String);
+                        break;
+                    case StringType.Interpolated:
+                        if (!string.IsNullOrEmpty(current))
                         {
-                            var interpolated = current.Split('{', '}');
-                            bool inside = false;
-                            var beenInside = false;
-                            foreach (var i in interpolated)
+                            yield return (current, CodePart.Text);
+                            current = string.Empty;
+                        }
+                        foreach (var (part, type) in ParseInterpolatedString(word))
+                        {
+                            yield return (part, type);
+                        }
+                        break;
+                    case StringType.None:
+                        if (_keyWords.Contains(word))
+                        {
+                            if (!string.IsNullOrEmpty(current))
                             {
-                                if (inside)
-                                {
-                                    beenInside = true;
-                                    yield return ("{", CodePart.Text);
-                                    foreach (var p in GetParts(i))
-                                    {
-                                        yield return p;
-                                    }
-                                    inside = false;
-                                }
-                                else
-                                {
-                                    if (beenInside)
-                                    {
-                                        yield return ("}", CodePart.Text);
-                                        beenInside = false;
-                                    }
-                                    
-                                    yield return (i, CodePart.String);
-                                    inside = true;
-                                }
+                                yield return (current, CodePart.Text);
+                                current = string.Empty;
                             }
+                            yield return (word, CodePart.Keyword);
+                        }
+                        else if (_controlKeyWords.Contains(word))
+                        {
+                            if (!string.IsNullOrEmpty(current))
+                            {
+                                yield return (current, CodePart.Text);
+                                current = string.Empty;
+                            }
+                            yield return (word, CodePart.ControlKeyword);
+                        }
+                        else if (IsMethodStart(current, text.FirstOrDefault()))
+                        {
+                            if (!string.IsNullOrEmpty(current))
+                            {
+                                yield return (current, CodePart.Text);
+                                current = string.Empty;
+                            }
+                            yield return (word, CodePart.Method);
                         }
                         else
                         {
-                            yield return (current, CodePart.String);
-
+                            current += word;
                         }
-                        current = string.Empty;
-                    }
-                    else if (special)
-                    {
-                        current += word;
-                        workLine = RemoveFromStart(workLine, word);
-                    }
-                    else if (_keyWords.Contains(word))
-                    {
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text);
-                            current = string.Empty;
-                        }
-                        yield return (word, CodePart.Keyword);
-                        workLine = RemoveFromStart(workLine, word);
-
-                    }
-                    else if (_controlKeyWords.Contains(word))
-                    {
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text);
-                            current = string.Empty;
-                        }
-                        yield return (word, CodePart.ControlKeyword);
-                        workLine = RemoveFromStart(workLine, word);
-                    }
-                    else if ((string.IsNullOrEmpty(current) || current.EndsWith('.') || current.EndsWith(' ')) && workLine.StartsWith($"{word}("))
-                    {
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text);
-                            current = string.Empty;
-                        }
-                        yield return (word, CodePart.Method);
-                        workLine = RemoveFromStart(workLine, word);
-                    }
-                    else
-                    {
-                        current += word;
-                        workLine = RemoveFromStart(workLine, word);
-                    }
+                        break;
                 }
-                if (!string.IsNullOrEmpty(current))
+            }
+            if (!string.IsNullOrEmpty(current))
+            {
+                yield return (current, CodePart.Text);
+            }
+        }
+
+        private static bool IsMethodStart(string current, char nextChar)
+        {
+            return nextChar == '(' &&
+                (string.IsNullOrEmpty(current)
+                || current.EndsWith(' ')
+                || current.EndsWith('.'));
+        }
+
+        private static IEnumerable<(string Part, CodePart Type)> ParseInterpolatedString(string word)
+        {
+            var interpolated = word.Split('{', '}');
+            bool inside = false;
+            foreach (var i in interpolated)
+            {
+                if (inside)
                 {
-                    yield return (current, CodePart.Text);
+                    foreach (var p in GetParts($"{{{i}}}"))
+                    {
+                        yield return p;
+                    }
                 }
+                else
+                {
+                    yield return (i, CodePart.String);
+                }
+                inside = !inside;
             }
         }
 
@@ -287,25 +265,27 @@
 
         }
 
-        private static string FindNextWord(string text, out bool special, out bool isString)
+        private static string FindNextWord(string text, out StringType stringType)
         {
+            
             if (string.IsNullOrEmpty(text))
             {
-                special = false;
-                isString = false;
+                stringType = StringType.None;
                 return string.Empty;
             }
 
             var word = string.Empty;
+            var starter = StringStarters.FirstOrDefault(s => text.StartsWith(s.Key));
+            stringType = starter.Value;
+
+            if (stringType != StringType.None)
+            {
+                return FindString(text, starter.Key.Length);
+            }
 
             var firstChar = text[0];
-            special = _specials.Contains(firstChar);
-            isString = firstChar == '"';
-            word += firstChar;
-            if (isString)
-            {
-                return word;
-            }
+            var special = _specials.Contains(firstChar);
+            word += firstChar;            
 
             var found = false;
             var counter = 1;
@@ -313,16 +293,7 @@
             {
                 var c = text[counter];
                 var isSpecial = _specials.Contains(c);
-                var nextString = c == '"';
-                if (nextString)
-                {
-                    found = true;
-                }
-                else if (isString)
-                {
-                    found = true;
-                }
-                else if ((special && !isSpecial) || (!special && isSpecial))
+                if ((special && !isSpecial) || (!special && isSpecial))
                 {
                     found = true;
                 }
@@ -334,6 +305,13 @@
             }
 
             return word;
+        }
+
+        private static string FindString(string text, int start)
+        {
+            var next = text.IndexOf('"', start) + 1;
+            var result = text.Substring(0, next);
+            return result;
         }
     }
 }
