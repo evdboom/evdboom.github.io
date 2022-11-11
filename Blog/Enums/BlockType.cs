@@ -2,6 +2,7 @@
 {
     public enum BlockType
     {
+        Inherit,
         Normal,
         Inline,
         Content,

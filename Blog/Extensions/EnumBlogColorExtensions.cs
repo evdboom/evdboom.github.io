@@ -6,7 +6,7 @@ namespace Blog.Extensions
     {
         private static Dictionary<BlogColor, string> _foreGroundColors = new()
         {
-            { BlogColor.Normal, string.Empty },
+            { BlogColor.Inherit, string.Empty },
             { BlogColor.Header, "color-header" },
             { BlogColor.Code, "color-code" },
             { BlogColor.Quote, "color-quote" },

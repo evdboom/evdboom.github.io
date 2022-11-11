@@ -7,7 +7,7 @@ namespace Blog.Builders
     {
         private PostItemContent? _currentItem;
 
-        protected PostBuilder() : base(new PostItem(), BlockType.Normal, PositionType.Inherit, Style.Normal)
+        protected PostBuilder() : base(new PostItem(), BlockType.Normal, PositionType.Inherit, Style.Inherit)
         {
         }
 
@@ -106,6 +106,16 @@ namespace Blog.Builders
         public TableBuilder CreateTable()
         {
             return TableBuilder.CreateTable(this, _blockType, _textAlignment, _style);
+        }
+
+        public ListBuilder CreateList()
+        {
+            return ListBuilder.CreateList(this, _blockType, _textAlignment, _style);
+        }
+
+        public ParagraphBuilder CreateParagrah()
+        {
+            return ParagraphBuilder.CreateParagraph(this, _blockType, _textAlignment, _style);
         }
 
         protected override void OnBuild()

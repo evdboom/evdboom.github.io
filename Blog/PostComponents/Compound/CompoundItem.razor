@@ -3,6 +3,7 @@
 @using Blog.PostComponents.Header
 @using Blog.PostComponents.Image
 @using Blog.PostComponents.Link
+@using Blog.PostComponents.List;
 @using Blog.PostComponents.Paragraph
 @using Blog.PostComponents.Line
 @using Blog.PostComponents.Quote
@@ -37,6 +38,9 @@
                 break;
             case ComponentType.Image:
                 <Image Content="(ImageContent)Content" />
-            break;
+                break;
+            case ComponentType.List:
+                <List Content="(ListContent)Content" />
+                break;
         }
 }

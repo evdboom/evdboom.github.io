@@ -34,7 +34,7 @@ namespace Blog.Builders
 
         public Builder AddToStyle(Style style)
         {
-            if (_style == Style.Normal)
+            if (_style == Style.Inherit)
             {
                 _style = style;
             }
@@ -48,7 +48,7 @@ namespace Blog.Builders
 
         public Builder ResetStyle()
         {
-            return SetStyle(Style.Normal);
+            return SetStyle(Style.Inherit);
         }
 
         public Builder SetBlockType(BlockType type)
@@ -109,6 +109,36 @@ namespace Blog.Builders
             return AlignText(PositionType.Inherit);
         }
 
+        public Builder Bold()
+        {
+            return AddToStyle(Style.Bold);
+        }
+
+        public Builder RemoveBold()
+        {
+            return RemoveStyle(Style.Bold);
+        }
+
+        public Builder Italic()
+        {
+            return AddToStyle(Style.Italic);
+        }
+
+        public Builder RemoveItalic()
+        {
+            return RemoveStyle(Style.Italic);
+        }
+
+        public Builder Underline()
+        {
+            return AddToStyle(Style.Underline);
+        }
+
+        public Builder RemoveUnderline()
+        {
+            return RemoveStyle(Style.Underline);
+        }
+
         public Result Build()
         {
             OnBuild();
@@ -117,7 +147,7 @@ namespace Blog.Builders
 
         protected virtual void SetContentProperties(PostItemContent content)
         {
-            if (content.BlockType == BlockType.Normal)
+            if (content.BlockType == BlockType.Inherit)
             {
                 content.BlockType = _blockType;
             }
@@ -127,7 +157,7 @@ namespace Blog.Builders
                 content.TextPosition = _textAlignment;
             }
 
-            if (content.Style == Style.Normal || content.Style == Style.Inherit)
+            if (content.Style == Style.Inherit)
             {
                 content.Style = _style;
             }

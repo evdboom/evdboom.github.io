@@ -8,7 +8,7 @@ namespace Blog.PostComponents.Date
     {        
         public static PostBuilder AddDate(this PostBuilder builder, DateTime date)
         {
-            return AddDate(builder, date, Style.Normal);
+            return AddDate(builder, date, Style.Inherit);
         }
 
         public static PostBuilder AddDate(this PostBuilder builder, DateTime date, Style style)
@@ -18,7 +18,7 @@ namespace Blog.PostComponents.Date
 
         public static PostBuilder AddDate(this PostBuilder builder, DateTime date, DateDisplayType display)
         {
-            return AddDate(builder, date, display, Style.Normal);
+            return AddDate(builder, date, display, Style.Inherit);
         }
 
         public static PostBuilder AddDate(this PostBuilder builder, DateTime date, DateDisplayType display, Style style)

@@ -2,7 +2,7 @@
 {
     public enum BlogColor
     {
-        Normal,
+        Inherit,
         Header,
         Quote,
         Code,

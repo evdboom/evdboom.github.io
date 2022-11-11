@@ -7,7 +7,7 @@ namespace Blog.PostComponents.Header
     {
         public static PostBuilder AddHeader(this PostBuilder builder, string text, HeaderSize size)
         {
-            return AddHeader(builder, text, size, Style.Normal);
+            return AddHeader(builder, text, size, Style.Inherit);
         }
 
         public static PostBuilder AddHeader(this PostBuilder builder, string text, HeaderSize size, Style style)

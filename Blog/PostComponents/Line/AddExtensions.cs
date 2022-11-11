@@ -12,7 +12,7 @@ namespace Blog.PostComponents.Line
 
         public static PostBuilder AddLine(this PostBuilder builder, string text)
         {
-            return AddLine(builder, text, Style.Normal);
+            return AddLine(builder, text, Style.Inherit);
         }
 
         public static PostBuilder AddLine(this PostBuilder builder, string text, Style style)
@@ -24,23 +24,25 @@ namespace Blog.PostComponents.Line
             });
         }
 
-        public static PostBuilder StartLine(this PostBuilder builder)
+        public static ParagraphBuilder AddSpace(this ParagraphBuilder builder)
         {
-            return StartLine(builder, Style.Normal);
+            return AddLine(builder, " ");
         }
 
-        public static PostBuilder StartLine(this PostBuilder builder, Style style)
+        public static ParagraphBuilder AddLine(this ParagraphBuilder builder, string text)
         {
-            return builder.StartContent(new LineContent
+            return AddLine(builder, text, Style.Inherit);
+        }
+
+        public static ParagraphBuilder AddLine(this ParagraphBuilder builder, string text, Style style)
+        {
+            return builder.AddContent(new LineContent
             {
+                Text = text,
                 Style = style
             });
         }
 
-        public static PostBuilder EndLine(this PostBuilder builder)
-        {
-            return builder.EndContent(ComponentType.Line);
-        }
 
         public static RowBuilder AddCells(this RowBuilder builder, params object?[] cells) 
         {
@@ -55,6 +57,14 @@ namespace Blog.PostComponents.Line
             var row = builder.StartRow();
             AddCells(row, cells);
             return row.Build();
+        }
+
+        public static ListBuilder AddRow(this ListBuilder builder, object? row)
+        {
+            return builder.AddItem(new LineContent
+            {
+                Text = $"{row}"
+            });
         }
     }
 }

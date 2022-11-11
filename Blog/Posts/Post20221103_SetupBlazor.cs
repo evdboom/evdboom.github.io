@@ -6,6 +6,7 @@ using Blog.PostComponents.Header;
 using Blog.PostComponents.Image;
 using Blog.PostComponents.Line;
 using Blog.PostComponents.Link;
+using Blog.PostComponents.List;
 using Blog.PostComponents.Paragraph;
 using Blog.PostComponents.Quote;
 
@@ -13,9 +14,7 @@ namespace Blog.Posts
 {
     public class Post20221103_SetupBlazor : PostBase
     {
-        protected override PostItem GeneratePost()
-        {
-            return PostBuilder
+        protected override PostItem GeneratePost() => PostBuilder
             .CreatePost()
             .WithDate(2022, 11, 3)
             .WithTitle("My first Blog post")
@@ -25,14 +24,14 @@ namespace Blog.Posts
             .AddHeader("Test header", HeaderSize.Three, Style.Bold | Style.Italic)
             .AddParagraph("Lorum ipsum something more", Style.StrikeThrough | Style.UpperCase)
             .ResetStyle()
-            .StartParagraph()
+            .CreateParagrah()
                 .SetJustContent()
                 .AddLine("Some text")
                 .AddSpace()
                 .AddLink("link", "https://www.nu.nl")
                 .SetBlocks()
-            .EndParagraph()
-            .AddQuote("This is MY blog", "Erik", "https://option-a.text")
+                .Build()
+            .AddQuote("This is MY blog", "Erik", "https://option-a.tech")
             .AddCode("c#", """
                            {
                                SomeFunction.CallMe();
@@ -59,7 +58,33 @@ namespace Blog.Posts
             .AddImage("OptionALogoFull.png", "Something only we know", "My image", HeaderSize.Three, "Not from getty :)")
             .AddParagraph("This was all made using just this code:")
             .AddImage("postcontent.png")
+            .CreateList()
+                .SetJustContent()
+                .AddRow("item 1")
+                .AddRow(4)
+                .AddRow("applePie")
+                .Build()
+            .CreateList()
+                .AddRow("item 1")
+                .AddRow(4)
+                .AddRow("my my my")
+                .Build()          
+            .CreateList()
+                .WithBoldNumbering()
+                .Ordered()
+                .SetJustContent()
+                .WithStyle(ListStyle.UpperRoman)
+                .AddRow("item 1")
+                .AddRow(4)
+                .AddRow("cherry pie")
+                .Build()
+            .CreateList()
+                .Ordered(3)    
+                .Horizontal()
+                .AddRow("item 1")
+                .AddRow(4)
+                .AddRow("on top?")
+                .Build()
             .Build();
-        }
     }
 }
