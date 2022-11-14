@@ -4,18 +4,20 @@ namespace Blog.PostComponents.Code
 {
     public static class AddExtensions
     {
-        public static PostBuilder AddCode(this PostBuilder builder, string code)
+        public static CodeBuilder<Parent> CreateCode<Parent>(this Parent parent) where Parent : IParentBuilder
         {
-            return AddCode(builder, string.Empty, code);
+            return new CodeBuilder<Parent>(parent);
         }
 
-        public static PostBuilder AddCode(this PostBuilder builder, string language, string code)
+        public static Parent AddCode<Parent>(this Parent parent, string code) where Parent : IParentBuilder
         {
-            return builder.AddContent(new CodeContent
-            {
-                Text = code,
-                Language = language,
-            });            
+            return AddCode(parent, string.Empty, code);
+        }
+
+        public static Parent AddCode<Parent>(this Parent parent, string language, string code) where Parent : IParentBuilder
+        {
+            return CreateCode(parent)
+                .AddCode(language, code);
         }
     }
 }

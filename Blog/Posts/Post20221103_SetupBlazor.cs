@@ -24,7 +24,7 @@ namespace Blog.Posts
             .AddHeader("Test header", HeaderSize.Three, Style.Bold | Style.Italic)
             .AddParagraph("Lorum ipsum something more", Style.StrikeThrough | Style.UpperCase)
             .ResetStyle()
-            .CreateParagrah()
+            .CreateParagraph()
                 .SetJustContent()
                 .AddLine("Some text")
                 .AddSpace()

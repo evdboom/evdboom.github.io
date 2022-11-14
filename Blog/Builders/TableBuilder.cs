@@ -1,27 +1,20 @@
-﻿using Blog.Enums;
-using Blog.PostComponents;
+﻿using Blog.PostComponents;
 using Blog.PostComponents.Line;
 using Blog.PostComponents.Table;
 
 namespace Blog.Builders
 {
-    public class TableBuilder : BuilderBase<TableBuilder, PostBuilder>
+    public class TableBuilder<Parent> : SubBuilderBase<TableBuilder<Parent>, Parent, TableContent>, IParentBuilder
+        where Parent : IParentBuilder
     {
-        private readonly TableContent _content;
-
-        private TableBuilder(PostBuilder parent, BlockType blockType, PositionType textAlignment, Style style) : base(parent, blockType, textAlignment, style)
+        public TableBuilder(Parent parent) : base(parent)
         {
-            _content = new();
-            SetContentProperties(_content);
             SetContentProperties(_content.Columns);
         }
 
-        public static TableBuilder CreateTable(PostBuilder parent, BlockType blockType, PositionType textAlignment, Style style)
-        {
-            return new TableBuilder(parent, blockType, textAlignment, style);
-        }
 
-        public TableBuilder WithCaption(string caption)
+
+        public TableBuilder<Parent> WithCaption(string caption)
         {
             if (!string.IsNullOrEmpty(_content.Text))
             {
@@ -32,8 +25,8 @@ namespace Blog.Builders
             return this;
         }
 
-        public TableBuilder AddColumns(params string[] columnHeaders)
-        {            
+        public TableBuilder<Parent> AddColumns(params string[] columnHeaders)
+        {
             foreach (var header in columnHeaders)
             {
                 AddColumn(header);
@@ -52,31 +45,37 @@ namespace Blog.Builders
             _content.Columns.ChildContent.Add(header);
         }
 
-        public TableBuilder AddRow(RowContent content)
+        public TableBuilder<Parent> AddRow(RowContent content)
         {
-            _content.ChildContent.Add(content);
-            SetContentProperties(content);
+            AddContent(content);
             return this;
         }
 
-        public RowBuilder StartRow()
+        public void AddContent(PostItemContent content)
         {
-            return RowBuilder.StartRow(this, _blockType, _textAlignment, _style);
+            _content.ChildContent.Add(content);
+            SetContentProperties(content);
+
         }
 
-        protected override TableBuilder This()
+        public RowBuilder<Parent> StartRow()
+        {
+            return new RowBuilder<Parent>(this);
+        }
+
+        protected override TableBuilder<Parent> This()
         {
             return this;
         }
 
         protected override void OnBuild()
-        {           
+        {
             if (!_content.ChildContent.All(c => c.ChildContent.Count == _content.Columns.ChildContent.Count))
             {
                 throw new InvalidOperationException($"row parameter count must be equal to columns count ({_content.Columns.ChildContent.Count})");
             }
 
-            _result.AddContent(_content);            
+            base.OnBuild();
         }
     }
 }

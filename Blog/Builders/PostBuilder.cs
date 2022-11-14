@@ -3,7 +3,7 @@ using Blog.PostComponents;
 
 namespace Blog.Builders
 {
-    public class PostBuilder : BuilderBase<PostBuilder, PostItem>
+    public class PostBuilder : BuilderBase<PostBuilder, PostItem>, IParentBuilder
     {
         private PostItemContent? _currentItem;
 
@@ -70,7 +70,8 @@ namespace Blog.Builders
             return this;            
         }
 
-        public PostBuilder AddContent(PostItemContent content)
+
+        public void AddContent(PostItemContent content)
         {
             if (_currentItem is null)
             {
@@ -82,9 +83,7 @@ namespace Blog.Builders
                 _currentItem.ChildContent.Add(content);
                 content.Parent = _currentItem;
             }
-            SetContentProperties(content);
-            
-            return this;
+            SetContentProperties(content);         
         }
 
         public PostBuilder EndContent(ComponentType expectedType)
@@ -101,22 +100,7 @@ namespace Blog.Builders
             _currentItem = _currentItem.Parent;
 
             return this;
-        }
-       
-        public TableBuilder CreateTable()
-        {
-            return TableBuilder.CreateTable(this, _blockType, _textAlignment, _style);
-        }
-
-        public ListBuilder CreateList()
-        {
-            return ListBuilder.CreateList(this, _blockType, _textAlignment, _style);
-        }
-
-        public ParagraphBuilder CreateParagrah()
-        {
-            return ParagraphBuilder.CreateParagraph(this, _blockType, _textAlignment, _style);
-        }
+        }            
 
         protected override void OnBuild()
         {

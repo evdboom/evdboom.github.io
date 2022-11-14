@@ -4,67 +4,56 @@ using Blog.PostComponents.List;
 
 namespace Blog.Builders
 {
-    public class ListBuilder : BuilderBase<ListBuilder, PostBuilder>
+    public class ListBuilder<Parent> : SubBuilderBase<ListBuilder<Parent>, Parent, ListContent>
+        where Parent : IParentBuilder
     {
-        private readonly ListContent _content;
-
-        private ListBuilder(PostBuilder parent, BlockType blockType, PositionType textAlignment, Style style) : base(parent, blockType, textAlignment, style)
+        public ListBuilder(Parent parent) : base(parent)
         {
-            _content = new();
-            SetContentProperties(_content);
+            
         }
 
-
-        public static ListBuilder CreateList(PostBuilder parent, BlockType blockType, PositionType textAlignment, Style style)
-        {
-            return new ListBuilder(parent, blockType, textAlignment, style);
-        }
-
-        public ListBuilder Ordered()
+        public ListBuilder<Parent> Ordered()
         {
             _content.Ordered = true;
             return this;
         }
 
-        public ListBuilder Ordered(int startIndex)
+        public ListBuilder<Parent> Ordered(int startIndex)
         {
             _content.Start = startIndex;
             return Ordered();
         }
 
-        public ListBuilder Horizontal()
+        public ListBuilder<Parent> Horizontal()
         {
             _content.Orientation = Orientation.Horizontal;
             return this;
         }
 
-        public ListBuilder WithStyle(ListStyle listStyle)
+        public ListBuilder<Parent> WithStyle(ListStyle listStyle)
         {
             _content.ListStyle = listStyle;
             return this;
         }
 
-        public ListBuilder WithBoldNumbering()
+        public ListBuilder<Parent> WithBoldNumbering()
         {
             _content.BoldNumbering = true;
             return this;
         }
 
-        public ListBuilder AddItem(PostItemContent content)
+        public ListBuilder<Parent> AddItem(PostItemContent content)
         {
             _content.ChildContent.Add(content);
             SetContentProperties(content);
             return this;
         }
 
-        protected override ListBuilder This()
+        protected override ListBuilder<Parent> This()
         {
             return this;
         }
 
-        protected override void OnBuild()
-        {
-            _result.AddContent(_content);
-        }
+
     }
 }

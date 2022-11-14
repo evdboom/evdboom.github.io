@@ -59,7 +59,8 @@ namespace Blog.PostComponents.Line
             return row.Build();
         }
 
-        public static ListBuilder AddRow(this ListBuilder builder, object? row)
+        public static ListBuilder<Parent> AddRow<Parent>(this ListBuilder<Parent> builder, object? row)
+            where Parent : IParentBuilder
         {
             return builder.AddItem(new LineContent
             {

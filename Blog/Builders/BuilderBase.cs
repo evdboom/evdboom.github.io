@@ -11,6 +11,11 @@ namespace Blog.Builders
         protected BlockType _blockType;
         protected PositionType _textAlignment;
         protected Style _style;
+        protected readonly List<string> _additionalClasses;
+
+        public BlockType BlockType => _blockType;
+        public PositionType TextAlignment => _textAlignment;
+        public Style Style => _style;
 
         protected BuilderBase(Result result, BlockType block, PositionType textAlignment, Style style)
         {
@@ -18,6 +23,16 @@ namespace Blog.Builders
             _blockType = block;
             _textAlignment = textAlignment;
             _style = style;
+            _additionalClasses = new();
+        }
+
+        public Builder AddClass(string className)
+        {
+            if (!_additionalClasses.Contains(className))
+            {
+                _additionalClasses.Add(className);
+            }
+            return This();
         }
 
         public Builder SetStyle(Style style)

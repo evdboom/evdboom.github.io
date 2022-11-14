@@ -5,19 +5,20 @@ namespace Blog.PostComponents.Header
 {
     public static class AddExtensions
     {
-        public static PostBuilder AddHeader(this PostBuilder builder, string text, HeaderSize size)
+        public static HeaderBuilder<Parent> CreateHeader<Parent>(this Parent parent) where Parent : IParentBuilder
         {
-            return AddHeader(builder, text, size, Style.Inherit);
+            return new HeaderBuilder<Parent>(parent);
         }
 
-        public static PostBuilder AddHeader(this PostBuilder builder, string text, HeaderSize size, Style style)
+        public static Parent AddHeader<Parent>(this Parent parent, string text, HeaderSize size) where Parent : IParentBuilder
         {
-            return builder.AddContent(new HeaderContent
-            {
-                HeaderSize = size,
-                Style = style,
-                Text = text,
-            });
+            return AddHeader(parent, text, size, Style.Inherit);
+        }
+
+        public static Parent AddHeader<Parent>(this Parent parent, string text, HeaderSize size, Style style) where Parent : IParentBuilder
+        {
+            return CreateHeader(parent)
+                .AddHeader(text, size, style);            
         }
     }
 }

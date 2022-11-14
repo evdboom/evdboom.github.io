@@ -4,36 +4,24 @@ using Blog.PostComponents.Paragraph;
 
 namespace Blog.Builders
 {
-    public class ParagraphBuilder : BuilderBase<ParagraphBuilder, PostBuilder>
+    public class ParagraphBuilder<Parent> : SubBuilderBase<ParagraphBuilder<Parent>, Parent, ParagraphContent>, IParentBuilder
+        where Parent : IParentBuilder
     {
-        private readonly ParagraphContent _content;
 
-        private ParagraphBuilder(PostBuilder parent, BlockType blockType, PositionType textAlignnent, Style style) : base(parent, blockType, textAlignnent, style) 
+        public ParagraphBuilder(Parent parent) : base(parent) 
         {
-            _content = new();
-            SetContentProperties(_content);
+
         }
 
-        public static ParagraphBuilder CreateParagraph(PostBuilder parent, BlockType blockType, PositionType textAlignnent, Style style)
-        {
-            return new ParagraphBuilder(parent, blockType, textAlignnent, style);
-        }
-
-        public ParagraphBuilder AddContent(PostItemContent content)
+        public void AddContent(PostItemContent content)
         {
             SetContentProperties(content);
             _content.ChildContent.Add(content);
-            return this;
         }
 
-        protected override ParagraphBuilder This()
+        protected override ParagraphBuilder<Parent> This()
         {
             return this;
-        }
-
-        protected override void OnBuild()
-        {
-            _result.AddContent(_content);
         }
     }
 }
