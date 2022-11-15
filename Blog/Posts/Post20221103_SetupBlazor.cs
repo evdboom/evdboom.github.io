@@ -1,90 +1,93 @@
-﻿using Blog.Builders;
-using Blog.Enums;
-using Blog.PostComponents;
-using Blog.PostComponents.Code;
-using Blog.PostComponents.Header;
-using Blog.PostComponents.Image;
-using Blog.PostComponents.Line;
-using Blog.PostComponents.Link;
-using Blog.PostComponents.List;
-using Blog.PostComponents.Paragraph;
-using Blog.PostComponents.Quote;
+﻿using OptionA.Blog.Components.Code;
+using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Core.Enums;
+using OptionA.Blog.Components.Header;
+using OptionA.Blog.Components.Image;
+using OptionA.Blog.Components.Line;
+using OptionA.Blog.Components.Link;
+using OptionA.Blog.Components.List;
+using OptionA.Blog.Components.Paragraph;
+using OptionA.Blog.Components.Quote;
+using OptionA.Blog.Components.Table;
 
 namespace Blog.Posts
 {
-    public class Post20221103_SetupBlazor : PostBase
+    public class Post20221103_SetupBlazor : Post
     {
-        protected override PostItem GeneratePost() => PostBuilder
-            .CreatePost()
-            .WithDate(2022, 11, 3)
-            .WithTitle("My first Blog post")
-            .WithSubTitle("This post is about setting everyting up correctly")
-            .SetStyle(Style.Bold)
-            .AddParagraph("If i place tags <div>test me</div> here what happens?")
-            .AddHeader("Test header", HeaderSize.Three, Style.Bold | Style.Italic)
-            .AddParagraph("Lorum ipsum something more", Style.StrikeThrough | Style.UpperCase)
-            .ResetStyle()
-            .CreateParagraph()
-                .SetJustContent()
-                .AddLine("Some text")
-                .AddSpace()
-                .AddLink("link", "https://www.nu.nl")
-                .SetBlocks()
-                .Build()
-            .AddQuote("This is MY blog", "Erik", "https://option-a.tech")
-            .AddCode("c#", """
-                           {
-                               SomeFunction.CallMe();
-                               var x = 12;
-                               Label y = typeof(Test);
-                               Labeler z = nameof(Label);
-                               return x;
-                               var testMeAsweel = $"{aa} asn more text";
-                               var testMeMore = "yo yo sem";
-                               var hard = @"multi
-                               line
-                               string";
-                           }
-                           """)
-            .CreateTable()
-                .WithCaption("This is a table")
-                .AddColumns("First", "Second", string.Empty)
-                .SetStyle(Style.StrikeThrough)
-                .AddRow("test", 23, true)
-                .ResetStyle()
-                .AddRow("Mijn naam is haas", "pie", false)
-                .AddRow("temp", null, true)
-                .Build()
-            .AddImage("OptionALogoFull.png", "Something only we know", "My image", HeaderSize.Three, "Not from getty :)")
-            .AddParagraph("This was all made using just this code:")
-            .AddImage("postcontent.png")
-            .CreateList()
-                .SetJustContent()
-                .AddRow("item 1")
-                .AddRow(4)
-                .AddRow("applePie")
-                .Build()
-            .CreateList()
-                .AddRow("item 1")
-                .AddRow(4)
-                .AddRow("my my my")
-                .Build()          
-            .CreateList()
-                .WithBoldNumbering()
-                .Ordered()
-                .SetJustContent()
-                .WithStyle(ListStyle.UpperRoman)
-                .AddRow("item 1")
-                .AddRow(4)
-                .AddRow("cherry pie")
-                .Build()
-            .CreateList()
-                .Ordered(3)    
-                .Horizontal()
-                .AddRow("item 1")
-                .AddRow(4)
-                .AddRow("on top?")
-                .Build()
-            .Build();
+        public override void OnBuildPost(PostBuilder builder)
+        {
+            builder
+                .WithDate(2022, 11, 3)
+                .WithTitle("My first Blog post")
+                .WithSubtitle("This post is about setting everyting up correctly")
+                .WithStyle(Style.Bold)
+                .AddParagraph("If i place tags <div>test me</div> here what happens?")
+                .AddHeader("Test header", HeaderSize.Three)
+                .CreateParagraph()
+                    .WithStyle(Style.StrikeThrough | Style.UpperCase)
+                    .WithText("Lorum ipsum something more")
+                    .Build()
+                .CreateParagraph()
+                    .WithBlockType(BlockType.Content)
+                    .AddLine("Some text")
+                    .AddSpace()
+                    .AddLink("link", "https://www.nu.nl")
+                    .Build()
+                .AddQuote("This is MY blog", "Erik", "https://option-a.tech")
+                .AddCode(CodeLanguage.CSharp, """
+                    {
+                        SomeFunction.CallMe();
+                        var x = 12;
+                        Label y = typeof(Test);
+                        Labeler z = nameof(Label);
+                        return x;
+                        var testMeAsweel = $"{aa} asn more text";
+                        var testMeMore = "yo yo sem";
+                        var hard = @"multi
+                        line
+                        string";
+                    }
+                    """)
+                .AddCode(CodeLanguage.CSharp, """
+                    var x = 4; // This is a very long comment to see if th aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa scroll part actually works, or if I have to include more in the class to make sure this will scroll for me :D.
+                    // method after command();
+                    public void Test(string x) // Does some work
+                    {
+                        //Do work
+                    }
+                    """)
+                .CreateTable()
+                    .WithColumns("First", "Second", string.Empty)
+                    .AddStyle(Style.StrikeThrough)
+                    .AddRow("test", 23, true)
+                    .RemoveStyle(Style.StrikeThrough)
+                    .AddRow("Mijn naam is haas", "pie", false)
+                    .AddRow("temp", null, true)
+                    .Build()
+                .AddImage("OptionALogoFull.png", "Something only we know")
+                .AddParagraph("This was all made using just this code:")
+                .AddImage("postcontent.png")
+                .AddFooter("Might need more work")
+                .RemoveStyle(Style.Bold)
+                .CreateList()
+                    .WithBlockType(BlockType.Content)
+                    .AddRow("item 1")
+                    .AddRow(4)
+                    .AddRow("applePie")
+                    .Build()
+                .CreateList()
+                    .IsOrdered(true)
+                    .WithBlockType(BlockType.Content)
+                    .WithListStyle(ListStyle.UpperRoman)
+                    .AddRow("item 1")
+                    .AddRow(4)
+                    .AddRow("cherry pie")
+                    .Build()
+                .CreateOrderedList(4)
+                    .AddRow("item 1")
+                    .AddRow(4)
+                    .AddRow("on top?")
+                    .Build();
+        }
     }
 }

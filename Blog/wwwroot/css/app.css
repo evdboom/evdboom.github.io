@@ -4,44 +4,6 @@
     cursor: pointer;
 }
 
-.color-header {
-    color: darkmagenta;
-}
-
-.color-quote {
-    color: dimgrey;
-}
-
-.color-link {
-    color: blue;
-}
-
-.keep-whitespace {
-    white-space: pre;
-}
-
-.code-keyword {
-    color: #569cd6;
-}
-
-.code-controlkeyword {
-    color: #d8a0df;
-}
-
-.code-string {
-    color: #ce9178;
-}
-
-.code-method {
-    color: #dcdcaa;
-}
-
-.code-block {
-    background-color: #2f2f2f;
-    color: #dcdcdc;
-    overflow-x: auto;
-}
-
 .mh-10 {
     max-height: 10vh;
 }
@@ -64,44 +26,4 @@
 
 .scroll-horizontal {
     overflow-x: auto;
-}
-
-.list-type-none {
-    list-style-type: none;
-}
-
-.list-type-opencircle {
-    list-style-type: circle;
-}
-
-.list-type-circle {
-    list-style-type: disc;
-}
-
-.list-type-square {
-    list-style-type: square;
-}
-
-.list-type-disclosureopen {
-    list-style-type: disclosure-open;
-}
-
-.list-type-disclosureclosed {
-    list-style-type: disclosure-closed;
-}
-
-.list-group-numbered.list-type-loweralpha > .list-group-item::before {
-    content: counters(section, ".", lower-alpha) ". "
-}
-
-.list-group-numbered.list-type-upperalpha > .list-group-item::before {
-    content: counters(section, ".", upper-alpja) ". "
-}
-
-.list-group-numbered.list-type-upperroman > .list-group-item::before {
-    content: counters(section, ".", upper-roman) ". "
-}
-
-.list-group.bold-numbers > .list-group-item::before {
-    font-weight: bold;
 }

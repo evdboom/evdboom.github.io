@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blog.Components.Core;
 
 namespace Blog.PostComponents
 {
@@ -8,7 +9,7 @@ namespace Blog.PostComponents
         private NavigationManager Navigation { get; set; } = null!;
 
         [Parameter]
-        public PostItem? Content { get; set; }
+        public IPost? Content { get; set; }
         [Parameter]
         public bool CompactMode { get; set; }
 

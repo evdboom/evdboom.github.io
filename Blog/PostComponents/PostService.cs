@@ -1,13 +1,14 @@
 ﻿using Blog.Posts;
+using OptionA.Blog.Components.Core;
 using System.Reflection;
 
 namespace Blog.PostComponents
 {
     public class PostService : IPostService
     {
-        private readonly Dictionary<string, PostItem> _postsByDateId;
-        private readonly Dictionary<string, PostItem> _postsByTitleId;
-        private readonly Dictionary<DateTime, List<PostItem>> _postsByMonth;
+        private readonly Dictionary<string, IPost> _postsByDateId;
+        private readonly Dictionary<string, IPost> _postsByTitleId;
+        private readonly Dictionary<DateTime, List<IPost>> _postsByMonth;
 
         private const string PostNamespace = "Blog.Posts";
 
@@ -43,24 +44,24 @@ namespace Blog.PostComponents
                 return;
             }
 
-            _postsByDateId[post.Post.DateId] = post.Post;
-            _postsByTitleId[post.Post.TitleId] = post.Post;
+            _postsByDateId[post.DateId] = post;
+            _postsByTitleId[post.TitleId] = post;
 
-            var month = new DateTime(post.Post.PostDate.Year, post.Post.PostDate.Month, 1);
+            var month = new DateTime(post.PostDate.Year, post.PostDate.Month, 1);
             if (_postsByMonth.ContainsKey(month))
             {
-                _postsByMonth[month].Add(post.Post);
+                _postsByMonth[month].Add(post);
             }
             else
             {
-                _postsByMonth[month] = new List<PostItem>
+                _postsByMonth[month] = new List<IPost>
                 {
-                    post.Post
+                    post
                 };
             }
         }
 
-        public PostItem? FindPost(string? id)
+        public IPost? FindPost(string? id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -69,7 +70,7 @@ namespace Blog.PostComponents
 
             id = id.ToLowerInvariant();
 
-            if (_postsByDateId.TryGetValue(id, out PostItem? post))
+            if (_postsByDateId.TryGetValue(id, out IPost? post))
             {
                 return post;
             }
@@ -81,14 +82,14 @@ namespace Blog.PostComponents
             return null;
         }
 
-        public IEnumerable<PostItem> EnumeratePosts()
+        public IEnumerable<IPost> EnumeratePosts()
         {
             return _postsByDateId
                 .OrderByDescending(p => p.Key)
                 .Select(p => p.Value);
         }
 
-        public IEnumerable<PostItem> GetPostsForMonth(int year, int month)
+        public IEnumerable<IPost> GetPostsForMonth(int year, int month)
         {
             var dateTime = new DateTime(year, month, 1);
             if (_postsByMonth.TryGetValue(dateTime, out var posts))
@@ -97,7 +98,7 @@ namespace Blog.PostComponents
                     .OrderBy(p => p.PostDate);
             }
 
-            return Enumerable.Empty<PostItem>();
+            return Enumerable.Empty<IPost>();
         }
     }
 }
