@@ -1,0 +1,19 @@
+﻿@if (Content is not null)
+{
+    <p class="@Content.GetClasses()">
+        @if (!string.IsNullOrEmpty(Content.Text) && !Content.TextAfterContent)
+        {
+            @Content.Text
+        }
+
+        @if (Content.ChildContent.Any())
+        {
+            <Compound Content="Content.ChildContent" />            
+        }
+
+        @if (!string.IsNullOrEmpty(Content.Text) && Content.TextAfterContent)
+        {
+            @Content.Text
+        }
+    </p>
+}

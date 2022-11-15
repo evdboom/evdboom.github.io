@@ -1,18 +1,14 @@
-﻿@using Blog.PostComponents.Compound
-@using Blog.PostComponents.Date
-@using Blog.PostComponents.Header
-@using Blog.PostComponents.Paragraph
-
+﻿@using OptionA.Blog.Components.Core.Enums;
 @if (Content is not null)
 {
     if (CompactMode)
     {
-        <Date Content="new DateContent { Date = Content.PostDate, Style = Enums.Style.Bold, DisplayType = DateDisplayType.LongDate, TextPosition = Enums.PositionType.Right, BlockType = Enums.BlockType.Normal }" />
+        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, TextAlignment = PositionType.Right, BlockType = BlockType.Normal }" />
         <div class="mh-20 mb-4 p-2 border border-2 rounded overflow-hidden shadow user-select-none pointer hover" @onclick="SelectPost">  
-            <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = Enums.BlogColor.Header }" />           
-            @if (!string.IsNullOrEmpty(Content.SubTitle))
+            <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = BlogColor.Header }" />           
+            @if (!string.IsNullOrEmpty(Content.Subtitle))
             {
-                <Paragraph Content="new ParagraphContent { Style = Enums.Style.Italic, Text = Content.SubTitle }" />
+                <Paragraph Content="new ParagraphContent { Style = Style.Italic, Text = Content.Subtitle }" />
             }
             <hr>
             <Compound Content="Content.Content" />
@@ -20,10 +16,11 @@
     }
     else
     {
-        <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = Enums.BlogColor.Header }" />
-        @if (!string.IsNullOrEmpty(Content.SubTitle))
+        <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = BlogColor.Header }" />
+        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, BlockType = BlockType.Normal }" />
+        @if (!string.IsNullOrEmpty(Content.Subtitle))
         {
-            <Paragraph Content="new ParagraphContent { Style = Enums.Style.Italic, Text = Content.SubTitle }" />
+            <Paragraph Content="new ParagraphContent { Style = Style.Italic, Text = Content.Subtitle }" />
         }
         <hr>
         <Compound Content="Content.Content" />

@@ -1,0 +1,182 @@
+﻿.code-keyword {
+    color: #569cd6;
+}
+
+.code-controlkeyword {
+    color: #d8a0df;
+}
+
+.code-string {
+    color: #ce9178;
+}
+
+.code-method {
+    color: #dcdcaa;
+}
+
+.code-comment {
+    color: #63b456;
+}
+
+.code-block {
+    background-color: #2f2f2f;
+    color: #dcdcdc;
+    overflow-x: auto;
+    white-space: pre;
+    padding: .4rem;
+    border-radius: .4rem;
+    font-family: 'Cascadia Code','Cascadia Mono',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace !important;
+    text-align: left;
+}
+
+.code-header-block {
+    background-color: #3f3f3f;
+    padding: .4rem;
+    border-top-left-radius: .4rem;
+    border-top-right-radius: .4rem;
+    position: sticky;
+    left: 0;
+    margin-bottom: .2rem;
+}
+
+.color-link {
+    color: cornflowerblue;
+}
+
+.color-header {
+    color: darkmagenta;
+}
+
+.color-text {
+    color: black;
+}
+
+.color-quote {
+    color: darkslategrey;
+}
+
+.color-footer {
+    color: dimgray;
+}
+
+.style-bold {
+    font-weight: bold;
+}
+
+.style-italic {
+    font-style: italic;
+}
+
+.style-underline {
+    text-decoration: underline;
+}
+
+.style-strikethrough {
+    text-decoration: line-through;
+}
+
+.style-lowercase {
+    text-transform: lowercase;
+}
+
+.style-uppercase {
+    text-transform: uppercase;
+}
+
+.style-monospace {
+    font-family: 'Cascadia Code','Cascadia Mono',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace !important;
+}
+
+.style-bordered {
+    border: 1px solid gray;
+    border-radius: .4rem;
+}
+
+.style-padded {
+    padding: .4rem;
+}
+
+.style-dark {
+    background-color: #171717;
+    color: #e6e6e6;
+}
+
+.style-keepwhitespace {
+    white-space: pre;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.list-style-circle {
+    list-style: disc;
+}
+
+.list-style-opencircle {
+    list-style: circle;
+}
+
+.list-style-square {
+    list-style: square;
+}
+
+.list-style-disclosureopen {
+    list-style: disclosure-open;
+}
+
+.list-style-disclosureclosed {
+    list-style: disclosure-closed;
+}
+
+.list-style-numeric {
+    list-style: decimal;
+}
+
+.list-style-loweralpha {
+    list-style: lower-alpha;
+}
+
+.list-style-upperalpha {
+    list-style: upper-alpha;
+}
+
+.list-style-upperroman {
+    list-style: upper-roman;
+}
+
+.text-left {
+    text-align: start;
+}
+
+.text-right {
+    text-align: end;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.block-left {
+    display: block;
+    margin-left: 0;
+}
+
+.block-right {
+    display: block;
+    margin-right: 0;
+}
+
+.block-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.block-floatleft {
+    float: left;
+}
+
+.block-floatright {
+    float: right;
+}

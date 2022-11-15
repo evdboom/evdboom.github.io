@@ -1,5 +1,6 @@
 ﻿using Blog.PostComponents;
 using Microsoft.AspNetCore.Components;
+using OptionA.Blog.Components.Core;
 
 namespace Blog.Pages
 {
@@ -13,7 +14,7 @@ namespace Blog.Pages
         [Parameter]
         public string? PostId { get; set; }
 
-        private PostItem? _currentPost;
+        private IPost? _currentPost;
 
         protected override void OnParametersSet()
         {

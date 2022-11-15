@@ -1,0 +1,22 @@
+﻿@if (Content is not null)
+{
+    if (Content.Ordered)
+    {
+        <ol class="@Content.GetClasses()" start="@Content.Start">
+            @foreach(var child in Content.ChildContent)
+            {
+                <ListItem Content="(ListItemContent)child"/>            
+            }
+        </ol>
+    }
+    else
+    {
+        <ul class="@Content.GetClasses()">
+            @foreach (var child in Content.ChildContent)
+            {
+                <ListItem Content="(ListItemContent)child" />
+            }
+        </ul>   
+    }    
+}
+

@@ -1,0 +1,51 @@
+﻿@using OptionA.Blog.Components.Core.Enums;
+@if (Content is not null)
+{
+    @if (!string.IsNullOrEmpty(Content.Text) && !Content.TextAfterContent)
+    {
+        @switch (Content.BlockType)
+        {
+            case BlockType.Content:
+                @Content.Text
+                break;
+            case BlockType.Inline:
+                <span class="@Content.GetClasses()">@Content.Text</span>
+                break;
+            case BlockType.Normal:
+                <div class="@Content.GetClasses()">@Content.Text</div>
+                break;
+        }
+    }
+
+    @if (Content.ChildContent.Any())
+    {
+        @switch (Content.BlockType)
+        {
+            case BlockType.Content:
+                <Compound Content="Content.ChildContent" />
+                break;
+            case BlockType.Inline:
+                <span class="@Content.GetClasses()"><Compound Content="Content.ChildContent" /></span>
+                break;
+            case BlockType.Normal:
+                <div class="@Content.GetClasses()"><Compound Content="Content.ChildContent" /></div>
+                break;
+        }
+    }
+
+    @if (!string.IsNullOrEmpty(Content.Text) && Content.TextAfterContent)
+    {
+        @switch (Content.BlockType)
+        {
+            case BlockType.Content:
+                @Content.Text
+                break;
+            case BlockType.Inline:
+                <span class="@Content.GetClasses()">@Content.Text</span>
+                break;
+            case BlockType.Normal:
+                <div class="@Content.GetClasses()">@Content.Text</div>
+                break;
+        }
+    }
+}

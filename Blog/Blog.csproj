@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Option-A.Blog.Components\OptionA.Blog.Components.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\CNAME">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
