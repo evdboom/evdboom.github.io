@@ -55,7 +55,7 @@
     color: darkslategrey;
 }
 
-.color-footer {
+.color-subtle {
     color: dimgray;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .style-bordered {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     border-radius: .4rem;
 }
 
@@ -103,6 +103,10 @@
 
 .style-keepwhitespace {
     white-space: pre;
+}
+
+.style-none {
+    text-decoration: none;    
 }
 
 .list-style-none {
@@ -179,4 +183,16 @@
 
 .block-floatright {
     float: right;
+}
+
+.compact-mode {
+    max-height: 20vh;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid lightgray;
+    border-radius: .4rem;
+    margin-bottom: 1rem;
+    padding: .4rem;
+    box-shadow: 0 .4rem 1rem rgba(0,0,0.15);
+    overflow: hidden;
 }

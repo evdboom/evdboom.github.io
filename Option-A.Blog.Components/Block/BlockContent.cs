@@ -20,5 +20,17 @@ namespace OptionA.Blog.Components.Block
         /// Boolean to determine where to place the text if also <see cref="PostContent.ChildContent"/> is present, default is before the content
         /// </summary>
         public bool TextAfterContent { get; set; }
+        /// <summary>
+        /// Overridden the default to also set blocktype
+        /// </summary>
+        /// <param name="builder"></param>
+        public override void SetProperties(IBuilder builder)
+        {
+            base.SetProperties(builder);
+            if (BlockType == BlockType.Inherit)
+            {
+                BlockType = builder.BlockType;
+            }
+        }
     }
 }

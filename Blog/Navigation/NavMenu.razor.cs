@@ -1,5 +1,5 @@
-﻿using Blog.PostComponents;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blog.Components.Services;
 
 namespace Blog.Navigation
 {

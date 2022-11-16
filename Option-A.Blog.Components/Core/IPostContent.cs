@@ -12,6 +12,10 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         IPost? Post { get; }
         /// <summary>
+        /// List of child content
+        /// </summary>
+        IList<IPostContent> ChildContent { get; }
+        /// <summary>
         /// List of additional classes to be added to the components
         /// </summary>
         IList<string> AdditionalClasses { get; }

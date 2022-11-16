@@ -20,7 +20,7 @@
         /// <summary>
         /// Color used for footers
         /// </summary>
-        Footer,
+        Subtle,
         /// <summary>
         /// Color used for quotes
         /// </summary>

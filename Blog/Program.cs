@@ -1,8 +1,8 @@
 using Blog;
-using Blog.PostComponents;
 using Blog.Responsive;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using OptionA.Blog.Components.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -16,6 +16,6 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
 {
     services
         .AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) })
-        .AddSingleton<IPostService, PostService>()
+        .AddBlogServices()
         .AddSingleton<IResponsiveService, ResponsiveService>();
 }

@@ -12,12 +12,20 @@ namespace OptionA.Blog.Components
         /// <summary>
         /// Default class for the encasing block of a <see cref="Code.Code"/>
         /// </summary>
-        public static string CodeBlock { get; set; } = "code-block";
+        public static string? CodeBlock { get; set; } = "code-block";
         
         /// <summary>
         /// Default class for the header of a <see cref="Code.Code"/>
         /// </summary>
-        public static string CodeHeaderBlock { get; set; } = "code-header-block";
+        public static string? CodeHeaderBlock { get; set; } = "code-header-block";
+
+        /// <summary>
+        /// Default class for diplaying posts in compact mode.
+        /// </summary>
+        public static IList<string> CompactMode { get; set; } = new List<string>
+        {
+            "compact-mode"
+        };
 
         /// <summary>
         /// Default classes for the various <see cref="CodePart"/> in a piece of code to better clarify code
@@ -40,7 +48,7 @@ namespace OptionA.Blog.Components
             { BlogColor.Header, "color-header" },
             { BlogColor.Text, "color-text" },
             { BlogColor.Quote, "color-quote" },
-            { BlogColor.Footer, "color-footer" },
+            { BlogColor.Subtle, "color-subtle" },
         };
 
         /// <summary>
@@ -59,6 +67,7 @@ namespace OptionA.Blog.Components
             { Style.Padded, "style-padded" },
             { Style.Dark, "style-dark" },
             { Style.KeepWhiteSpace, "style-keepwhitespace" },
+            { Style.None, "style-none" },
         };
 
         /// <summary>

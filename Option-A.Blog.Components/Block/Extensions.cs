@@ -149,34 +149,40 @@ namespace OptionA.Blog.Components.Block
         /// <returns></returns>
         public static Parent AddQuote<Parent>(this Parent parent, string quote, string source, string link) where Parent : IParentBuilder
         {
-            CreateBlock(parent)
-                .WithBlockType(BlockType.Block)
-                .WithStyle(Style.Bordered | Style.Italic)
-                .WithText(quote)
+            var paragraph = CreateParagraph(parent)
+                .WithStyle(Style.Normal)
                 .WithTextAlignment(PositionType.Center)
-                .WithColor(BlogColor.Quote)
-                .Build();
+                .CreateBlock()
+                    .WithBlockType(BlockType.Block)
+                    .WithStyle(Style.Bordered | Style.Italic)
+                    .WithText(quote)
+                    .WithColor(BlogColor.Quote)
+                    .Build();
 
             if (!string.IsNullOrEmpty(link))
             {
-                return parent
-                    .CreateLink()
-                    .WithTextAlignment(PositionType.Center)
-                    .WithBlockType(BlockType.Block)
-                    .WithHref(link)
-                    .WithText(source)
-                    .WithStyle(Style.Italic)
-                    .WithColor(BlogColor.Footer)
+                return paragraph
+                    .CreateBlock()
+                        .WithBlockType(BlockType.Block)
+                        .WithStyle(Style.Italic)
+                        .CreateLink()
+                            .WithColor(BlogColor.Subtle)
+                            .WithStyle(Style.None)
+                            .WithHref(link)
+                            .WithText(source)
+                            .Build()
+                        .Build()
                     .Build();
             }
             else
             {
-                return CreateBlock(parent)
-                    .WithBlockType(BlockType.Block)
-                    .WithStyle(Style.Italic)
-                    .WithText(source)
-                    .WithTextAlignment(PositionType.Center)
-                    .WithColor(BlogColor.Footer)
+                return paragraph
+                    .CreateBlock()
+                        .WithBlockType(BlockType.Block)
+                        .WithStyle(Style.Italic)
+                        .WithText(source)
+                        .WithColor(BlogColor.Subtle)
+                        .Build()
                     .Build();
             }
         }
@@ -195,7 +201,7 @@ namespace OptionA.Blog.Components.Block
                     .WithStyle(Style.Italic)
                     .WithText($"{text}")
                     .WithTextAlignment(PositionType.Center)
-                    .WithColor(BlogColor.Footer)
+                    .WithColor(BlogColor.Subtle)
                     .Build();
         }
     }

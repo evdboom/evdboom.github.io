@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Unittests", "Blog.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blog.Components", "Option-A.Blog.Components\OptionA.Blog.Components.csproj", "{39E7BE35-1261-48D2-A293-6C28A198CED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionA.Blog.Components.Unittests", "OptionA.Blog.Components.Unittests\OptionA.Blog.Components.Unittests.csproj", "{08FAB07D-98A4-4BBC-8EBA-FD37233BE8BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blog.Components.Unittests", "OptionA.Blog.Components.Unittests\OptionA.Blog.Components.Unittests.csproj", "{08FAB07D-98A4-4BBC-8EBA-FD37233BE8BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

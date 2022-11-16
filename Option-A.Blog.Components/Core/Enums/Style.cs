@@ -58,5 +58,9 @@
         /// Make sure to keep any set whitespace
         /// </summary>
         KeepWhiteSpace = 4096,
+        /// <summary>
+        /// Sets the text-decoration to none
+        /// </summary>
+        None = 8192,
     }
 }
