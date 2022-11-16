@@ -39,6 +39,10 @@
     margin-bottom: .2rem;
 }
 
+.code-selected {
+    background-color: rgba(51, 153, 255, .5);
+}
+
 .color-link {
     color: cornflowerblue;
 }
@@ -193,6 +197,6 @@
     border-radius: .4rem;
     margin-bottom: 1rem;
     padding: .4rem;
-    box-shadow: 0 .4rem 1rem rgba(0,0,0.15);
+    box-shadow: 0 .4rem 1rem rgba(0,0,0,.3);
     overflow: hidden;
 }
