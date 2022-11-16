@@ -2,16 +2,21 @@
 
 namespace OptionA.Blog.Components.Table
 {
+    /// <summary>
+    /// Builder for creating table rows
+    /// </summary>
+    /// <typeparam name="Parent"></typeparam>
     public class TableRowBuilder<Parent> : ContentBuilderBase<TableRowBuilder<Parent>, TableBuilder<Parent>, TableRowContent>, IParentBuilder
         where Parent : IParentBuilder
     {
-        private readonly bool _columns;
-
+        /// <summary>
+        /// Post for which the content is created
+        /// </summary>
         public IPost Post => _result.Post;
 
-        public TableRowBuilder(TableBuilder<Parent> parent, bool columns) : base(parent, parent.Style, parent.TextAlignment, parent.BlockType, parent.BlockAlignment, parent.Color)
+        public TableRowBuilder(TableBuilder<Parent> parent, bool columns) : base(parent)
         {
-            _columns = columns;
+            _content.ColumnRow = columns;
         }
 
         protected override TableRowBuilder<Parent> This()
@@ -22,7 +27,7 @@ namespace OptionA.Blog.Components.Table
         protected override void OnBuild()
         {
             base.OnBuild();
-            _result.AddContent(_content, _columns);
+            _result.AddContent(_content);
         }
 
         public void AddContent(IPostContent content)

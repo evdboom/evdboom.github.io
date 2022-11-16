@@ -2,17 +2,32 @@
 
 namespace OptionA.Blog.Components.Core
 {
+    /// <summary>
+    /// Default implementation of the <see cref="IPostContent"/> inerface
+    /// </summary>
     public abstract class PostContent : IPostContent
     {
+        /// <summary>
+        /// <inheritdoc/>
+        /// <para> Can be overridden to provide custom behavior</para>
+        /// </summary>
         public virtual IList<IPostContent> ChildContent { get; } = new List<IPostContent>();
+        /// <inheritdoc/>
         public IList<string> AdditionalClasses { get; } = new List<string>();
+        /// <inheritdoc/>
         public abstract ComponentType Type { get; }
+        /// <inheritdoc/>
         public Style Style { get; set; }
+        /// <inheritdoc/>
         public BlockType BlockType { get; set; }
+        /// <inheritdoc/>
         public PositionType TextAlignment { get; set; }
+        /// <inheritdoc/>
         public PositionType BlockAlignment { get; set; }
+        /// <inheritdoc/>
         public BlogColor Color { get; set; }
 
+        /// <inheritdoc/>
         public string GetClasses()
         {
             var list = GetBaseClassesList() 
@@ -23,11 +38,19 @@ namespace OptionA.Blog.Components.Core
             return string.Join(' ', list);
         }
 
+        /// <summary>
+        /// The get <see cref="GetClasses"/> method results in the total of the baseclasses, additionalclasses and these optional classes, override to add content specific classes.
+        /// </summary>
+        /// <returns></returns>
         protected virtual IEnumerable<string> GetContentClassesList()
         {
             yield break;
         }
 
+        /// <summary>
+        /// Add the base classes for <see cref="Color"/>, <see cref="BlockAlignment"/>, <see cref="TextAlignment"/> and <see cref="Style"/> properties, classes can be set, overridden or cleared in <see cref="DefaultClasses"/> to influence the behavior (only filled classes are added)
+        /// </summary>
+        /// <returns></returns>
         protected IEnumerable<string> GetBaseClassesList()
         {
             if (DefaultClasses.ColorClasses.TryGetValue(Color, out string? colorClass))
@@ -57,6 +80,7 @@ namespace OptionA.Blog.Components.Core
             }
         }
 
+        /// <inheritdoc/>
         public void SetProperties(IBuilder builder)
         {
             if (BlockType == BlockType.Inherit)

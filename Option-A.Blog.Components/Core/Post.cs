@@ -1,7 +1,13 @@
 ﻿namespace OptionA.Blog.Components.Core
 {
+    /// <summary>
+    /// Base classes for posts, can be inherited to construct posts.
+    /// </summary>
     public abstract class Post : IPost
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         protected Post() 
         {
             var builder = PostBuilder.CreatePost(this);
@@ -9,9 +15,11 @@
             builder.Build();
         }
 
+        /// <inheritdoc/>
         public IList<IPostContent> Content { get; } = new List<IPostContent>();
 
         private DateTime _postDate;
+        /// <inheritdoc/>
         public DateTime PostDate
         {
             get => _postDate;
@@ -23,6 +31,7 @@
         }
 
         private string? _title;
+        /// <inheritdoc/>
         public string Title
         {
             get => _title ?? string.Empty;
@@ -35,13 +44,21 @@
             }
         }
 
+        /// <inheritdoc/>
         public string Subtitle { get; set; } = string.Empty;
 
         private string? _dateId;
+        /// <inheritdoc/>
         public string DateId => _dateId ?? string.Empty;
+
         private string? _titleId;
+        /// <inheritdoc/>
         public string TitleId => _titleId ?? string.Empty;
 
+        /// <summary>
+        /// Method where Post content can be set for actual post classes
+        /// </summary>
+        /// <param name="builder"></param>
         public abstract void OnBuildPost(PostBuilder builder);
     }
 }

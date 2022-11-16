@@ -1,4 +1,5 @@
 ﻿using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Header
 {

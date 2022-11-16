@@ -2,9 +2,10 @@
 
 namespace OptionA.Blog.Components.Core
 {
-    public interface IParentBuilder : IBuilder
+    /// <summary>
+    /// Interface for builders that support generic child builders, for instance <see cref="Paragraph.ParagraphBuilder{Parent}"/>
+    /// </summary>
+    public interface IParentBuilder : IContentParentBuilder
     {
-        IPost Post { get; }
-        void AddContent(IPostContent content);
     }
 }

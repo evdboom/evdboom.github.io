@@ -1,4 +1,4 @@
-﻿using OptionA.Blog.Components.Core;
+﻿using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Line;
 
 namespace OptionA.Blog.Components.Link

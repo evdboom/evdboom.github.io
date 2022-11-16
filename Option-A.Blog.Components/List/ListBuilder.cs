@@ -2,7 +2,7 @@
 
 namespace OptionA.Blog.Components.List
 {
-    public class ListBuilder<Parent> : MainContentBuilderBase<ListBuilder<Parent>, Parent, ListContent>
+    public class ListBuilder<Parent> : MainContentBuilderBase<ListBuilder<Parent>, Parent, ListContent>, IContentParentBuilder
         where Parent : IParentBuilder
     {
         public IPost Post => _result.Post;
@@ -29,8 +29,13 @@ namespace OptionA.Blog.Components.List
             return this;
         }
 
-        public void AddContent(ListItemContent content)
+        public void AddContent(IPostContent content)
         {
+            if (content is not ListItemContent)
+            {
+                throw new InvalidOperationException($"Can only add {nameof(ListItemContent)} to a list");
+            }
+
             _content.ChildContent.Add(content);            
         }
 

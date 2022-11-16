@@ -1,8 +1,9 @@
 ﻿using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.List;
 
 namespace OptionA.Blog.Components.Table
 {
-    public class TableBuilder<Parent> : MainContentBuilderBase<TableBuilder<Parent>, Parent, TableContent>
+    public class TableBuilder<Parent> : MainContentBuilderBase<TableBuilder<Parent>, Parent, TableContent>, IContentParentBuilder
         where Parent : IParentBuilder
     {
         public IPost Post => _result.Post;
@@ -22,15 +23,20 @@ namespace OptionA.Blog.Components.Table
             return this;
         }
 
-        public void AddContent(TableRowContent content, bool columns)
+        public void AddContent(IPostContent content)
         {
-            if (columns)
+            if (content is not TableRowContent row)
             {
-                _content.Columns = content;
+                throw new InvalidOperationException($"Can only add {nameof(TableRowContent)} to a table");
+            }
+
+            if (row.ColumnRow)
+            {
+                _content.Columns = row;
             }
             else
             {
-                _content.ChildContent.Add(content);
+                _content.ChildContent.Add(row);
             }
 
         }

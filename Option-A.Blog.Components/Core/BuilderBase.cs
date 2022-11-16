@@ -2,42 +2,67 @@
 
 namespace OptionA.Blog.Components.Core
 {
+    /// <summary>
+    /// Base class for a content builder
+    /// </summary>
+    /// <typeparam name="Builder"></typeparam>
+    /// <typeparam name="Result"></typeparam>
     public abstract class BuilderBase<Builder, Result> : IBuilder
     {
+        /// <summary>
+        /// The result which will be returned by the <see cref="Build"/> method
+        /// </summary>
         protected readonly Result _result;
 
-        protected Style _style;
         /// <summary>
-        /// Gets the currently set <see cref="Enums.Style" /> for this builder, Style is copied to child builders.
+        /// The current <see cref="Enums.Style" /> for this builder, Style is copied to child builders.
         /// </summary>
+        protected Style _style;
+        /// <inheritdoc/>
         public Style Style => _style;
 
-        protected PositionType _textAlignment;
         /// <summary>
-        /// Gets the currently set <see cref="Enums.PositionType" /> for the text alignment for this builder, TextAlignment is copied to child builders.
+        /// The current <see cref="Enums.PositionType" /> for the text alignment for this builder, TextAlignment is copied to child builders.
         /// </summary>
+        protected PositionType _textAlignment;
+        /// <inheritdoc/>
         public PositionType TextAlignment => _textAlignment;
 
-        protected BlockType _blockType;
         /// <summary>
-        /// Gets the currently set <see cref="Enums.BlockType" /> for this builder, BlockType is copied to child builders.
+        /// the current <see cref="Enums.BlockType" /> for this builder, BlockType is copied to child builders.
         /// </summary>
+        protected BlockType _blockType;
+        /// <inheritdoc/>
         public BlockType BlockType => _blockType;
 
-        protected PositionType _blockAlignment;
         /// <summary>
-        /// Gets the currently set <see cref="Enums.PositionType" /> for the block alignment for this builder, BlockAlignment is copied to child builders.
+        /// the current <see cref="Enums.PositionType" /> for the block alignment for this builder, BlockAlignment is copied to child builders.
         /// </summary>
+        protected PositionType _blockAlignment;
+        /// <inheritdoc/>
         public PositionType BlockAlignment => _blockAlignment;
 
-        protected BlogColor _color;
         /// <summary>
-        /// Gets the currently set <see cref="Enums.BlogColor" /> for this builder, Color is only copied to child builders that do not have a default color themselves. 
+        /// the current <see cref="Enums.BlogColor" /> for this builder, Color is only copied to child builders that do not have a default color themselves. 
         /// </summary>
+        protected BlogColor _color;
+        /// <inheritdoc/>
         public BlogColor Color => _color;
+        
+        /// <summary>
+        /// Override if this builder has it's own default color, so it will not inherit from the parent.
+        /// </summary>
         protected virtual BlogColor _ownColor => BlogColor.Inherit;
 
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="style"></param>
+        /// <param name="textAlignment"></param>
+        /// <param name="blockType"></param>
+        /// <param name="blockAlignment"></param>
+        /// <param name="color"></param>
         protected BuilderBase(Result result, Style style, PositionType textAlignment, BlockType blockType, PositionType blockAlignment, BlogColor color)
         {
             _style = style;

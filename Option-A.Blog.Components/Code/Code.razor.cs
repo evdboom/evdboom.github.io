@@ -7,8 +7,5 @@ namespace OptionA.Blog.Components.Code
     {
         [Parameter]
         public CodeContent? Content { get; set; }
-
-        [JSImport("navigator.clipboard.writeText")]
-        public static partial Task CopyToClipBoard(string text);
     }
 }
