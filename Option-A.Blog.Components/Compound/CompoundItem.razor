@@ -1,9 +1,10 @@
-﻿@if (Content is not null)
+﻿@using OptionA.Blog.Components.Core.Enums;
+@if (Content is not null)
 {
     @switch (Content.Type)
         {
-            case ComponentType.Paragraph:
-                <Paragraph Content="(ParagraphContent)Content" />
+            case ComponentType.Block:
+                <Block Content="(BlockContent)Content" />
                 break;
             case ComponentType.Header:
                 <Header Content="(HeaderContent)Content" />
@@ -11,14 +12,8 @@
             case ComponentType.Link:
                 <Link Content="(LinkContent)Content" />
                 break;
-            case ComponentType.Line:
-                <Line Content="(LineContent)Content" />
-                break;
             case ComponentType.Date:
                 <Date Content="(DateContent)Content" /> 
-                break;
-            case ComponentType.Quote:
-                <Quote Content="(QuoteContent)Content" />
                 break;
             case ComponentType.Code:
                 <Code Content="(CodeContent)Content" />

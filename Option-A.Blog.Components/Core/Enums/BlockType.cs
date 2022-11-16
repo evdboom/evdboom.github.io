@@ -1,7 +1,7 @@
 ﻿namespace OptionA.Blog.Components.Core.Enums
 {
     /// <summary>
-    /// Determines the type of tag to use for (mainly) <see cref="Line.Line"/> or derived components.
+    /// Determines the type of tag to use for (mainly) <see cref="Block.Block"/> or derived components.
     /// </summary>
     public enum BlockType
     {
@@ -10,16 +10,20 @@
         /// </summary>
         Inherit,
         /// <summary>
-        /// Normal block, resulting in a &lt;div&gt; tag for a <see cref="Line.Line"/> or derived components
+        /// Normal block, resulting in a &lt;div&gt; tag for a <see cref="Block.Block"/> or derived components
         /// </summary>
-        Normal,
+        Block,
         /// <summary>
-        /// Inline block, resulting in a &lt;span&gt; tag for a <see cref="Line.Line"/> or derived components
+        /// Inline block, resulting in a &lt;span&gt; tag for a <see cref="Block.Block"/> or derived components
         /// </summary>
         Inline,
         /// <summary>
-        /// Render just the, resulting in a no tag for a <see cref="Line.Line"/> or derived components, this also affects styles set as the component itself will not use these (set through parent)
+        /// Render just the content, resulting in a no tag for a <see cref="Block.Block"/> or derived components, this also affects styles set as the component itself will not use these (set through parent)
         /// </summary>
         Content,
+        /// <summary>
+        /// Paragraph block, similar to <see cref="Block"/>, but results in a &lt;p&gt; tag for a <see cref="Block.Block"/> or derived components
+        /// </summary>
+        Paragraph
     }
 }

@@ -8,9 +8,9 @@ namespace OptionA.Blog.Components.Core
     public interface IPostContent
     {
         /// <summary>
-        /// Child content of this content
+        /// Post this content belongs to
         /// </summary>
-        IList<IPostContent> ChildContent { get; }
+        IPost? Post { get; }
         /// <summary>
         /// List of additional classes to be added to the components
         /// </summary>
@@ -24,10 +24,6 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         Style Style { get; }
         /// <summary>
-        /// Blocktype of the component
-        /// </summary>
-        BlockType BlockType { get; }
-        /// <summary>
         /// Text alignment of the component
         /// </summary>
         PositionType TextAlignment { get; }
@@ -39,7 +35,6 @@ namespace OptionA.Blog.Components.Core
         /// Color type to use for the component
         /// </summary>
         BlogColor Color { get; }
-
         /// <summary>
         /// Method to set the properties (Color, Alignment, etc) from the builder to the content
         /// </summary>

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OptionA.Blog.Components.Code.Parsers
+﻿namespace OptionA.Blog.Components.Code.Parsers
 {
+    /// <summary>
+    /// Parser for parsing c# code to a more readable format.
+    /// </summary>
     public class CSharpParser : IParser
     {
         private readonly List<string> _controlKeyWords = new()
@@ -164,6 +161,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             { "@$\"", StringType.Interpolated }
         };
 
+        /// <inheritdoc/>
         public IEnumerable<(string Part, CodePart Type)> GetParts(string text)
         {
             var current = string.Empty;
@@ -243,7 +241,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             }
         }
 
-        private bool IsMethodStart(string current, char nextChar)
+        private static bool IsMethodStart(string current, char nextChar)
         {
             return nextChar == '(' &&
                 (string.IsNullOrEmpty(current)
@@ -272,7 +270,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             }
         }
 
-        private string RemoveFromStart(string text, string toRemove)
+        private static string RemoveFromStart(string text, string toRemove)
         {
             if (!text.StartsWith(toRemove))
             {
@@ -302,7 +300,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             }
             else if (text.StartsWith(CommentStart))
             {
-                return FindTillValue(text, 0, Environment.NewLine);                
+                return FindTillValue(text, 0, Environment.NewLine);
             }
 
             var firstChar = text[0];
@@ -329,7 +327,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             return word;
         }
 
-        private string FindTillValue(string text, int start, string searchValue)
+        private static string FindTillValue(string text, int start, string searchValue)
         {
             var next = text.IndexOf(searchValue, start);
             if (next < 0)

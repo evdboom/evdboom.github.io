@@ -3,7 +3,7 @@
 {
     if (CompactMode)
     {
-        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, TextAlignment = PositionType.Right, BlockType = BlockType.Normal }" />
+        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, TextAlignment = PositionType.Right, BlockType = BlockType.Block }" />
         <div class="mh-20 mb-4 p-2 border border-2 rounded overflow-hidden shadow user-select-none pointer hover" @onclick="SelectPost">  
             <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = BlogColor.Header }" />           
             @if (!string.IsNullOrEmpty(Content.Subtitle))
@@ -17,7 +17,7 @@
     else
     {
         <Header Content="new HeaderContent { Text = Content.Title, HeaderSize = HeaderSize.One, Color = BlogColor.Header }" />
-        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, BlockType = BlockType.Normal }" />
+        <Date Content="new DateContent { Date = Content.PostDate, Style = Style.Bold, DisplayType = DateDisplayType.LongDate, BlockType = BlockType.Block }" />
         @if (!string.IsNullOrEmpty(Content.Subtitle))
         {
             <Paragraph Content="new ParagraphContent { Style = Style.Italic, Text = Content.Subtitle }" />

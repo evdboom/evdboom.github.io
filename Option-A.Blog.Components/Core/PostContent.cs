@@ -7,6 +7,8 @@ namespace OptionA.Blog.Components.Core
     /// </summary>
     public abstract class PostContent : IPostContent
     {
+        /// <inheritdoc/>
+        public IPost? Post { get; set; }
         /// <summary>
         /// <inheritdoc/>
         /// <para> Can be overridden to provide custom behavior</para>
@@ -17,9 +19,7 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public abstract ComponentType Type { get; }
         /// <inheritdoc/>
-        public Style Style { get; set; }
-        /// <inheritdoc/>
-        public BlockType BlockType { get; set; }
+        public Style Style { get; set; }    
         /// <inheritdoc/>
         public PositionType TextAlignment { get; set; }
         /// <inheritdoc/>
@@ -80,14 +80,13 @@ namespace OptionA.Blog.Components.Core
             }
         }
 
+        /// <summary>
         /// <inheritdoc/>
-        public void SetProperties(IBuilder builder)
-        {
-            if (BlockType == BlockType.Inherit)
-            {
-                BlockType = builder.BlockType;
-            }
-
+        /// <para>Override to add additional properties to be set from the builder</para>
+        /// </summary>
+        /// <param name="builder"></param>
+        public virtual void SetProperties(IBuilder builder)
+        {            
             if (TextAlignment == PositionType.Inherit)
             {
                 TextAlignment = builder.TextAlignment;

@@ -9,27 +9,26 @@ namespace OptionA.Blog.Components.Table
     public class TableRowBuilder<Parent> : ContentBuilderBase<TableRowBuilder<Parent>, TableBuilder<Parent>, TableRowContent>, IParentBuilder
         where Parent : IParentBuilder
     {
-        /// <summary>
-        /// Post for which the content is created
-        /// </summary>
+        /// <inheritdoc/>
         public IPost Post => _result.Post;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="columns"></param>
         public TableRowBuilder(TableBuilder<Parent> parent, bool columns) : base(parent)
         {
             _content.ColumnRow = columns;
         }
 
+        /// <inheritdoc/>
         protected override TableRowBuilder<Parent> This()
         {
             return this;
         }
 
-        protected override void OnBuild()
-        {
-            base.OnBuild();
-            _result.AddContent(_content);
-        }
-
+        /// <inheritdoc/>
         public void AddContent(IPostContent content)
         {
             _content.ChildContent.Add(content);

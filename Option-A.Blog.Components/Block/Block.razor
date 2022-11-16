@@ -1,0 +1,25 @@
+﻿@using OptionA.Blog.Components.Core.Enums;
+@if (Content is not null)
+{
+    @switch (Content.BlockType)
+    {
+        case BlockType.Block:
+            <div class="@Content.GetClasses()">
+                <BlockContents Content="Content" />
+            </div>
+            break;
+        case BlockType.Inline:
+            <span class="@Content.GetClasses()">
+                <BlockContents Content="Content" />
+            </span>
+            break;
+        case BlockType.Paragraph:
+            <p class="@Content.GetClasses()">
+                <BlockContents Content="Content" />
+            </p>
+            break;
+        case BlockType.Content:
+            <BlockContents Content="Content" />
+            break;
+    }
+}

@@ -3,7 +3,7 @@
 namespace OptionA.Blog.Components.Core
 {
     /// <summary>
-    /// Base class for a builder of content (for main content use the <see cref="MainContentBuilderBase{Builder, Parent, Content}"/> as a base class)
+    /// Base class for a builder of component content
     /// </summary>
     /// <typeparam name="Builder"></typeparam>
     /// <typeparam name="Parent"></typeparam>

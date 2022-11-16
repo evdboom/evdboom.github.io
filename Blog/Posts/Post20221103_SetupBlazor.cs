@@ -1,13 +1,11 @@
-﻿using OptionA.Blog.Components.Code;
+﻿using OptionA.Blog.Components.Block;
+using OptionA.Blog.Components.Code;
 using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Header;
 using OptionA.Blog.Components.Image;
-using OptionA.Blog.Components.Line;
 using OptionA.Blog.Components.Link;
 using OptionA.Blog.Components.List;
-using OptionA.Blog.Components.Paragraph;
-using OptionA.Blog.Components.Quote;
 using OptionA.Blog.Components.Table;
 
 namespace Blog.Posts
@@ -29,7 +27,7 @@ namespace Blog.Posts
                     .Build()
                 .CreateParagraph()
                     .WithBlockType(BlockType.Content)
-                    .AddLine("Some text")
+                    .AddBlock("Some text")
                     .AddSpace()
                     .AddLink("link", "https://www.nu.nl")
                     .Build()

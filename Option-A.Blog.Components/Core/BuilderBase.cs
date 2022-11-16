@@ -52,7 +52,7 @@ namespace OptionA.Blog.Components.Core
         /// <summary>
         /// Override if this builder has it's own default color, so it will not inherit from the parent.
         /// </summary>
-        protected virtual BlogColor _ownColor => BlogColor.Inherit;
+        protected virtual BlogColor OwnColor => BlogColor.Inherit;
 
         /// <summary>
         /// Default constructor
@@ -70,13 +70,13 @@ namespace OptionA.Blog.Components.Core
             _blockAlignment = blockAlignment;
             _blockType = blockType;
             _result = result;
-            _color = _ownColor != BlogColor.Inherit
-                ? _ownColor
+            _color = OwnColor != BlogColor.Inherit
+                ? OwnColor
                 : color;
         }
 
         /// <summary>
-        /// Builds the current builder, calls the <see cref="OnBuild"/> method and then returning the <see cref="Result"/>
+        /// Builds the current builder, calls the <see cref="OnBuild"/> method and then returning the Result/>
         /// </summary>
         /// <returns></returns>
         public Result Build()

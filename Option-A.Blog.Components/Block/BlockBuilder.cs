@@ -1,0 +1,60 @@
+﻿using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Core.Enums;
+
+namespace OptionA.Blog.Components.Block
+{
+    /// <summary>
+    /// Builder for the <see cref="BlockContent"/>
+    /// </summary>
+    /// <typeparam name="Parent"></typeparam>
+    public class BlockBuilder<Parent> : ContentBuilderBase<BlockBuilder<Parent>, Parent, BlockContent>, IParentBuilder
+        where Parent : IParentBuilder
+    {
+        /// <inheritdoc/>
+        public IPost Post => _result.Post;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="parent"></param>
+        public BlockBuilder(Parent parent) : base(parent) 
+        {
+        }
+
+        /// <summary>
+        /// Sets the text
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public BlockBuilder<Parent> WithText(string text)
+        {
+            _content.Text = text;
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public void AddContent(IPostContent content)
+        {
+            _content.ChildContent.Add(content);
+        }
+
+        /// <inheritdoc/>
+        protected override BlockBuilder<Parent> This()
+        {
+            return this;
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// <para>After the base <see cref="OnBuild"/>, sets the <see cref="BlockContent.BlockType"/> to <see cref="BlockType.Block"/> if still at <see cref="BlockType.Inherit"/></para>
+        /// </summary>
+        protected override void OnBuild()
+        {
+            base.OnBuild();
+            if (_content.BlockType == BlockType.Inherit)
+            {
+                _content.BlockType = BlockType.Block;
+            }
+        }
+    }
+}
