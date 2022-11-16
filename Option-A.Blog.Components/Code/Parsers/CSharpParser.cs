@@ -188,10 +188,9 @@
                 var isIncomplete = wordType.HasFlag(WordType.Incomplete);
                 wordType &= ~WordType.Incomplete;
 
-                if (isIncomplete)
-                {
-                    incomplete = wordType;
-                }
+                incomplete = isIncomplete
+                    ? wordType
+                    : WordType.Unknown;
 
                 switch (wordType)
                 {
