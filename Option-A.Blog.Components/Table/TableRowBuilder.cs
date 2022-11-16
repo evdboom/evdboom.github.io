@@ -2,29 +2,33 @@
 
 namespace OptionA.Blog.Components.Table
 {
+    /// <summary>
+    /// Builder for creating table rows
+    /// </summary>
+    /// <typeparam name="Parent"></typeparam>
     public class TableRowBuilder<Parent> : ContentBuilderBase<TableRowBuilder<Parent>, TableBuilder<Parent>, TableRowContent>, IParentBuilder
         where Parent : IParentBuilder
     {
-        private readonly bool _columns;
-
+        /// <inheritdoc/>
         public IPost Post => _result.Post;
 
-        public TableRowBuilder(TableBuilder<Parent> parent, bool columns) : base(parent, parent.Style, parent.TextAlignment, parent.BlockType, parent.BlockAlignment, parent.Color)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="columns"></param>
+        public TableRowBuilder(TableBuilder<Parent> parent, bool columns) : base(parent)
         {
-            _columns = columns;
+            _content.ColumnRow = columns;
         }
 
+        /// <inheritdoc/>
         protected override TableRowBuilder<Parent> This()
         {
             return this;
         }
 
-        protected override void OnBuild()
-        {
-            base.OnBuild();
-            _result.AddContent(_content, _columns);
-        }
-
+        /// <inheritdoc/>
         public void AddContent(IPostContent content)
         {
             _content.ChildContent.Add(content);

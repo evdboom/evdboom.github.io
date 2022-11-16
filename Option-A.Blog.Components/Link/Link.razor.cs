@@ -2,8 +2,14 @@
 
 namespace OptionA.Blog.Components.Link
 {
+    /// <summary>
+    /// Link component
+    /// </summary>
     public partial class Link
     {
+        /// <summary>
+        /// Content for the component
+        /// </summary>
         [Parameter]
         public LinkContent? Content { get; set; }
 

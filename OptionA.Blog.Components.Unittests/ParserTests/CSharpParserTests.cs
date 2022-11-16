@@ -1,14 +1,27 @@
-﻿using Blog.PostComponents.Code;
+﻿using OptionA.Blog.Components.Code;
+using OptionA.Blog.Components.Code.Parsers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Blog.Unittests
+namespace OptionA.Blog.Components.Unittests.ParserTests
 {
-    public class CodeUtilTests
+    public class CSharpParserTests
     {
+        private readonly CSharpParser _parser;
+
+        public CSharpParserTests()
+        {
+            _parser = new();
+        }
+
         [Fact]
         public void FindsMethodDeclaration()
-        {            
+        {
             var test = "public static IEnumerable<(string Part, CodePart type)> GetParts(string text)";
-            var parts = CodePartUtil.GetParts(test).ToList();
+            var parts = _parser.GetParts(test).ToList();
             Assert.Collection(parts, part =>
             {
                 Assert.Equal("public", part.Part);
@@ -64,7 +77,7 @@ namespace Blog.Unittests
     var testMeAsweel = $""{aa} asn more text"";
     var testMeMore = ""yo yo sem"";
 }";
-            var parts = CodePartUtil.GetParts(test).ToList();
+            var parts = _parser.GetParts(test).ToList();
 
         }
     }

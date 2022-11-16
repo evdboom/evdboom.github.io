@@ -1,10 +1,9 @@
-﻿using OptionA.Blog.Components.Core.Enums;
-
-namespace OptionA.Blog.Components.Core
+﻿namespace OptionA.Blog.Components.Core
 {
-    public interface IParentBuilder : IBuilder
+    /// <summary>
+    /// Interface for builders that support generic child builders, for instance <see cref="Block.BlockBuilder{Parent}"/>
+    /// </summary>
+    public interface IParentBuilder : IContentParentBuilder
     {
-        IPost Post { get; }
-        void AddContent(IPostContent content);
     }
 }

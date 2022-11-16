@@ -3,27 +3,49 @@ using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Header
 {
-    public class HeaderBuilder<Parent> : MainContentBuilderBase<HeaderBuilder<Parent>, Parent, HeaderContent>
+    /// <summary>
+    /// Builder for creating <see cref="HeaderContent"/>
+    /// </summary>
+    /// <typeparam name="Parent"></typeparam>
+    public class HeaderBuilder<Parent> : ContentBuilderBase<HeaderBuilder<Parent>, Parent, HeaderContent>
         where Parent : IParentBuilder
     {
-        protected override BlogColor _ownColor => BlogColor.Header;
+        /// <summary>
+        /// Sets the color to <see cref="BlogColor.Header"/>
+        /// </summary>
+        protected override BlogColor OwnColor => BlogColor.Header;
 
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="parent"></param>
         public HeaderBuilder(Parent parent) : base(parent)
         {
         }
 
+        /// <summary>
+        /// Sets the text for the header
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public HeaderBuilder<Parent> WithText(string text)
         {
             _content.Text = text;
             return this;
         }
 
+        /// <summary>
+        /// Sets the size of the header
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public HeaderBuilder<Parent> OfSize(HeaderSize size)
         {
             _content.HeaderSize = size;
             return this;
         }
 
+        /// <inheritdoc/>
         protected override HeaderBuilder<Parent> This()
         {
             return this;

@@ -1,21 +1,40 @@
-﻿using OptionA.Blog.Components.Code.Parsers;
+﻿using OptionA.Blog.Components.Block;
+using OptionA.Blog.Components.Code.Parsers;
 using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
-using OptionA.Blog.Components.Line;
-using OptionA.Blog.Components.Paragraph;
 
 namespace OptionA.Blog.Components.Code
 {
-    public class CodeContent : ParagraphContent
+    /// <summary>
+    /// Content for the <see cref="Code.Code"/> component
+    /// </summary>
+    public class CodeContent : BlockContent
     {
+        /// <summary>
+        /// Parser for transforming raw code into more readable code.
+        /// </summary>
         public IParser? Parser { get; set; }
+        /// <summary>
+        /// Code to transform
+        /// </summary>
         public string Code { get; set; } = string.Empty;
+        /// <summary>
+        /// Language of the code
+        /// </summary>
         public CodeLanguage Language { get; set; }
+        /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Code;
 
+        /// <summary>
+        /// Childcontent for code block is set by block, cannot set it directly
+        /// </summary>
         public override IList<IPostContent> ChildContent => GetChildren()
             .ToList();
 
+        /// <summary>
+        /// Adds the <see cref="DefaultClasses.CodeBlock"/> class to the content
+        /// </summary>
+        /// <returns></returns>
         protected override IEnumerable<string> GetContentClassesList()
         {
             if (!string.IsNullOrEmpty(DefaultClasses.CodeBlock))
@@ -26,53 +45,47 @@ namespace OptionA.Blog.Components.Code
 
         private IEnumerable<IPostContent> GetChildren()
         {
+            var builder = ComponentBuilder.CreateBuilder(Post!);
             if (Language != CodeLanguage.Other)
             {
-                var header = new LineContent
-                {
-                    Text = Language.ToDisplayLanguage(),
-                    TextAlignment = PositionType.Right,
-                    BlockType = BlockType.Normal,
-                    Style = Style.Bold
-                };
+                var header = builder
+                    .CreateBlock()
+                    .WithStyle(Style.Bold)
+                    .WithText(Language.ToDisplayLanguage())
+                    .WithTextAlignment(PositionType.Right);
 
                 if (!string.IsNullOrEmpty(DefaultClasses.CodeHeaderBlock))
                 {
-                    header.AdditionalClasses.Add(DefaultClasses.CodeHeaderBlock);
+                    header.AddClass(DefaultClasses.CodeHeaderBlock);
                 }
-
-                yield return header;
+                header.Build();
             }
 
             if (Parser is null)
             {
-                yield return new LineContent
-                {
-                    Text = Code,
-                    BlockType = BlockType.Content
-                };
-                yield break;
+                return builder
+                    .AddContent(Code)
+                    .Build();
             }
 
             foreach (var (part, type) in Parser.GetParts(Code))
             {
-                var content = new LineContent
+                if (type == CodePart.Text)
                 {
-                    Text = part,
-                    BlockType = type == CodePart.Text
-                        ? BlockType.Content
-                        : BlockType.Inline
-                };
-                if (type != CodePart.Text)
-                {
-                    var className = type.GetPartClass();
-                    if (!string.IsNullOrEmpty(className))
-                    {
-                        content.AdditionalClasses.Add(className);
-                    }
+                    builder.AddContent(part);
                 }
-                yield return content;
+                else
+                {
+                    builder
+                        .CreateInline()
+                        .WithText(part)
+                        .AddClass(type.GetPartClass())
+                        .Build();                    
+                }
             }
+
+            return builder
+                .Build();
         }
     }
 }

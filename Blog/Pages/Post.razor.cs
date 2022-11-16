@@ -1,6 +1,6 @@
-﻿using Blog.PostComponents;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Services;
 
 namespace Blog.Pages
 {
@@ -37,7 +37,7 @@ namespace Blog.Pages
             {
                 _currentPost = post;
                 StateHasChanged();
-            }                        
+            }
         }
     }
 }

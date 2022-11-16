@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace OptionA.Blog.Components.Code
 {
+    /// <summary>
+    /// Code component
+    /// </summary>
     public partial class Code
     {
+        /// <summary>
+        /// Content for the component
+        /// </summary>
         [Parameter]
         public CodeContent? Content { get; set; }
-
-        [JSImport("navigator.clipboard.writeText")]
-        public static partial Task CopyToClipBoard(string text);
     }
 }

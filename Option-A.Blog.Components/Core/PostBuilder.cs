@@ -2,52 +2,101 @@
 
 namespace OptionA.Blog.Components.Core
 {
+    /// <summary>
+    /// Post builder for actualy builing the posts.
+    /// </summary>
     public class PostBuilder : BuilderBase<PostBuilder, Post>, IParentBuilder
     {
+        /// <inheritdoc/>
         public IPost Post => _result;
 
-        private PostBuilder(Post result) : base(result, Style.Inherit, PositionType.Inherit, BlockType.Normal, PositionType.Inherit, BlogColor.Inherit)
+        private PostBuilder(Post result) : base(result, Style.Inherit, PositionType.Inherit, BlockType.Block, PositionType.Inherit, BlogColor.Inherit)
         {
         }
 
+        /// <summary>
+        /// Startpoint to create a post, called in the constructor of the base <see cref="Core.Post"/> class
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         public static PostBuilder CreatePost(Post post)
         {
             return new PostBuilder(post);
         }
 
+        /// <summary>
+        /// Sets the date for the post, use hours if more then one posts are created for a date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public PostBuilder WithDate(DateTime date)
         {
             _result.PostDate = date;
             return this;
         }
 
+        /// <summary>
+        /// Sets the date for the post, use hours if more then one posts are created for a date
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public PostBuilder WithDate(int year, int month, int day)
         {
             return WithDate(year, month, day, 0);
         }
 
+        /// <summary>
+        ///  Sets the date for the post, sets the postNumber (max 23) as hours in de postdate
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="postNumber"></param>
+        /// <returns></returns>
         public PostBuilder WithDate(int year, int month, int day, int postNumber)
         {
+            if (postNumber < 0 || postNumber > 23)
+            {
+                throw new ArgumentException($"{nameof(postNumber)} can only be set from 0 to 23");
+            }
+
             return WithDate(new DateTime(year, month, day, postNumber, 0, 0));
         }
 
+        /// <summary>
+        /// Sets the title for the post
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
         public PostBuilder WithTitle(string title)
         {
             _result.Title = title;
             return this;
         }
 
+        /// <summary>
+        /// Sets the subtitle or short description for the post
+        /// </summary>
+        /// <param name="subtitle"></param>
+        /// <returns></returns>
         public PostBuilder WithSubtitle(string subtitle)
         {
             _result.Subtitle = subtitle;
             return this;
         }
 
+        /// <summary>
+        /// Adds content to this post
+        /// </summary>
+        /// <param name="content"></param>
         public void AddContent(IPostContent content)
         {
             _result.Content.Add(content);
         }
 
+        /// <inheritdoc/>
         protected override PostBuilder This()
         {
             return this;

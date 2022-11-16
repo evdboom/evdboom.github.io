@@ -1,9 +1,11 @@
-﻿using Blog.Posts;
-using OptionA.Blog.Components.Core;
+﻿using OptionA.Blog.Components.Core;
 using System.Reflection;
 
-namespace Blog.PostComponents
+namespace OptionA.Blog.Components.Services
 {
+    /// <summary>
+    /// Default implementation of the <see cref="IPostService"/>
+    /// </summary>
     public class PostService : IPostService
     {
         private readonly Dictionary<string, IPost> _postsByDateId;
@@ -12,6 +14,10 @@ namespace Blog.PostComponents
 
         private const string PostNamespace = "Blog.Posts";
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <exception cref="InvalidOperationException">thrown if no posts are found</exception>
         public PostService()
         {
             _postsByDateId = new();
@@ -61,6 +67,7 @@ namespace Blog.PostComponents
             }
         }
 
+        /// <inheritdoc/>
         public IPost? FindPost(string? id)
         {
             if (string.IsNullOrEmpty(id))
@@ -82,6 +89,7 @@ namespace Blog.PostComponents
             return null;
         }
 
+        /// <inheritdoc/>
         public IEnumerable<IPost> EnumeratePosts()
         {
             return _postsByDateId
@@ -89,6 +97,7 @@ namespace Blog.PostComponents
                 .Select(p => p.Value);
         }
 
+        /// <inheritdoc/>
         public IEnumerable<IPost> GetPostsForMonth(int year, int month)
         {
             var dateTime = new DateTime(year, month, 1);
@@ -99,6 +108,14 @@ namespace Blog.PostComponents
             }
 
             return Enumerable.Empty<IPost>();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<DateTime> GetMonthsWithPosts()
+        {
+            return _postsByMonth
+                .Keys
+                .OrderBy(k => k);
         }
     }
 }

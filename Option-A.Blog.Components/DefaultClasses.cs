@@ -4,12 +4,32 @@ using OptionA.Blog.Components.List;
 
 namespace OptionA.Blog.Components
 {
+    /// <summary>
+    /// Classes used by the various components in this package, override with your own or clear if you do not wish to use the default style and behavior.
+    /// </summary>
     public static class DefaultClasses
     {
-        public static string CodeBlock { get; set; } = "code-block";
-        public static string CodeHeaderBlock { get; set; } = "code-header-block";
+        /// <summary>
+        /// Default class for the encasing block of a <see cref="Code.Code"/>
+        /// </summary>
+        public static string? CodeBlock { get; set; } = "code-block";
+        
+        /// <summary>
+        /// Default class for the header of a <see cref="Code.Code"/>
+        /// </summary>
+        public static string? CodeHeaderBlock { get; set; } = "code-header-block";
 
+        /// <summary>
+        /// Default class for diplaying posts in compact mode.
+        /// </summary>
+        public static IList<string> CompactMode { get; set; } = new List<string>
+        {
+            "compact-mode"
+        };
 
+        /// <summary>
+        /// Default classes for the various <see cref="CodePart"/> in a piece of code to better clarify code
+        /// </summary>
         public static IDictionary<CodePart, string> CodeClasses { get; set; } = new Dictionary<CodePart, string>
         {
             { CodePart.Keyword, "code-keyword" },
@@ -19,15 +39,21 @@ namespace OptionA.Blog.Components
             { CodePart.Comment, "code-comment" }
         };
 
+        /// <summary>
+        /// Default classes for the default colors of the components
+        /// </summary>
         public static IDictionary<BlogColor, string> ColorClasses { get; set; } = new Dictionary<BlogColor, string>
         {
             { BlogColor.Link, "color-link" },
             { BlogColor.Header, "color-header" },
             { BlogColor.Text, "color-text" },
             { BlogColor.Quote, "color-quote" },
-            { BlogColor.Footer, "color-footer" },
+            { BlogColor.Subtle, "color-subtle" },
         };
 
+        /// <summary>
+        /// Default classes for the various styles used by components
+        /// </summary>
         public static IDictionary<Style, string> StyleClasses { get; set; } = new Dictionary<Style, string>
         {
             { Style.Bold, "style-bold" },
@@ -41,8 +67,12 @@ namespace OptionA.Blog.Components
             { Style.Padded, "style-padded" },
             { Style.Dark, "style-dark" },
             { Style.KeepWhiteSpace, "style-keepwhitespace" },
+            { Style.None, "style-none" },
         };
 
+        /// <summary>
+        /// Default classes for the various list styles used by the <see cref="List.List"/> component
+        /// </summary>
         public static IDictionary<ListStyle, string> ListStyleClasses { get; set; } = new Dictionary<ListStyle, string>
         {
             { ListStyle.None, "list-style-none" },
@@ -57,6 +87,9 @@ namespace OptionA.Blog.Components
             { ListStyle.UpperRoman, "list-style-upperroman" },
         };
 
+        /// <summary>
+        /// Default classes for the text alignment inside a block
+        /// </summary>
         public static IDictionary<PositionType, string> TextAlignmentClasses { get; set; } = new Dictionary<PositionType, string>
         {
             { PositionType.Left, "text-left" },
@@ -64,6 +97,9 @@ namespace OptionA.Blog.Components
             { PositionType.Center, "text-center" },
         };
 
+        /// <summary>
+        /// Default classes for the alignment of a block
+        /// </summary>
         public static IDictionary<PositionType, string> BlockAlignmentClasses { get; set; } = new Dictionary<PositionType, string>
         {
             { PositionType.Left, "block-left" },
@@ -73,6 +109,9 @@ namespace OptionA.Blog.Components
             { PositionType.FloatRight, "block-floatright" }
         };
 
+        /// <summary>
+        /// Optional classes for each Content class, they are injected through the builders of the various content classes. If you directly create content classes you have to insert these yourself
+        /// </summary>
         public static IDictionary<Type, IList<string>> ContentClasses { get; set; } = new Dictionary<Type, IList<string>>();
 
     }
