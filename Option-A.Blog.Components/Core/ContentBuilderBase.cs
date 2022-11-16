@@ -38,7 +38,7 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         /// <param name="className"></param>
         /// <returns></returns>
-        public Builder AddClass(string className)
+        public Builder AddClass(string? className)
         {
             if (!string.IsNullOrEmpty(className) && !_content.AdditionalClasses.Contains(className))
             {

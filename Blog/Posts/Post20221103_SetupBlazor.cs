@@ -35,11 +35,11 @@ namespace Blog.Posts
                     {
                         SomeFunction.CallMe();
                         var x = 12;
-                        Label y = typeof(Test);
+                        Label y = *M*typeof(Test)*M*;
                         Labeler z = nameof(Label);
                         return x;
-                        var testMeAsweel = $"{aa} asn more text";
-                        var testMeMore = "yo yo sem";
+                        var testMeAsweel = *M*$"{a*M*a} *M*asn*M* more text";
+                        var testMeMore*M* = "yo yo sem";*M*
                         var hard = @"multi
                         line
                         string";

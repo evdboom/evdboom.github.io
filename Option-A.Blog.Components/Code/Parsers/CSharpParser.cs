@@ -147,86 +147,109 @@
             ';',
             ',',
             '|',
-            '*'
         };
 
-        private readonly string CommentStart = "//";
+        private readonly string _selectionMarker = "*M*";
 
-        private readonly Dictionary<string, StringType> StringStarters = new()
+        private readonly Dictionary<string, WordType> _starters = new()
         {
-            { "\"", StringType.Normal },
-            { "@\"", StringType.Normal },
-            { "$\"", StringType.Interpolated },
-            { "$@\"", StringType.Interpolated },
-            { "@$\"", StringType.Interpolated }
+            { "\"", WordType.String },
+            { "@\"", WordType.String },
+            { "$\"", WordType.Interpolated },
+            { "$@\"", WordType.Interpolated },
+            { "@$\"", WordType.Interpolated },
+            { "*", WordType.Marker },
+            { "//", WordType.Comment }
         };
 
         /// <inheritdoc/>
-        public IEnumerable<(string Part, CodePart Type)> GetParts(string text)
+        public IEnumerable<(string Part, CodePart Type, bool Selected)> GetParts(string text)
         {
             var current = string.Empty;
+            var selected = false;
+            var incomplete = WordType.Unknown;
+            var endedInside = false;
             while (!string.IsNullOrEmpty(text))
             {
-                var word = FindNextWord(text, out StringType stringType);
+                var word = FindNextWord(text, incomplete, out WordType wordType);
                 text = RemoveFromStart(text, word);
 
-                switch (stringType)
+                if (word == _selectionMarker)
                 {
-                    case StringType.Normal:
+                    if (!string.IsNullOrEmpty(current))
+                    {
+                        yield return (current, CodePart.Text, selected);
+                        current = string.Empty;
+                    }
+                    selected = !selected;
+                    continue;
+                }
+
+                var isIncomplete = wordType.HasFlag(WordType.Incomplete);
+                wordType &= ~WordType.Incomplete;
+
+                if (isIncomplete)
+                {
+                    incomplete = wordType;
+                }
+
+                switch (wordType)
+                {
+                    case WordType.String:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            yield return (current, CodePart.Text);
+                            yield return (current, CodePart.Text, selected);
                             current = string.Empty;
                         }
-                        yield return (word, CodePart.String);
+                        yield return (word, CodePart.String, selected);
                         break;
-                    case StringType.Interpolated:
+                    case WordType.Interpolated:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            yield return (current, CodePart.Text);
+                            yield return (current, CodePart.Text, selected);
                             current = string.Empty;
-                        }
-                        foreach (var (part, type) in ParseInterpolatedString(word))
+                        }                        
+                        foreach (var (part, type, inside) in ParseInterpolatedString(word, endedInside))
                         {
-                            yield return (part, type);
+                            endedInside = inside;
+                            yield return (part, type, selected);
                         }
                         break;
-                    case StringType.None:
-                        if (word.StartsWith(CommentStart))
+                    case WordType.Comment:
+                        if (!string.IsNullOrEmpty(current))
+                        {
+                            yield return (current, CodePart.Text, selected);
+                            current = string.Empty;
+                        }
+                        yield return (word, CodePart.Comment, selected);
+                        break;
+                    case WordType.Unknown:
+                        if (_keyWords.Contains(word))
                         {
                             if (!string.IsNullOrEmpty(current))
                             {
-                                yield return (current, CodePart.Text);
+                                yield return (current, CodePart.Text, selected);
                                 current = string.Empty;
                             }
-                            yield return (word, CodePart.Comment);
-                        }
-                        else if (_keyWords.Contains(word))
-                        {
-                            if (!string.IsNullOrEmpty(current))
-                            {
-                                yield return (current, CodePart.Text);
-                                current = string.Empty;
-                            }
-                            yield return (word, CodePart.Keyword);
+                            yield return (word, CodePart.Keyword, selected);
                         }
                         else if (_controlKeyWords.Contains(word))
                         {
                             if (!string.IsNullOrEmpty(current))
                             {
-                                yield return (current, CodePart.Text);
+                                yield return (current, CodePart.Text, selected);
                                 current = string.Empty;
                             }
-                            yield return (word, CodePart.ControlKeyword);
+                            yield return (word, CodePart.ControlKeyword, selected);
                         }
                         else if (IsMethodStart(current, text.FirstOrDefault()))
                         {
                             if (!string.IsNullOrEmpty(current))
                             {
-                                yield return (current, CodePart.Text);
+                                yield return (current, CodePart.Text, selected);
                                 current = string.Empty;
                             }
-                            yield return (word, CodePart.Method);
+                            yield return (word, CodePart.Method, selected);
                         }
                         else
                         {
@@ -237,7 +260,7 @@
             }
             if (!string.IsNullOrEmpty(current))
             {
-                yield return (current, CodePart.Text);
+                yield return (current, CodePart.Text, selected);
             }
         }
 
@@ -249,22 +272,35 @@
                 || current.EndsWith('.'));
         }
 
-        private IEnumerable<(string Part, CodePart Type)> ParseInterpolatedString(string word)
+        private IEnumerable<(string Part, CodePart Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside)
         {
             var interpolated = word.Split('{', '}');
-            bool inside = false;
-            foreach (var i in interpolated)
+            var inside = beginInside;
+            for (int i = 0; i < interpolated.Length; i++)
             {
+                var part = interpolated[i];
+                var last = i == interpolated.Length - 1;
+
                 if (inside)
                 {
-                    foreach (var p in GetParts($"{{{i}}}"))
+                    var start = beginInside
+                        ? string.Empty
+                        : "{";
+                    var end = last
+                        ? string.Empty
+                        : "}";
+
+                    var insidePart = $"{start}{part}{end}";
+                    beginInside = false;
+
+                    foreach (var p in GetParts(insidePart))
                     {
-                        yield return p;
+                        yield return (p.Part, p.Type, last);
                     }
                 }
                 else
                 {
-                    yield return (i, CodePart.String);
+                    yield return (part, CodePart.String, false);
                 }
                 inside = !inside;
             }
@@ -281,50 +317,72 @@
 
         }
 
-        private string FindNextWord(string text, out StringType stringType)
+        private string FindNextWord(string text, WordType incomplete, out WordType wordType)
         {
 
             if (string.IsNullOrEmpty(text))
             {
-                stringType = StringType.None;
+                wordType = WordType.Unknown;
                 return string.Empty;
             }
 
             var word = string.Empty;
-            var starter = StringStarters.FirstOrDefault(s => text.StartsWith(s.Key));
-            stringType = starter.Value;
+            var starter = _starters.FirstOrDefault(s => text.StartsWith(s.Key));
+            wordType = starter.Value;
 
-            if (stringType != StringType.None)
+            if (wordType == WordType.Marker)
             {
-                return FindTillValue(text, starter.Key.Length, "\"");
-            }
-            else if (text.StartsWith(CommentStart))
-            {
-                return FindTillValue(text, 0, Environment.NewLine);
-            }
-
-            var firstChar = text[0];
-            var special = _specials.Contains(firstChar);
-            word += firstChar;
-
-            var found = false;
-            var counter = 1;
-            while (!found && counter < text.Length)
-            {
-                var c = text[counter];
-                var isSpecial = _specials.Contains(c);
-                if ((special && !isSpecial) || (!special && isSpecial))
+                if (text.StartsWith(_selectionMarker))
                 {
-                    found = true;
+                    return _selectionMarker;
                 }
-                else
-                {
-                    word += c;
-                }
-                counter++;
+            }
+            else if (incomplete != WordType.Unknown)
+            {
+                wordType = incomplete;
             }
 
-            return word;
+
+            if (wordType == WordType.Comment)
+            {
+                word = FindTillValue(text, 0, Environment.NewLine);
+            }
+            else if (wordType != WordType.Unknown)
+            {
+                word = FindTillValue(text, starter.Key?.Length ?? 0, "\"");
+            }
+            else
+            {
+                var firstChar = text[0];
+                var special = _specials.Contains(firstChar);
+                word += firstChar;
+
+                var found = false;
+                var counter = 1;
+                while (!found && counter < text.Length)
+                {
+                    var c = text[counter];
+                    var isSpecial = _specials.Contains(c);
+                    if ((special && !isSpecial) || (!special && isSpecial))
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        word += c;
+                    }
+                    counter++;
+                }
+            }
+
+            if (word.Contains(_selectionMarker))
+            {
+                wordType |= WordType.Incomplete;
+            }
+
+            return word
+                .Split(_selectionMarker)
+                .FirstOrDefault() ?? string.Empty;
         }
 
         private static string FindTillValue(string text, int start, string searchValue)

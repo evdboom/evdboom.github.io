@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        IEnumerable<(string Part, CodePart Type)> GetParts(string code);
+        IEnumerable<(string Part, CodePart Type, bool Selected)> GetParts(string code);
     }
 }

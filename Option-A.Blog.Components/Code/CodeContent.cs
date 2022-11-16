@@ -68,18 +68,26 @@ namespace OptionA.Blog.Components.Code
                     .Build();
             }
 
-            foreach (var (part, type) in Parser.GetParts(Code))
+            foreach (var (part, type, selected) in Parser.GetParts(Code))
             {
-                if (type == CodePart.Text)
-                {
-                    builder.AddContent(part);
+                if (!selected && type == CodePart.Text)
+                {                   
+                    builder
+                        .AddContent(part);                    
+                    
                 }
                 else
                 {
-                    builder
+                    var content = builder
                         .CreateInline()
                         .WithText(part)
-                        .AddClass(type.GetPartClass())
+                        .AddClass(type.GetPartClass());
+                    if (selected)
+                    {
+                        content
+                            .AddClass(DefaultClasses.SelectedCode);
+                    }
+                    content
                         .Build();                    
                 }
             }

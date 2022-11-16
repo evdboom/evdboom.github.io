@@ -154,8 +154,8 @@ namespace OptionA.Blog.Components.Block
                 .WithTextAlignment(PositionType.Center)
                 .CreateBlock()
                     .WithBlockType(BlockType.Block)
-                    .WithStyle(Style.Bordered | Style.Italic)
-                    .WithText(quote)
+                    .WithStyle(Style.Bordered | Style.Italic | Style.Padded)
+                    .WithText($"\"{quote}\"")
                     .WithColor(BlogColor.Quote)
                     .Build();
 
