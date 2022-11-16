@@ -1,4 +1,5 @@
-﻿using Blog.PostComponents;
+﻿using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Services;
 using System.Reflection;
 
 namespace Blog.Unittests.ActualBlogTests
@@ -84,8 +85,8 @@ namespace Blog.Unittests.ActualBlogTests
 
             Assert.All(all, item =>
             {
-                Assert.NotNull(_service.FindPost(((IPost)item).Post.DateId));
-                Assert.NotNull(_service.FindPost(((IPost)item).Post.TitleId));
+                Assert.NotNull(_service.FindPost(((IPost)item).DateId));
+                Assert.NotNull(_service.FindPost(((IPost)item).TitleId));
             });
         }
 
