@@ -38,11 +38,11 @@ namespace OptionA.Blog.Components.Image
         /// <param name="source"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public static Parent AddImage<Parent>(this Parent parent, string source, string description) where Parent : IParentBuilder
+        public static Parent AddImage<Parent>(this Parent parent, string source, string title) where Parent : IParentBuilder
         {
             return CreateImage(parent)
                 .WithSource(source)
-                .WithDescription(description)
+                .WithTitle(title)
                 .Build();
         }
     }

@@ -17,6 +17,8 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public IList<string> AdditionalClasses { get; } = new List<string>();
         /// <inheritdoc/>
+        public virtual IDictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
+        /// <inheritdoc/>
         public abstract ComponentType Type { get; }
         /// <inheritdoc/>
         public Style Style { get; set; }    

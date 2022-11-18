@@ -33,6 +33,22 @@ namespace OptionA.Blog.Components.Core
             }
         }
 
+        public Builder WithTitle(string title)
+        {
+            return WithAttribute("title", title);
+        }
+
+        public Builder WithAttribute(string attributeName)
+        {
+            return WithAttribute(attributeName, null);
+        }
+
+        public Builder WithAttribute(string attributeName, object? attributeValue)
+        {
+            _content.Attributes[attributeName] = attributeValue;
+            return This();
+        }
+
         /// <summary>
         /// Method to add a specific class to the Content of this builder.
         /// </summary>

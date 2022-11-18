@@ -35,5 +35,19 @@ namespace OptionA.Blog.Components.List
                 yield return className;
             }
         }
+
+        /// <inheritdoc/>
+        public override IDictionary<string, object?> Attributes
+        {
+            get
+            {
+                var attributes = base.Attributes;
+                if (Start > 1)
+                {
+                    attributes["start"] = Start;
+                }
+                return attributes;
+            }
+        }
     }
 }

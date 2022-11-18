@@ -12,9 +12,5 @@ namespace OptionA.Blog.Components.Link
         /// </summary>
         [Parameter]
         public LinkContent? Content { get; set; }
-
-        private string Target => Content?.NewTab == true
-            ? "_blank"
-            : "_self";
     }
 }

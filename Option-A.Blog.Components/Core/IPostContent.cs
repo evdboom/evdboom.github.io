@@ -20,6 +20,10 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         IList<string> AdditionalClasses { get; }
         /// <summary>
+        /// Attributes to be added to the components
+        /// </summary>
+        IDictionary<string, object?> Attributes { get; }
+        /// <summary>
         /// Type of component
         /// </summary>
         ComponentType Type { get; }

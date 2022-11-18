@@ -1,6 +1,6 @@
 ﻿@if (Content is not null)
 {
-    <a href="@Content.Href" target="@Target" class="@Content.GetClasses()">
+    <a class="@Content.GetClasses()" @attributes=Content.Attributes>
         <BlockContents Content="Content" />
     </a>    
 }

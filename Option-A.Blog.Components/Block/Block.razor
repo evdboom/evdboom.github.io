@@ -4,17 +4,17 @@
     @switch (Content.BlockType)
     {
         case BlockType.Block:
-            <div class="@Content.GetClasses()">
+            <div class="@Content.GetClasses()" @attributes=Content.Attributes>
                 <BlockContents Content="Content" />
             </div>
             break;
         case BlockType.Inline:
-            <span class="@Content.GetClasses()">
+            <span class="@Content.GetClasses()" @attributes=Content.Attributes>
                 <BlockContents Content="Content" />
             </span>
             break;
         case BlockType.Paragraph:
-            <p class="@Content.GetClasses()">
+            <p class="@Content.GetClasses()" @attributes=Content.Attributes>
                 <BlockContents Content="Content" />
             </p>
             break;

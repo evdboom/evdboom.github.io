@@ -16,7 +16,7 @@
         /// <summary>
         /// Short description
         /// </summary>
-        string Subtitle { get; }
+        string? Subtitle { get; }
         /// <summary>
         /// DateId, should be rendered as yyyyMMddHH from <see cref="PostDate"/>
         /// </summary>
@@ -29,5 +29,9 @@
         /// Content of the post
         /// </summary>
         IList<IPostContent> Content { get; }
+        /// <summary>
+        /// Tags relevant for this post
+        /// </summary>
+        IList<string> Tags { get; }
     }
 }

@@ -30,5 +30,16 @@ namespace OptionA.Blog.Components.Services
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DateTime> GetMonthsWithPosts();
+        /// <summary>
+        /// Returns all the tags used for posts
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetTags();
+        /// <summary>
+        /// Returns all the posts that have the given tag.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public IEnumerable<IPost> GetPostsForTag(string tag);
     }
 }

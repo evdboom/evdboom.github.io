@@ -1,0 +1,7 @@
+﻿@if (Month is not null)
+{
+    @foreach(var post in PostService.GetPostsForMonth(Month.Value.Year, Month.Value.Month))
+    {
+        <Link Content="GetPostContent(post)" />
+    }
+}
