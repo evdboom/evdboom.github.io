@@ -1,5 +1,6 @@
-﻿<h3>TagList</h3>
-
-@code {
-
+﻿<div>
+@foreach(var tag in PostService.GetTags())
+{
+    <span class="tag-item">@tag</span>
 }
+</div>

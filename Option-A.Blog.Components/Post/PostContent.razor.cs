@@ -44,8 +44,7 @@ namespace OptionA.Blog.Components.Post
                 .WithStyle(style)
                 .WithColor(color)
                 .AddDate(Content.PostDate, DateDisplayType.LongDate)
-                .Build()
-                .FirstOrDefault() as DateContent;
+                .BuildOne<DateContent>();                
         }
 
         private HeaderContent? GetHeaderContent(PositionType textAlignment)
@@ -59,8 +58,7 @@ namespace OptionA.Blog.Components.Post
                 .CreateBuilder(Content)
                 .WithTextAlignment(textAlignment)
                 .AddHeader(Content.Title, HeaderSize.One)
-                .Build()
-                .FirstOrDefault() as HeaderContent;
+                .BuildOne<HeaderContent>();                
         }
 
         private BlockContent? GetSubtitleContent(PositionType textAlignment)
@@ -76,8 +74,7 @@ namespace OptionA.Blog.Components.Post
                 .WithStyle(Style.Italic)
                 .WithColor(BlogColor.Subtle)
                 .AddParagraph(Content.Subtitle)
-                .Build()
-                .FirstOrDefault() as BlockContent;                    
+                .BuildOne<BlockContent>();                
         }        
 
         private string? GetCompactModeClasses()

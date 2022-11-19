@@ -121,7 +121,7 @@ namespace OptionA.Blog.Components.Services
             if (_postsByMonth.TryGetValue(dateTime, out var posts))
             {
                 return posts
-                    .OrderBy(p => p.PostDate);
+                    .OrderByDescending(p => p.PostDate);
             }
 
             return Enumerable.Empty<IPost>();
@@ -132,7 +132,7 @@ namespace OptionA.Blog.Components.Services
         {
             return _postsByMonth
                 .Keys
-                .OrderBy(k => k);
+                .OrderByDescending(k => k);
         }
 
         /// <inheritdoc/>

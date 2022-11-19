@@ -1,4 +1,6 @@
-﻿@foreach (var month in PostService.GetMonthsWithPosts())
+﻿<ul class="@GetClasses()">
+@foreach (var month in PostService.GetMonthsWithPosts())
 {
     <ArchiveMonth Month="month"/>
 }
+</ul>

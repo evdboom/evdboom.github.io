@@ -5,7 +5,15 @@
     <NavMenu />
     <main>
         <article class="content px-4">
-            @Body
+            <div class="row">
+                <div class="col-lg-9">
+                    @Body
+                </div>
+                <div class="col-lg-3">
+                    <TagList />
+                    <Archive />                    
+                </div>
+            </div>            
         </article>
     </main>
 </div>

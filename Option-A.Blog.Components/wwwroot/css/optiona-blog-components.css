@@ -63,6 +63,14 @@
     color: dimgray;
 }
 
+.tag-item {
+    color: #dcdcdc;
+    background-color: darkmagenta;
+    padding: .2rem;
+    margin-right: .2rem;
+    user-select: none;
+}
+
 .style-bold {
     font-weight: bold;
 }

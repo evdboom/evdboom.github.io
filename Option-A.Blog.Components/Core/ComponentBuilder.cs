@@ -35,5 +35,16 @@ namespace OptionA.Blog.Components.Core
         {
             return this;
         }
+
+        /// <summary>
+        /// Builds at most one content of the given type, will throw an exception if more then one content is preset.
+        /// </summary>
+        /// <typeparam name="Content"></typeparam>
+        /// <returns></returns>
+        public Content? BuildOne<Content>() where Content : class, IPostContent
+        {
+            return Build()
+                .SingleOrDefault() as Content;
+        }
     }
 }

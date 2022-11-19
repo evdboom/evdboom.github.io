@@ -25,6 +25,11 @@ namespace OptionA.Blog.Components
         public static string? SelectedCode { get; set; } = "code-selected";
 
         /// <summary>
+        /// Default class for displaying tags
+        /// </summary>
+        public static string? Tag { get; set; } = "tag-item";
+        
+        /// <summary>
         /// Default class for diplaying posts in compact mode.
         /// </summary>
         public static IList<string> CompactMode { get; set; } = new List<string>
