@@ -119,6 +119,19 @@ namespace OptionA.Blog.Components.Core
             _result.Content.Add(content);
         }
 
+        /// <summary>
+        /// Adds contents to this post
+        /// </summary>
+        /// <param name="contents"></param>
+        public PostBuilder AddContents(IEnumerable<IPostContent> contents)
+        {
+            foreach(var content in contents)
+            {
+                _result.Content.Add(content);
+            }
+            return this;
+        }
+
         /// <inheritdoc/>
         protected override PostBuilder This()
         {

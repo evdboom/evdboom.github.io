@@ -1,4 +1,5 @@
-﻿using OptionA.Blog.Components.Core.Enums;
+﻿using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Core
 {
@@ -27,5 +28,9 @@ namespace OptionA.Blog.Components.Core
         /// Gets the currently set <see cref="Enums.BlogColor" /> for this builder, Color is only copied to child builders that do not have a default color themselves. 
         /// </summary>
         BlogColor Color { get; }
+        /// <summary>
+        /// Gets the currently set OnClick action for this builder, this is not copied to child builders.
+        /// </summary>
+        Func<MouseEventArgs,Task>? OnClick { get; }
     }
 }

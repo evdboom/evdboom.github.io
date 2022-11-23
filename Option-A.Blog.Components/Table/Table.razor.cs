@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace OptionA.Blog.Components.Table
 {
@@ -12,6 +13,17 @@ namespace OptionA.Blog.Components.Table
         /// </summary>
         [Parameter]
         public TableContent? Content { get; set; }
-        
+
+        private async Task Click(MouseEventArgs args)
+        {
+            if (Content?.OnClick is null)
+            {
+                return;
+            }
+
+            await Content.OnClick.Invoke(args);
+            StateHasChanged();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using OptionA.Blog.Components.Core.Enums;
+﻿using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Core
 {
@@ -26,26 +27,73 @@ namespace OptionA.Blog.Components.Core
             _content = new();
             if (DefaultClasses.ContentClasses.TryGetValue(typeof(Content), out var classes))
             {
-                foreach (var className in classes)
-                {
-                    AddClass(className);
-                }
+                AddClasses(classes);                
             }
         }
 
+        /// <summary>
+        /// Adds the titke attribute with the given value
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
         public Builder WithTitle(string title)
         {
             return WithAttribute("title", title);
         }
 
+        /// <summary>
+        /// Adds an empty attribute
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <returns></returns>
         public Builder WithAttribute(string attributeName)
         {
             return WithAttribute(attributeName, null);
         }
 
+        /// <summary>
+        /// Adds an attribute with the given value
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="attributeValue"></param>
+        /// <returns></returns>
         public Builder WithAttribute(string attributeName, object? attributeValue)
         {
             _content.Attributes[attributeName] = attributeValue;
+            return This();
+        }
+
+        /// <summary>
+        /// Method to add multipleclasses to the content of this builder
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns></returns>
+        public Builder AddClasses(params string[] classes)
+        {
+            if (classes is not null)
+            {
+                foreach (var className in classes)
+                {
+                    AddClass(className);
+                }
+            }
+            return This();
+        }
+
+        /// <summary>
+        /// Method to add multipleclasses to the content of this builder
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns></returns>
+        public Builder AddClasses(IEnumerable<string>? classes)
+        {
+            if (classes is not null)
+            {
+                foreach (var className in classes)
+                {
+                    AddClass(className);
+                }
+            }
             return This();
         }
 

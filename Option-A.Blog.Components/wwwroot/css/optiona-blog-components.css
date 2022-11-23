@@ -63,12 +63,24 @@
     color: dimgray;
 }
 
+.tag-container {
+    overflow-wrap: anywhere;
+}
+
 .tag-item {
     color: #dcdcdc;
     background-color: darkmagenta;
-    padding: .2rem;
-    margin-right: .2rem;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    padding-left:.4rem;
+    padding-right: .4rem;
+    margin-right: .4rem;
+    margin-bottom: .4rem;
     user-select: none;
+    display: inline-block;
+    white-space: nowrap;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .style-bold {

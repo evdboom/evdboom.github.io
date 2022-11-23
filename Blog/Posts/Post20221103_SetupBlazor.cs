@@ -18,7 +18,7 @@ namespace Blog.Posts
                 .WithDate(2022, 11, 3)
                 .WithTitle("My first Blog post")
                 .WithSubtitle("This post is about setting everyting up correctly")
-                .WithTags("blazor", "setup")
+                .WithTags("blazor", "setup", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleleven", "twleve", "thirteen", "forteen")
                 .WithStyle(Style.Bold)
                 .AddParagraph("If i place tags <div>test me</div> here what happens?")
                 .AddHeader("Test header", HeaderSize.Three)

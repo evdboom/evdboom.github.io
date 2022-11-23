@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace OptionA.Blog.Components.Header
 {
@@ -12,5 +13,16 @@ namespace OptionA.Blog.Components.Header
         /// </summary>
         [Parameter]
         public HeaderContent? Content { get; set; }
+
+        private async Task Click(MouseEventArgs args)
+        {
+            if (Content?.OnClick is null)
+            {
+                return;
+            }
+
+            await Content.OnClick.Invoke(args);
+            StateHasChanged();
+        }
     }
 }

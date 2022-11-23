@@ -1,6 +1,4 @@
-﻿<div>
-@foreach(var tag in PostService.GetTags())
+﻿@if (_content is not null)
 {
-    <span class="tag-item">@tag</span>
+    <Block Content="_content" />
 }
-</div>

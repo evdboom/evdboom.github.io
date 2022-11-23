@@ -12,6 +12,7 @@ namespace OptionA.Blog.Components.Services
         private readonly Dictionary<string, IPost> _postsByTitleId;
         private readonly Dictionary<DateTime, List<IPost>> _postsByMonth;
         private readonly Dictionary<string, List<IPost>> _postsByTag;
+        private readonly Dictionary<string, int> _tagsByCount;
 
         private const string PostNamespace = "Blog.Posts";
 
@@ -25,6 +26,7 @@ namespace OptionA.Blog.Components.Services
             _postsByTitleId = new();
             _postsByMonth = new();
             _postsByTag = new();
+            _tagsByCount = new();
 
             var postType = typeof(IPost);
 
@@ -73,6 +75,7 @@ namespace OptionA.Blog.Components.Services
                 if (_postsByTag.TryGetValue(tag, out var tagPosts))
                 {
                     tagPosts.Add(post);
+                    _tagsByCount[tag]++;
                 }
                 else
                 {
@@ -80,7 +83,8 @@ namespace OptionA.Blog.Components.Services
                     {
                         post 
                     };
-                }
+                    _tagsByCount[tag] = 1;
+                }                
             }
         }
 
@@ -138,9 +142,11 @@ namespace OptionA.Blog.Components.Services
         /// <inheritdoc/>
         public IEnumerable<string> GetTags()
         {
-            return _postsByTag
-                .Keys
-                .OrderBy(k => k);
+            return _tagsByCount
+                .OrderByDescending(tc => tc.Value)
+                .ThenBy(tc => tc.Key)
+                .Select(tc => tc.Key);                
+                
         }
 
         /// <inheritdoc/>

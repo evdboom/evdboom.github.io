@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace OptionA.Blog.Components.Block
 {
@@ -17,5 +13,16 @@ namespace OptionA.Blog.Components.Block
         /// </summary>
         [Parameter]
         public BlockContent? Content { get; set; }
+
+        private async Task Click(MouseEventArgs args)
+        {
+            if (Content?.OnClick is null)
+            {
+                return;
+            }
+
+            await Content.OnClick.Invoke(args);
+            StateHasChanged();
+        }
     }
 }

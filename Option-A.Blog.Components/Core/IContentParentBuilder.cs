@@ -8,7 +8,7 @@
         /// <summary>
         /// The post for which the content is created
         /// </summary>
-        IPost Post { get; }
+        IPost? Post { get; }
         /// <summary>
         /// Adds the content to this builder
         /// </summary>

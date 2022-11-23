@@ -2,7 +2,7 @@
 {
     if (Content.Ordered)
     {
-        <ol class="@Content.GetClasses()" @attributes=Content.Attributes>
+        <ol class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
             @foreach(var child in Content.ChildContent)
             {
                 <ListItem Content="(ListItemContent)child"/>            
@@ -11,7 +11,7 @@
     }
     else
     {
-        <ul class="@Content.GetClasses()" @attributes=Content.Attributes>
+        <ul class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
             @foreach (var child in Content.ChildContent)
             {
                 <ListItem Content="(ListItemContent)child" />

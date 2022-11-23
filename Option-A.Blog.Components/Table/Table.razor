@@ -1,6 +1,6 @@
 ﻿@if (Content is not null)
 {
-    <table class="@Content.GetClasses()">
+    <table class="@Content.GetClasses()" @onclick=Click>
         <thead>
             <tr>
                 @foreach(var column in Content.Columns.ChildContent)

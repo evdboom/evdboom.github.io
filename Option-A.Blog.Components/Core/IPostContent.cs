@@ -1,4 +1,5 @@
-﻿using OptionA.Blog.Components.Core.Enums;
+﻿using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Core
 {
@@ -44,6 +45,10 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         BlogColor Color { get; }
         /// <summary>
+        /// The clickaction for this component
+        /// </summary>
+        public Func<MouseEventArgs, Task>? OnClick { get; }
+        /// <summary>
         /// Method to set the properties (Color, Alignment, etc) from the builder to the content
         /// </summary>
         /// <param name="builder"></param>
@@ -52,6 +57,6 @@ namespace OptionA.Blog.Components.Core
         /// Method which results in a single space seperated string of all the classes for this component
         /// </summary>
         /// <returns></returns>
-        string GetClasses();
+        string GetClasses();        
     }
 }

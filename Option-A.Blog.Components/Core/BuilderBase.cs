@@ -1,4 +1,5 @@
-﻿using OptionA.Blog.Components.Core.Enums;
+﻿using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Core
 {
@@ -48,7 +49,14 @@ namespace OptionA.Blog.Components.Core
         protected BlogColor _color;
         /// <inheritdoc/>
         public BlogColor Color => _color;
-        
+        /// <summary>
+        /// The currently set onclick action, this is not copied to childbuilders.
+        /// </summary>
+        protected Func<MouseEventArgs, Task>? _onClick;
+        /// <inheritdoc/>
+        public Func<MouseEventArgs, Task>? OnClick => _onClick;
+
+
         /// <summary>
         /// Override if this builder has it's own default color, so it will not inherit from the parent.
         /// </summary>
@@ -159,6 +167,17 @@ namespace OptionA.Blog.Components.Core
         public Builder WithBlockType(BlockType blockType)
         {
             _blockType = blockType;
+            return This();
+        }
+
+        /// <summary>
+        /// Adds an on click action for the result of the current builder
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public Builder WithOnClick(Func<MouseEventArgs, Task> action)
+        {
+            _onClick = action;
             return This();
         }
 

@@ -11,7 +11,7 @@ namespace OptionA.Blog.Components.Block
         where Parent : IParentBuilder
     {
         /// <inheritdoc/>
-        public IPost Post => _result.Post;
+        public IPost? Post => _result.Post;
 
         /// <summary>
         /// Default constructor
@@ -37,6 +37,22 @@ namespace OptionA.Blog.Components.Block
         {
             _content.ChildContent.Add(content);
         }
+
+        /// <summary>
+        /// Adds the content to this builder, does not set any properties.
+        /// </summary>
+        /// <param name="contents"></param>
+        /// <returns></returns>
+        public BlockBuilder<Parent> AddContents(IEnumerable<IPostContent> contents)
+        {
+            foreach(var content in contents)
+            {
+                _content.ChildContent.Add(content);
+            }
+
+            return this;
+        }
+
 
         /// <inheritdoc/>
         protected override BlockBuilder<Parent> This()

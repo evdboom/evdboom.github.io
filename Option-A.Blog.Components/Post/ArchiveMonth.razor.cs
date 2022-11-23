@@ -12,6 +12,9 @@ namespace OptionA.Blog.Components.Post
         [Inject]
         private IPostService PostService { get; set; } = null!;
 
+        /// <summary>
+        /// Month for which there is content
+        /// </summary>
         [Parameter]
         public DateTime? Month { get; set; }
 
@@ -35,6 +38,34 @@ namespace OptionA.Blog.Components.Post
             return DefaultClasses.ListStyleClasses.TryGetValue(ListStyle.None, out string? classes)
                 ? classes
                 : string.Empty;
+        }
+
+        private ListItemContent? GetListItem()
+        {
+            if (Month is null)
+            {
+                return null;
+            }
+
+            return ComponentBuilder
+                .CreateBuilder(null)
+                .CreateList()
+                    .CreateRow()
+                        .WithOnClick((e) =>
+                        {
+                            SwitchOpenState();
+                            return Task.CompletedTask;
+                        })
+                        .CreateDate()
+                            .WithBlockType(Core.Enums.BlockType.Content)
+                            .ForDate(Month.Value)
+                            .WithDisplayType(DateDisplayType.YearMonth)
+                            .Build()
+                        .Build()
+                    .Build()
+                .BuildOne<ListContent>()?
+                .ChildContent
+                .FirstOrDefault() as ListItemContent;
         }
 
         private LinkContent? GetPostContent(IPost post)
