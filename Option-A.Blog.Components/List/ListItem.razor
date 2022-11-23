@@ -1,6 +1,6 @@
 ﻿@if (Content is not null)
 {
-    <li class="@Content.GetClasses()">
+    <li class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
         <BlockContents Content="Content" />
     </li>
 }

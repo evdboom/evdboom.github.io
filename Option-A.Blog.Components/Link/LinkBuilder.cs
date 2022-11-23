@@ -11,7 +11,7 @@ namespace OptionA.Blog.Components.Link
         where Parent : IParentBuilder
     {
         /// <inheritdoc/>
-        public IPost Post => _result.Post;
+        public IPost? Post => _result.Post;
         /// <summary>
         /// Sets the color to <see cref="BlogColor.Link"/>
         /// </summary>
@@ -62,6 +62,15 @@ namespace OptionA.Blog.Components.Link
         public void AddContent(IPostContent content)
         {
             _content.ChildContent.Add(content);
+        }
+
+        public LinkBuilder<Parent> AddContents(IEnumerable<IPostContent> contents)
+        {
+            foreach (var content in contents)
+            {
+                _content.ChildContent.Add(content);
+            }
+            return this;
         }
 
         /// <inheritdoc/>

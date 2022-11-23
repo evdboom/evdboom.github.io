@@ -10,7 +10,7 @@ namespace OptionA.Blog.Components.Table
         where Parent : IParentBuilder
     {
         /// <inheritdoc/>
-        public IPost Post => _result.Post;
+        public IPost? Post => _result.Post;
 
         /// <summary>
         /// Default constructor

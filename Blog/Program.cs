@@ -2,6 +2,7 @@ using Blog;
 using Blog.Responsive;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using OptionA.Blog.Components;
 using OptionA.Blog.Components.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -18,4 +19,6 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
         .AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) })
         .AddBlogServices()
         .AddSingleton<IResponsiveService, ResponsiveService>();
+
+    DefaultClasses.CompactMode.Add("hover");
 }

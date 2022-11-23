@@ -16,6 +16,9 @@
         }
 
         /// <inheritdoc/>
+        public IList<string> Tags { get; } = new List<string>();
+
+        /// <inheritdoc/>
         public IList<IPostContent> Content { get; } = new List<IPostContent>();
 
         private DateTime _postDate;
@@ -45,7 +48,7 @@
         }
 
         /// <inheritdoc/>
-        public string Subtitle { get; set; } = string.Empty;
+        public string? Subtitle { get; set; }
 
         private string? _dateId;
         /// <inheritdoc/>

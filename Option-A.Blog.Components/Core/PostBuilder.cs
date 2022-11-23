@@ -36,6 +36,29 @@ namespace OptionA.Blog.Components.Core
         }
 
         /// <summary>
+        /// Adds a tags to the post
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public PostBuilder WithTags(params string[] tags)
+        {
+            var upper = tags
+                .Select(t => t.ToUpper());
+
+            var newTags = upper.Where(tag => !_result.Tags.Contains(tag));
+
+            if (newTags.Any())
+            {
+                foreach(var tag in newTags)
+                {
+                    _result.Tags.Add(tag);
+                }
+                
+            }
+            return this;
+        }
+
+        /// <summary>
         /// Sets the date for the post, use hours if more then one posts are created for a date
         /// </summary>
         /// <param name="year"></param>
@@ -94,6 +117,19 @@ namespace OptionA.Blog.Components.Core
         public void AddContent(IPostContent content)
         {
             _result.Content.Add(content);
+        }
+
+        /// <summary>
+        /// Adds contents to this post
+        /// </summary>
+        /// <param name="contents"></param>
+        public PostBuilder AddContents(IEnumerable<IPostContent> contents)
+        {
+            foreach(var content in contents)
+            {
+                _result.Content.Add(content);
+            }
+            return this;
         }
 
         /// <inheritdoc/>

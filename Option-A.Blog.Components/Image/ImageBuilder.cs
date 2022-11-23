@@ -31,17 +31,6 @@ namespace OptionA.Blog.Components.Image
             return this;
         }
 
-        /// <summary>
-        /// Sets the image description
-        /// </summary>
-        /// <param name="description"></param>
-        /// <returns></returns>
-        public ImageBuilder<Parent> WithDescription(string description)
-        {
-            _content.Description = description;
-            return this;
-        }
-
         /// <inheritdoc/>
         protected override ImageBuilder<Parent> This()
         {

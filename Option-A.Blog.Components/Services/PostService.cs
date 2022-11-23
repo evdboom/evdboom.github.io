@@ -11,6 +11,8 @@ namespace OptionA.Blog.Components.Services
         private readonly Dictionary<string, IPost> _postsByDateId;
         private readonly Dictionary<string, IPost> _postsByTitleId;
         private readonly Dictionary<DateTime, List<IPost>> _postsByMonth;
+        private readonly Dictionary<string, List<IPost>> _postsByTag;
+        private readonly Dictionary<string, int> _tagsByCount;
 
         private const string PostNamespace = "Blog.Posts";
 
@@ -23,6 +25,8 @@ namespace OptionA.Blog.Components.Services
             _postsByDateId = new();
             _postsByTitleId = new();
             _postsByMonth = new();
+            _postsByTag = new();
+            _tagsByCount = new();
 
             var postType = typeof(IPost);
 
@@ -54,9 +58,9 @@ namespace OptionA.Blog.Components.Services
             _postsByTitleId[post.TitleId] = post;
 
             var month = new DateTime(post.PostDate.Year, post.PostDate.Month, 1);
-            if (_postsByMonth.ContainsKey(month))
+            if (_postsByMonth.TryGetValue(month, out var monthPosts))
             {
-                _postsByMonth[month].Add(post);
+                monthPosts.Add(post);
             }
             else
             {
@@ -64,6 +68,23 @@ namespace OptionA.Blog.Components.Services
                 {
                     post
                 };
+            }
+
+            foreach(var tag in post.Tags)
+            {
+                if (_postsByTag.TryGetValue(tag, out var tagPosts))
+                {
+                    tagPosts.Add(post);
+                    _tagsByCount[tag]++;
+                }
+                else
+                {
+                    _postsByTag[tag] = new List<IPost> 
+                    {
+                        post 
+                    };
+                    _tagsByCount[tag] = 1;
+                }                
             }
         }
 
@@ -104,7 +125,7 @@ namespace OptionA.Blog.Components.Services
             if (_postsByMonth.TryGetValue(dateTime, out var posts))
             {
                 return posts
-                    .OrderBy(p => p.PostDate);
+                    .OrderByDescending(p => p.PostDate);
             }
 
             return Enumerable.Empty<IPost>();
@@ -115,7 +136,29 @@ namespace OptionA.Blog.Components.Services
         {
             return _postsByMonth
                 .Keys
-                .OrderBy(k => k);
+                .OrderByDescending(k => k);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<string> GetTags()
+        {
+            return _tagsByCount
+                .OrderByDescending(tc => tc.Value)
+                .ThenBy(tc => tc.Key)
+                .Select(tc => tc.Key);                
+                
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<IPost> GetPostsForTag(string tag)
+        {
+            if (_postsByTag.TryGetValue(tag, out var posts))
+            {
+                return posts
+                    .OrderBy(p => p.PostDate);
+            }
+
+            return Enumerable.Empty<IPost>();
         }
     }
 }

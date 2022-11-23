@@ -19,7 +19,8 @@ namespace OptionA.Blog.Components.Block
         /// <summary>
         /// Boolean to determine where to place the text if also <see cref="PostContent.ChildContent"/> is present, default is before the content
         /// </summary>
-        public bool TextAfterContent { get; set; }
+        public bool TextAfterContent { get; set; }        
+
         /// <summary>
         /// Overridden the default to also set blocktype
         /// </summary>

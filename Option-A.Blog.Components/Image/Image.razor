@@ -1,4 +1,4 @@
 ﻿@if (Content is not null)
 {
-    <img src="@Content.Source" class="@Content.GetClasses()" alt="@Content.Title" title="@Content.Title" />
+    <img class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click />
 }

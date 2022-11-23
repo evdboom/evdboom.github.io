@@ -1,22 +1,4 @@
-﻿@using OptionA.Blog.Components.Core.Enums;
-@if (Content is not null)
+﻿@if (_displayContent is not null)
 {
-    if (CompactMode)
-    {
-        <Date Content="GetDateContent(PositionType.Right, Style.Bold, BlogColor.Text)" />
-        <div class="@GetCompactModeClasses()" @onclick="SelectPost">
-            <Header Content="GetHeaderContent(PositionType.Left)" />
-            <Block Content="GetSubtitleContent(PositionType.Left)" />      
-            <hr>
-            <Compound Content="Content.Content" />
-        </div>
-    }
-    else
-    {        
-        <Header Content="GetHeaderContent(PositionType.Center)" />
-        <Date Content="GetDateContent(PositionType.Center, Style.Italic, BlogColor.Subtle)" />
-        <Block Content="GetSubtitleContent(PositionType.Center)" />
-        <hr>
-        <Compound Content="Content.Content" />
-    }    
+    <Block Content=_displayContent />
 }

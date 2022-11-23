@@ -8,9 +8,9 @@ namespace OptionA.Blog.Components.Core
     public class ComponentBuilder : BuilderBase<ComponentBuilder, IList<IPostContent>>, IParentBuilder
     {
         /// <inheritdoc/>
-        public IPost Post { get; }
+        public IPost? Post { get; }
 
-        private ComponentBuilder(IPost post, IList<IPostContent> result, Style style, PositionType textAlignment, BlockType blockType, PositionType blockAlignment, BlogColor color) : base(result, style, textAlignment, blockType, blockAlignment, color)
+        private ComponentBuilder(IPost? post, IList<IPostContent> result, Style style, PositionType textAlignment, BlockType blockType, PositionType blockAlignment, BlogColor color) : base(result, style, textAlignment, blockType, blockAlignment, color)
         {
             Post = post;
         }        
@@ -19,7 +19,7 @@ namespace OptionA.Blog.Components.Core
         /// Creates a new component builder for building child collections.
         /// </summary>
         /// <returns></returns>
-        public static ComponentBuilder CreateBuilder(IPost post)
+        public static ComponentBuilder CreateBuilder(IPost? post)
         {
             return new ComponentBuilder(post, new List<IPostContent>(), Style.Inherit, PositionType.Inherit, BlockType.Block, PositionType.Inherit, BlogColor.Inherit);
         }
@@ -31,9 +31,30 @@ namespace OptionA.Blog.Components.Core
         }
 
         /// <inheritdoc/>
+        public ComponentBuilder AddContents(IEnumerable<IPostContent> contents)
+        {
+            foreach (var content in contents)
+            {
+                _result.Add(content);
+            }
+            return this;
+        }
+
+        /// <inheritdoc/>
         protected override ComponentBuilder This()
         {
             return this;
+        }
+
+        /// <summary>
+        /// Builds at most one content of the given type, will throw an exception if more then one content is preset.
+        /// </summary>
+        /// <typeparam name="Content"></typeparam>
+        /// <returns></returns>
+        public Content? BuildOne<Content>() where Content : class, IPostContent
+        {
+            return Build()
+                .SingleOrDefault() as Content;
         }
     }
 }

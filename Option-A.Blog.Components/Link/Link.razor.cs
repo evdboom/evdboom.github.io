@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace OptionA.Blog.Components.Link
 {
@@ -13,8 +14,15 @@ namespace OptionA.Blog.Components.Link
         [Parameter]
         public LinkContent? Content { get; set; }
 
-        private string Target => Content?.NewTab == true
-            ? "_blank"
-            : "_self";
+        private async Task Click(MouseEventArgs args)
+        {
+            if (Content?.OnClick is null)
+            {
+                return;
+            }
+
+            await Content.OnClick.Invoke(args);
+            StateHasChanged();
+        }
     }
 }

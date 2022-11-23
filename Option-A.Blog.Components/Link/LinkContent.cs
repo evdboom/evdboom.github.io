@@ -18,5 +18,18 @@ namespace OptionA.Blog.Components.Link
         public bool NewTab { get; set; }
         /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Link;
+        public override IDictionary<string, object?> Attributes
+        {
+            get
+            {
+                var attributes = base.Attributes;
+                attributes["href"] = Href;
+                attributes["target"] = NewTab
+                    ? "_blank"
+                    : "_self";
+
+                return attributes;
+            }
+        }
     }
 }

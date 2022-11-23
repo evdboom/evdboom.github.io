@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace OptionA.Blog.Components.Image
 {
@@ -12,5 +13,16 @@ namespace OptionA.Blog.Components.Image
         /// </summary>
         [Parameter]
         public ImageContent? Content { get; set; }
+
+        private async Task Click(MouseEventArgs args)
+        {
+            if (Content?.OnClick is null)
+            {
+                return;
+            }
+
+            await Content.OnClick.Invoke(args);
+            StateHasChanged();
+        }
     }
 }

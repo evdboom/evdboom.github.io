@@ -1,4 +1,5 @@
-﻿using OptionA.Blog.Components.Core.Enums;
+﻿using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blog.Components.Core.Enums;
 
 namespace OptionA.Blog.Components.Core
 {
@@ -17,6 +18,8 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public IList<string> AdditionalClasses { get; } = new List<string>();
         /// <inheritdoc/>
+        public virtual IDictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
+        /// <inheritdoc/>
         public abstract ComponentType Type { get; }
         /// <inheritdoc/>
         public Style Style { get; set; }    
@@ -26,6 +29,8 @@ namespace OptionA.Blog.Components.Core
         public PositionType BlockAlignment { get; set; }
         /// <inheritdoc/>
         public BlogColor Color { get; set; }
+        /// <inheritdoc/>
+        public Func<MouseEventArgs, Task>? OnClick { get; set; }
 
         /// <inheritdoc/>
         public string GetClasses()
@@ -51,7 +56,7 @@ namespace OptionA.Blog.Components.Core
         /// Add the base classes for <see cref="Color"/>, <see cref="BlockAlignment"/>, <see cref="TextAlignment"/> and <see cref="Style"/> properties, classes can be set, overridden or cleared in <see cref="DefaultClasses"/> to influence the behavior (only filled classes are added)
         /// </summary>
         /// <returns></returns>
-        protected IEnumerable<string> GetBaseClassesList()
+        protected virtual IEnumerable<string> GetBaseClassesList()
         {
             if (DefaultClasses.ColorClasses.TryGetValue(Color, out string? colorClass))
             {
@@ -105,6 +110,11 @@ namespace OptionA.Blog.Components.Core
             if (Color == BlogColor.Inherit)
             {
                 Color = builder.Color;
+            }
+
+            if (OnClick is null)
+            { 
+                OnClick = builder.OnClick;
             }
         }
     }

@@ -7,11 +7,7 @@ namespace OptionA.Blog.Components.Image
     /// Content for the <see cref="Image.Image"/> component
     /// </summary>
     public class ImageContent : PostContent
-    {
-        /// <summary>
-        /// Description, will be set as Title and Alt for the image
-        /// </summary>
-        public string? Description { get; set; }
+    {        
         /// <summary>
         /// Name of the image
         /// </summary>
@@ -20,12 +16,26 @@ namespace OptionA.Blog.Components.Image
         /// Full source location of the image
         /// </summary>
         public string Source => $"/images/{Post!.DateId}/{Name}";
-        /// <summary>
-        /// Actual title, returns source of description is empty
-        /// </summary>
-        public string Title => !string.IsNullOrEmpty(Description)
-            ? Description
-            : Source;
+        /// <inheritdoc/>
+        public override IDictionary<string, object?> Attributes
+        {
+            get
+            {
+                var attributes = base.Attributes;                
+                if (!attributes.ContainsKey("title"))
+                {
+                    attributes["title"] = Source;
+                }
+                if (!attributes.ContainsKey("alt"))
+                {
+                    attributes["alt"] = attributes["title"];
+                }
+
+                attributes["src"] = Source;                
+
+                return attributes;
+            }
+        }
         /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Image;
     }
