@@ -12,17 +12,6 @@ namespace OptionA.Blog.Components.Post
         [Inject]
         private NavigationManager Navigation { get; set; } = null!;
 
-        /// <summary>
-        /// Set to add additional classes to the tag container
-        /// </summary>
-        [Parameter]
-        public IList<string>? AdditionalContainerClasses { get; set; }
-        /// <summary>
-        /// Set to add additonal classes to each tag
-        /// </summary>
-        [Parameter]
-        public IList<string>? AdditionalTagClasses { get; set; }
-
         private BlockContent? _content;
 
         private void ClickTag(string tag)
@@ -38,14 +27,12 @@ namespace OptionA.Blog.Components.Post
             var builder = ComponentBuilder
                 .CreateBuilder(null)
                     .CreateBlock()
-                        .AddClass(DefaultClasses.TagContainer)
-                        .AddClasses(AdditionalContainerClasses);            
+                        .AddClasses(DefaultClasses.TagContainer);          
 
             foreach(var tag in PostService.GetTags())
             {
                 builder
                     .CreateTag(tag)
-                        .AddClasses(AdditionalTagClasses)
                         .WithOnClick((e) =>
                         {
                             ClickTag(tag);

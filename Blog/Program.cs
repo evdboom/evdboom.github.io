@@ -21,4 +21,5 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
         .AddSingleton<IResponsiveService, ResponsiveService>();
 
     DefaultClasses.CompactMode.Add("hover");
+    DefaultClasses.Tag.Add("hover");
 }

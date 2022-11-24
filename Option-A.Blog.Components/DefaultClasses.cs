@@ -27,11 +27,17 @@ namespace OptionA.Blog.Components
         /// <summary>
         /// Default class for displaying tags
         /// </summary>
-        public static string? Tag { get; set; } = "tag-item";
+        public static IList<string> Tag { get; set; } = new List<string>
+        {
+            "tag-item"
+        };
         /// <summary>
         /// Default class for container displaying tags
         /// </summary>
-        public static string? TagContainer { get; set; } = "tag-container";
+        public static IList<string> TagContainer { get; set; } = new List<string>
+        {
+            "tag-container"
+        };
 
         /// <summary>
         /// Default class for diplaying posts in compact mode.

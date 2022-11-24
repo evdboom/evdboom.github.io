@@ -216,7 +216,7 @@ namespace OptionA.Blog.Components.Block
         {
             return CreateInline(parent)          
                 .WithText($"{text}")
-                .AddClass(DefaultClasses.Tag)
+                .AddClasses(DefaultClasses.Tag)
                 .Build();
         }
 
@@ -231,7 +231,7 @@ namespace OptionA.Blog.Components.Block
         {
             return CreateInline(parent)
                 .WithText($"{text}")
-                .AddClass(DefaultClasses.Tag);
+                .AddClasses(DefaultClasses.Tag);
         }
     }
 }
