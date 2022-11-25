@@ -1,0 +1,5 @@
+﻿@page "/tag/{tagName}"
+@if (!string.IsNullOrEmpty(TagName))
+{
+    <PostList Content="PostService.GetPostsForTag(TagName)" />
+}

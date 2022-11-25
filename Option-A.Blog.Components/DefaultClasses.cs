@@ -20,24 +20,34 @@ namespace OptionA.Blog.Components
         public static string? CodeHeaderBlock { get; set; } = "code-header-block";
 
         /// <summary>
-        /// Default class selected code parts
+        /// Default classes selected code parts
         /// </summary>
         public static string? SelectedCode { get; set; } = "code-selected";
 
         /// <summary>
-        /// Default class for displaying tags
+        /// Default classes for displaying tags
         /// </summary>
         public static IList<string> Tag { get; set; } = new List<string>
         {
             "tag-item"
         };
+
         /// <summary>
-        /// Default class for container displaying tags
+        /// Default classes for container displaying tags
         /// </summary>
         public static IList<string> TagContainer { get; set; } = new List<string>
         {
             "tag-container"
         };
+
+        /// <summary>
+        /// Default classes for container headers (Tag container, Archive container)
+        /// </summary>
+        public static IList<string> ContainerHeader { get; set; } = new List<string>
+        {
+            "container-header"
+        };
+
 
         /// <summary>
         /// Default class for diplaying posts in compact mode.

@@ -41,6 +41,9 @@
         /// A 'Block' of content, depending on the <see cref="BlockType"/> resulting in a &lt;div&gt;, &lt;span&gt;, &lt;p&gt;or no tag
         /// </summary>
         Block,
+        /// <summary>
+        /// A Line, resulting in a &lt;hr&gt; tag, currently not supporting any styling
+        /// </summary>
         Line
     }
 }

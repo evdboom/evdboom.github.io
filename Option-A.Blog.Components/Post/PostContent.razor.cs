@@ -5,6 +5,7 @@ using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Date;
 using OptionA.Blog.Components.Header;
 using OptionA.Blog.Components.Line;
+using OptionA.Blog.Components.Link;
 using System.Drawing;
 
 namespace OptionA.Blog.Components.Post
@@ -58,15 +59,15 @@ namespace OptionA.Blog.Components.Post
                         .AddDate(Content.PostDate, DateDisplayType.LongDate)
                         .WithTextAlignment(PositionType.Inherit)
                         .WithStyle(Style.Inherit)
-                        .CreateBlock()
-                            .WithBlockType(BlockType.Block)
-                            .AddClasses(DefaultClasses.CompactMode)
-                            .WithOnClick((e) =>
-                            {
-                                SelectPost();
-                                return Task.CompletedTask;
-                            })
+                        .CreateLink()
+                            .WithHref($"/post/{Content.TitleId}")
+                            .WithTextAlignment(PositionType.Inherit)
+                            .WithBlockAlignment(PositionType.FloatRight)
+                            .AddTags(Content.Tags)
                             .WithTextAlignment(PositionType.Left)
+                            .WithBlockAlignment(PositionType.Inherit)
+                            .WithBlockType(BlockType.Block)
+                            .AddClasses(DefaultClasses.CompactMode)                           
                             .AddHeader(Content.Title, HeaderSize.One)
                             .WithStyle(Style.Italic)
                             .WithColor(BlogColor.Subtle)

@@ -7,6 +7,9 @@ using OptionA.Blog.Components.Services;
 
 namespace OptionA.Blog.Components.Post
 {
+    /// <summary>
+    /// Archive component for a specific month
+    /// </summary>
     public partial class ArchiveMonth
     {
         [Inject]
@@ -72,13 +75,12 @@ namespace OptionA.Blog.Components.Post
         {
             return ComponentBuilder
                 .CreateBuilder(post)
-                .CreateLink()
-                    .WithText($"{DateDisplayType.Date.ToDateFormat(post.PostDate)} - {post.Title}")
-                    .WithTitle(post.Subtitle ?? post.Title)
-                    .WithHref($"/post/{post.TitleId}")
-                    .OpensInNewTab(false)
-                    .Build()
-                .BuildOne<LinkContent>();
+                    .CreateLink()
+                        .WithText($"{DateDisplayType.Date.ToDateFormat(post.PostDate)} - {post.Title}")
+                        .WithTitle(post.Subtitle ?? post.Title)
+                        .WithHref($"/post/{post.TitleId}")
+                        .Build()
+                    .BuildOne<LinkContent>();
         }
     }
 }

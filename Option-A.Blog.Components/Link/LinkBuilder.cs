@@ -48,13 +48,13 @@ namespace OptionA.Blog.Components.Link
         }
 
         /// <summary>
-        /// Sets if the link opens in a new tab
+        /// Sets if the link opens internally (default), over self or in a new tab
         /// </summary>
-        /// <param name="newTab"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public LinkBuilder<Parent> OpensInNewTab(bool newTab)
+        public LinkBuilder<Parent> WithMode(LinkMode mode)
         {
-            _content.NewTab = newTab;
+            _content.Mode = mode;
             return this;
         }
 
@@ -64,6 +64,11 @@ namespace OptionA.Blog.Components.Link
             _content.ChildContent.Add(content);
         }
 
+        /// <summary>
+        /// Add multiple contents to this builder, properties are not copied to these children
+        /// </summary>
+        /// <param name="contents"></param>
+        /// <returns></returns>
         public LinkBuilder<Parent> AddContents(IEnumerable<IPostContent> contents)
         {
             foreach (var content in contents)

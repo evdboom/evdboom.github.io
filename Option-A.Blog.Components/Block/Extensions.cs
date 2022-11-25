@@ -204,34 +204,5 @@ namespace OptionA.Blog.Components.Block
                 .WithColor(BlogColor.Subtle)
                 .Build();
         }
-
-        /// <summary>
-        /// Adds a tag to the current builder
-        /// </summary>
-        /// <typeparam name="Parent"></typeparam>
-        /// <param name="parent"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static Parent AddTag<Parent>(this Parent parent, object? text) where Parent : IParentBuilder
-        {
-            return CreateInline(parent)          
-                .WithText($"{text}")
-                .AddClasses(DefaultClasses.Tag)
-                .Build();
-        }
-
-        /// <summary>
-        /// Adds a tag to the current builder
-        /// </summary>
-        /// <typeparam name="Parent"></typeparam>
-        /// <param name="parent"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static BlockBuilder<Parent> CreateTag<Parent>(this Parent parent, object? text) where Parent : IParentBuilder
-        {
-            return CreateInline(parent)
-                .WithText($"{text}")
-                .AddClasses(DefaultClasses.Tag);
-        }
     }
 }

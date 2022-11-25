@@ -4,6 +4,9 @@ using OptionA.Blog.Components.Services;
 
 namespace OptionA.Blog.Components.Post
 {
+    /// <summary>
+    /// Archive component
+    /// </summary>
     public partial class Archive
     {
         [Inject]
