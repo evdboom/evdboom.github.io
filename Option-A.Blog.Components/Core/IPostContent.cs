@@ -45,6 +45,15 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         BlogColor Color { get; }
         /// <summary>
+        /// Padding to use for the component
+        /// </summary>
+        (Side Side, Strength Strength) Padding { get; }
+        /// <summary>
+        /// Margin to use for the component
+        /// </summary>
+        (Side Side, Strength Strength) Margin { get; }
+
+        /// <summary>
         /// The clickaction for this component
         /// </summary>
         public Func<MouseEventArgs, Task>? OnClick { get; }

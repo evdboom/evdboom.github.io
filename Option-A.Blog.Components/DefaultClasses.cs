@@ -37,7 +37,16 @@ namespace OptionA.Blog.Components
         /// </summary>
         public static IList<string> TagContainer { get; set; } = new List<string>
         {
-            "tag-container"
+            "tag-container",
+            "component-container"
+        };
+
+        /// <summary>
+        /// Default classes for container displaying the archive
+        /// </summary>
+        public static IList<string> ArchiveContainer { get; set; } = new List<string>
+        {
+            "component-container"
         };
 
         /// <summary>
@@ -86,6 +95,7 @@ namespace OptionA.Blog.Components
         /// </summary>
         public static IDictionary<Style, string> StyleClasses { get; set; } = new Dictionary<Style, string>
         {
+            { Style.Thin, "style-thin" },
             { Style.Bold, "style-bold" },
             { Style.Italic, "style-italic" },
             { Style.Underline, "style-underline" },
@@ -94,10 +104,103 @@ namespace OptionA.Blog.Components
             { Style.UpperCase, "style-uppercase" },
             { Style.Monospace, "style-monospace" },
             { Style.Bordered, "style-bordered" },
-            { Style.Padded, "style-padded" },
-            { Style.Dark, "style-dark" },
             { Style.KeepWhiteSpace, "style-keepwhitespace" },
-            { Style.None, "style-none" },
+            { Style.NoDecoration, "style-none" },
+        };
+
+        /// <summary>
+        /// Default classes for the margin to be set on components
+        /// </summary>
+        public static IDictionary<Side, IDictionary<Strength, string>> MarginClasses { get; set; } = new Dictionary<Side, IDictionary<Strength, string>>
+        {
+            { 
+                Side.Top, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "margin-top-1" },
+                    { Strength.ABitMore, "margin-top-2" },
+                    { Strength.Average, "margin-top-3" },
+                    { Strength.ALot, "margin-top-4" },
+                    { Strength.Most, "margin-top-5" },
+                }
+            },
+            {
+                Side.Right, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "margin-right-1" },
+                    { Strength.ABitMore, "margin-right-2" },
+                    { Strength.Average, "margin-right-3" },
+                    { Strength.ALot, "margin-right-4" },
+                    { Strength.Most, "margin-right-5" },
+                }
+            },
+            {
+                Side.Bottom, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "margin-bottom-1" },
+                    { Strength.ABitMore, "margin-bottom-2" },
+                    { Strength.Average, "margin-bottom-3" },
+                    { Strength.ALot, "margin-bottom-4" },
+                    { Strength.Most, "margin-bottom-5" },
+                }
+            },
+            {
+                Side.Left, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "margin-left-1" },
+                    { Strength.ABitMore, "margin-left-2" },
+                    { Strength.Average, "margin-left-3" },
+                    { Strength.ALot, "margin-left-4" },
+                    { Strength.Most, "margin-left-5" },
+                }
+            },
+
+        };
+
+        /// <summary>
+        /// Default classes for the padding to be set on components
+        /// </summary>
+        public static IDictionary<Side, IDictionary<Strength, string>> PaddingClasses { get; set; } = new Dictionary<Side, IDictionary<Strength, string>>
+        {
+            {
+                Side.Top, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "padding-top-1" },
+                    { Strength.ABitMore, "padding-top-2" },
+                    { Strength.Average, "padding-top-3" },
+                    { Strength.ALot, "padding-top-4" },
+                    { Strength.Most, "padding-top-5" },
+                }
+            },
+            {
+                Side.Right, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "padding-right-1" },
+                    { Strength.ABitMore, "padding-right-2" },
+                    { Strength.Average, "padding-right-3" },
+                    { Strength.ALot, "padding-right-4" },
+                    { Strength.Most, "padding-right-5" },
+                }
+            },
+            {
+                Side.Bottom, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "padding-bottom-1" },
+                    { Strength.ABitMore, "padding-bottom-2" },
+                    { Strength.Average, "padding-bottom-3" },
+                    { Strength.ALot, "padding-bottom-4" },
+                    { Strength.Most, "padding-bottom-5" },
+                }
+            },
+            {
+                Side.Left, new Dictionary<Strength, string>
+                {
+                    { Strength.ABit, "padding-left-1" },
+                    { Strength.ABitMore, "padding-left-2" },
+                    { Strength.Average, "padding-left-3" },
+                    { Strength.ALot, "padding-left-4" },
+                    { Strength.Most, "padding-left-5" },
+                }
+            },
         };
 
         /// <summary>

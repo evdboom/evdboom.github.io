@@ -50,6 +50,18 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public BlogColor Color => _color;
         /// <summary>
+        /// the current value for margin
+        /// </summary>
+        protected (Side Side, Strength Strength) _margin;
+        /// <inheritdoc/>
+        public (Side Side, Strength Strength) Margin => _margin;
+        /// <summary>
+        /// the current value for padding
+        /// </summary>
+        protected (Side Side, Strength Strength) _padding;
+        /// <inheritdoc/>
+        public (Side Side, Strength Strength) Padding => _padding;
+        /// <summary>
         /// The currently set onclick action, this is not copied to childbuilders.
         /// </summary>
         protected Func<MouseEventArgs, Task>? _onClick;
@@ -134,6 +146,30 @@ namespace OptionA.Blog.Components.Core
         public Builder WithStyle(Style style)
         {
             _style = style;
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the margin to be used for this builder, margin is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <param name="strength"></param>
+        /// <returns></returns>
+        public Builder WithMargin(Side side, Strength strength)
+        {
+            _margin = (side, strength);
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the padding to be used for this builder, padding is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <param name="strength"></param>
+        /// <returns></returns>
+        public Builder WithPadding(Side side, Strength strength)
+        {
+            _padding = (side, strength);
             return This();
         }
 

@@ -154,7 +154,7 @@ namespace OptionA.Blog.Components.Block
                 .WithTextAlignment(PositionType.Center)
                 .CreateBlock()
                     .WithBlockType(BlockType.Block)
-                    .WithStyle(Style.Bordered | Style.Italic | Style.Padded)
+                    .WithStyle(Style.Bordered | Style.Italic)
                     .WithText($"\"{quote}\"")
                     .WithColor(BlogColor.Quote)
                     .Build();
@@ -167,7 +167,7 @@ namespace OptionA.Blog.Components.Block
                         .WithStyle(Style.Italic)
                         .CreateLink()
                             .WithColor(BlogColor.Subtle)
-                            .WithStyle(Style.None)
+                            .WithStyle(Style.NoDecoration)
                             .WithHref(link)
                             .WithText(source)
                             .Build()

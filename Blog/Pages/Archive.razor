@@ -1,0 +1,5 @@
+﻿@page "/archive/{year:int}/{month:int}"
+@if (Year > 0 && Month > 0)
+{
+    <PostList Content="PostService.GetPostsForMonth(Year, Month)" />
+}

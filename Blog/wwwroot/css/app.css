@@ -1,20 +1,6 @@
 ﻿@import url('icons/bootstrap-icons.css');
-
-.pointer {
-    cursor: pointer;
-}
-
-.mh-10 {
-    max-height: 10vh;
-}
-
-.mh-15 {
-    max-height: 15vh;
-}
-
-.mh-20 {
-    max-height: 20vh;
-}
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
 .hover {
     transition: opacity 200ms;
@@ -24,6 +10,6 @@
     opacity: 0.5;
 }
 
-.scroll-horizontal {
-    overflow-x: auto;
+body {
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri
 }

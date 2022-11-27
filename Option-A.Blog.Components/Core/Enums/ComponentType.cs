@@ -44,6 +44,10 @@
         /// <summary>
         /// A Line, resulting in a &lt;hr&gt; tag, currently not supporting any styling
         /// </summary>
-        Line
+        Line,
+        /// <summary>
+        /// An Icon resulting in a &lt;i&gt; tag, set the icon through classes
+        /// </summary>
+        Icon
     }
 }

@@ -15,52 +15,48 @@
         /// </summary>
         Normal = 1,
         /// <summary>
+        /// Render text thin
+        /// </summary>
+        Thin = 2,
+        /// <summary>
         /// Render text bold
         /// </summary>
-        Bold = 2,
+        Bold = 4,
         /// <summary>
         /// Render text italic
         /// </summary>
-        Italic = 4,
+        Italic = 8,
         /// <summary>
         /// Underline text
         /// </summary>
-        Underline = 8,
+        Underline = 16,
         /// <summary>
         /// Strike through text
         /// </summary>
-        StrikeThrough = 16,
+        StrikeThrough = 32,
         /// <summary>
         /// Make text lowercase
         /// </summary>
-        LowerCase = 32,
+        LowerCase = 64,
         /// <summary>
         /// Make text uppercase
         /// </summary>
-        UpperCase = 64,
+        UpperCase = 128,
         /// <summary>
         /// Use a monospace font
         /// </summary>
-        Monospace = 128,
+        Monospace = 256,
         /// <summary>
         /// Place a border around the block
         /// </summary>
-        Bordered = 256,
-        /// <summary>
-        /// Add padding to the block
-        /// </summary>
-        Padded = 512,
-        /// <summary>
-        /// Use a dark theme for the block (not fully supported yet)
-        /// </summary>
-        Dark = 1024,
+        Bordered = 512,
         /// <summary>
         /// Make sure to keep any set whitespace
         /// </summary>
-        KeepWhiteSpace = 4096,
+        KeepWhiteSpace = 1024,
         /// <summary>
         /// Sets the text-decoration to none
         /// </summary>
-        None = 8192,
+        NoDecoration = 2048,
     }
 }

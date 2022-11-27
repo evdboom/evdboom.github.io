@@ -29,6 +29,14 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         BlogColor Color { get; }
         /// <summary>
+        /// Gets the currently set Margin
+        /// </summary>
+        (Side Side, Strength Strength) Margin { get; }
+        /// <summary>
+        /// Gets the currently set Padding
+        /// </summary>
+        (Side Side, Strength Strength) Padding { get; }
+        /// <summary>
         /// Gets the currently set OnClick action for this builder, this is not copied to child builders.
         /// </summary>
         Func<MouseEventArgs,Task>? OnClick { get; }

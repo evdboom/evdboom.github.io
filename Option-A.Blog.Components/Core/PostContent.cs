@@ -30,6 +30,10 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public BlogColor Color { get; set; }
         /// <inheritdoc/>
+        public (Side Side, Strength Strength) Padding { get; set; }
+        /// <inheritdoc/>
+        public (Side Side, Strength Strength) Margin { get; set; }
+        /// <inheritdoc/>
         public Func<MouseEventArgs, Task>? OnClick { get; set; }
 
         /// <inheritdoc/>
@@ -83,6 +87,22 @@ namespace OptionA.Blog.Components.Core
             {
                 yield return style;
             }
+
+            foreach(var side in Enum.GetValues<Side>())
+            {
+                if (Padding.Side.HasFlag(side) &&
+                    DefaultClasses.PaddingClasses.TryGetValue(side, out var paddingStrength) &&
+                    paddingStrength.TryGetValue(Padding.Strength, out string? paddingClass))
+                {
+                    yield return paddingClass;
+                }
+                if (Margin.Side.HasFlag(side) &&
+                    DefaultClasses.MarginClasses.TryGetValue(side, out var marginStrength) &&
+                    marginStrength.TryGetValue(Margin.Strength, out string? marginClass))
+                {
+                    yield return marginClass;
+                }
+            }
         }
 
         /// <summary>
@@ -110,12 +130,19 @@ namespace OptionA.Blog.Components.Core
             if (Color == BlogColor.Inherit)
             {
                 Color = builder.Color;
+            }            
+
+            if (Padding.Side == Side.Inherit)
+            {
+                Padding = builder.Padding;
             }
 
-            if (OnClick is null)
-            { 
-                OnClick = builder.OnClick;
+            if (Margin.Side == Side.Inherit)
+            {
+                Margin = builder.Padding;
             }
+
+            OnClick ??= builder.OnClick;
         }
     }
 }
