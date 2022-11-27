@@ -37,9 +37,9 @@ namespace OptionA.Blog.Components.Code
         /// <returns></returns>
         protected override IEnumerable<string> GetContentClassesList()
         {
-            if (!string.IsNullOrEmpty(DefaultClasses.CodeBlock))
+            foreach(var className in DefaultClasses.CodeBlock)
             {
-                yield return DefaultClasses.CodeBlock;
+                yield return className;
             }
         }
 
@@ -48,17 +48,13 @@ namespace OptionA.Blog.Components.Code
             var builder = ComponentBuilder.CreateBuilder(Post!);
             if (Language != CodeLanguage.Other)
             {
-                var header = builder
+                builder
                     .CreateBlock()
-                    .WithStyle(Style.Bold)
-                    .WithText(Language.ToDisplayLanguage())
-                    .WithTextAlignment(PositionType.Right);
-
-                if (!string.IsNullOrEmpty(DefaultClasses.CodeHeaderBlock))
-                {
-                    header.AddClass(DefaultClasses.CodeHeaderBlock);
-                }
-                header.Build();
+                        .WithStyle(Style.Bold)
+                        .WithText(Language.ToDisplayLanguage())
+                        .WithTextAlignment(PositionType.Right)
+                        .AddClasses(DefaultClasses.CodeHeaderBlock)
+                        .Build();                
             }
 
             if (Parser is null)

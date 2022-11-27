@@ -1,2 +1,6 @@
 ﻿@page "/"
+@if (_content is not null)
+{
+    <Block Content="_content" />
+}
 <PostList Content="PostService.EnumeratePosts()" />

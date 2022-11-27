@@ -47,10 +47,6 @@
         /// </summary>
         Monospace = 256,
         /// <summary>
-        /// Place a border around the block
-        /// </summary>
-        Bordered = 512,
-        /// <summary>
         /// Make sure to keep any set whitespace
         /// </summary>
         KeepWhiteSpace = 1024,

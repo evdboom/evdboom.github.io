@@ -31,11 +31,19 @@ namespace OptionA.Blog.Components.Core
         /// <summary>
         /// Gets the currently set Margin
         /// </summary>
-        (Side Side, Strength Strength) Margin { get; }
+        IDictionary<Side, Strength> Margin { get; }
         /// <summary>
         /// Gets the currently set Padding
         /// </summary>
-        (Side Side, Strength Strength) Padding { get; }
+        IDictionary<Side, Strength> Padding { get; }
+        /// <summary>
+        /// Gets the current value for sides of the border
+        /// </summary>
+        Side Border { get; }
+        /// <summary>
+        /// Gets the current value for sides of the borderradius
+        /// </summary>
+        IList<Side> BorderRadius { get; }
         /// <summary>
         /// Gets the currently set OnClick action for this builder, this is not copied to child builders.
         /// </summary>

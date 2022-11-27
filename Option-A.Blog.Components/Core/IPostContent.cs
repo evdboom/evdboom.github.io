@@ -47,12 +47,19 @@ namespace OptionA.Blog.Components.Core
         /// <summary>
         /// Padding to use for the component
         /// </summary>
-        (Side Side, Strength Strength) Padding { get; }
+        IDictionary<Side, Strength> Padding { get; }
         /// <summary>
         /// Margin to use for the component
         /// </summary>
-        (Side Side, Strength Strength) Margin { get; }
-
+        IDictionary<Side, Strength> Margin { get; }
+        /// <summary>
+        /// Sets the sides to add a border for
+        /// </summary>
+        Side Border { get; }
+        /// <summary>
+        /// Sets the sides to add a border radius for
+        /// </summary>
+        IList<Side> BorderRadius { get; }
         /// <summary>
         /// The clickaction for this component
         /// </summary>
