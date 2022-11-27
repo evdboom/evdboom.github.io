@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blog.Components;
 using OptionA.Blog.Components.Block;
-using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Core;
-using OptionA.Blog.Components.Date;
+using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Header;
-using OptionA.Blog.Components.Services;
-using System;
 using OptionA.Blog.Components.Line;
+using OptionA.Blog.Components.Link;
+using OptionA.Blog.Components.Services;
 
 namespace Blog.Pages
 {
-    public partial class Index
+    public partial class Tag
     {
         [Inject]
         private IPostService PostService { get; set; } = null!;
+        [Parameter]
+        public string? TagName { get; set; }
 
         private BlockContent? _content;
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
             _content = ComponentBuilder
                 .CreateBuilder(null)
@@ -25,7 +27,8 @@ namespace Blog.Pages
                     .CreateContent()
                         .CreateHeader()
                             .OfSize(HeaderSize.Two)
-                            .WithText("Most recent posts")                           
+                            .WithText("Posts for ")
+                            .AddTag(TagName)
                             .Build()
                         .AddLine()
                         .Build()

@@ -45,6 +45,22 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         BlogColor Color { get; }
         /// <summary>
+        /// Padding to use for the component
+        /// </summary>
+        IDictionary<Side, Strength> Padding { get; }
+        /// <summary>
+        /// Margin to use for the component
+        /// </summary>
+        IDictionary<Side, Strength> Margin { get; }
+        /// <summary>
+        /// Sets the sides to add a border for
+        /// </summary>
+        Side Border { get; }
+        /// <summary>
+        /// Sets the sides to add a border radius for
+        /// </summary>
+        IList<Side> BorderRadius { get; }
+        /// <summary>
         /// The clickaction for this component
         /// </summary>
         public Func<MouseEventArgs, Task>? OnClick { get; }

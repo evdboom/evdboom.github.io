@@ -13,21 +13,28 @@ namespace OptionA.Blog.Components.Link
         /// </summary>
         public string Href { get; set; } = string.Empty;
         /// <summary>
-        /// If true link will open in a new tab
+        /// Linkmode for this link, see <see cref="LinkMode"/> for options
         /// </summary>
-        public bool NewTab { get; set; }
+        public LinkMode Mode { get; set; }
         /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Link;
+        /// <inheritdoc/>
         public override IDictionary<string, object?> Attributes
         {
             get
             {
                 var attributes = base.Attributes;
                 attributes["href"] = Href;
-                attributes["target"] = NewTab
-                    ? "_blank"
-                    : "_self";
-
+                switch (Mode)
+                {
+                    case LinkMode.Self:
+                        attributes["target"] =  "_self";
+                        break;
+                    case LinkMode.NewTab:
+                        attributes["target"] = "_blank";
+                        break;
+                }
+                
                 return attributes;
             }
         }

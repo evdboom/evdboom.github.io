@@ -1,6 +1,6 @@
 ﻿@page "/"
-
-@foreach (var post in PostService.EnumeratePosts())
+@if (_content is not null)
 {
-    <PostContent Content="post" CompactMode=true />
+    <Block Content="_content" />
 }
+<PostList Content="PostService.EnumeratePosts()" />

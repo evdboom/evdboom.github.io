@@ -153,8 +153,11 @@ namespace OptionA.Blog.Components.Block
                 .WithStyle(Style.Normal)
                 .WithTextAlignment(PositionType.Center)
                 .CreateBlock()
+                    .WithBorder(Side.All)
+                    .AddBorderRadius(Side.All)
+                    .AddPadding(Side.All, Strength.ABitMore)
                     .WithBlockType(BlockType.Block)
-                    .WithStyle(Style.Bordered | Style.Italic | Style.Padded)
+                    .WithStyle(Style.Italic)
                     .WithText($"\"{quote}\"")
                     .WithColor(BlogColor.Quote)
                     .Build();
@@ -167,8 +170,9 @@ namespace OptionA.Blog.Components.Block
                         .WithStyle(Style.Italic)
                         .CreateLink()
                             .WithColor(BlogColor.Subtle)
-                            .WithStyle(Style.None)
+                            .WithStyle(Style.NoDecoration)
                             .WithHref(link)
+                            .WithMode(LinkMode.NewTab)
                             .WithText(source)
                             .Build()
                         .Build()
@@ -203,35 +207,6 @@ namespace OptionA.Blog.Components.Block
                 .WithTextAlignment(PositionType.Center)
                 .WithColor(BlogColor.Subtle)
                 .Build();
-        }
-
-        /// <summary>
-        /// Adds a tag to the current builder
-        /// </summary>
-        /// <typeparam name="Parent"></typeparam>
-        /// <param name="parent"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static Parent AddTag<Parent>(this Parent parent, object? text) where Parent : IParentBuilder
-        {
-            return CreateInline(parent)          
-                .WithText($"{text}")
-                .AddClass(DefaultClasses.Tag)
-                .Build();
-        }
-
-        /// <summary>
-        /// Adds a tag to the current builder
-        /// </summary>
-        /// <typeparam name="Parent"></typeparam>
-        /// <param name="parent"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static BlockBuilder<Parent> CreateTag<Parent>(this Parent parent, object? text) where Parent : IParentBuilder
-        {
-            return CreateInline(parent)
-                .WithText($"{text}")
-                .AddClass(DefaultClasses.Tag);
         }
     }
 }

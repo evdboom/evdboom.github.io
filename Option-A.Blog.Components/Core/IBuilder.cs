@@ -29,6 +29,22 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         BlogColor Color { get; }
         /// <summary>
+        /// Gets the currently set Margin
+        /// </summary>
+        IDictionary<Side, Strength> Margin { get; }
+        /// <summary>
+        /// Gets the currently set Padding
+        /// </summary>
+        IDictionary<Side, Strength> Padding { get; }
+        /// <summary>
+        /// Gets the current value for sides of the border
+        /// </summary>
+        Side Border { get; }
+        /// <summary>
+        /// Gets the current value for sides of the borderradius
+        /// </summary>
+        IList<Side> BorderRadius { get; }
+        /// <summary>
         /// Gets the currently set OnClick action for this builder, this is not copied to child builders.
         /// </summary>
         Func<MouseEventArgs,Task>? OnClick { get; }

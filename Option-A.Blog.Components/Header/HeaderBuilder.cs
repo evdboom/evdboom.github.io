@@ -7,13 +7,16 @@ namespace OptionA.Blog.Components.Header
     /// Builder for creating <see cref="HeaderContent"/>
     /// </summary>
     /// <typeparam name="Parent"></typeparam>
-    public class HeaderBuilder<Parent> : ContentBuilderBase<HeaderBuilder<Parent>, Parent, HeaderContent>
+    public class HeaderBuilder<Parent> : ContentBuilderBase<HeaderBuilder<Parent>, Parent, HeaderContent>, IParentBuilder
         where Parent : IParentBuilder
     {
         /// <summary>
         /// Sets the color to <see cref="BlogColor.Header"/>
         /// </summary>
         protected override BlogColor OwnColor => BlogColor.Header;
+
+        /// <inheritdoc />
+        public IPost? Post => _result.Post;
 
         /// <summary>
         /// Default Constructor
@@ -49,6 +52,12 @@ namespace OptionA.Blog.Components.Header
         protected override HeaderBuilder<Parent> This()
         {
             return this;
+        }
+
+        /// <inheritdoc/>
+        public void AddContent(IPostContent content)
+        {
+            _content.ChildContent.Add(content);
         }
     }
 

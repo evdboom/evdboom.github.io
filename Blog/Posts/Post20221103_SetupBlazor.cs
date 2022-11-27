@@ -3,6 +3,7 @@ using OptionA.Blog.Components.Code;
 using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Header;
+using OptionA.Blog.Components.Icon;
 using OptionA.Blog.Components.Image;
 using OptionA.Blog.Components.Link;
 using OptionA.Blog.Components.List;
@@ -18,9 +19,19 @@ namespace Blog.Posts
                 .WithDate(2022, 11, 3)
                 .WithTitle("My first Blog post")
                 .WithSubtitle("This post is about setting everyting up correctly")
-                .WithTags("blazor", "setup", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleleven", "twleve", "thirteen", "forteen")
-                .WithStyle(Style.Bold)
+                .WithTags("blazor", "setup")
                 .AddParagraph("If i place tags <div>test me</div> here what happens?")
+                .CreateHeader()
+                    .OfSize(HeaderSize.One)
+                    .CreateBlock()
+                        .AddIcon("bi bi-check-circle")
+                        .AddContent("Option A")
+                        .Build()
+                    .CreateBlock()
+                        .AddIcon("bi bi-circle")
+                        .AddContent("Option B")
+                        .Build()
+                    .Build()
                 .AddHeader("Test header", HeaderSize.Three)
                 .CreateParagraph()
                     .WithStyle(Style.StrikeThrough | Style.UpperCase)

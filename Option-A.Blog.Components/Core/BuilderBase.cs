@@ -50,6 +50,30 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public BlogColor Color => _color;
         /// <summary>
+        /// the current value for margin
+        /// </summary>
+        protected IDictionary<Side,Strength> _margin = new Dictionary<Side, Strength>();
+        /// <inheritdoc/>
+        public IDictionary<Side, Strength> Margin => _margin;
+        /// <summary>
+        /// the current value for padding
+        /// </summary>
+        protected IDictionary<Side, Strength> _padding = new Dictionary<Side, Strength>();
+        /// <inheritdoc/>
+        public IDictionary<Side, Strength> Padding => _padding;
+        /// <summary>
+        /// The current value for border sides
+        /// </summary>
+        protected Side _border;
+        ///<inheritdoc/>
+        public Side Border => _border;
+        /// <summary>
+        /// The current value for borderradius
+        /// </summary>
+        protected IList<Side> _borderRadius = new List<Side>();
+        /// <inheritdoc/>
+        public IList<Side> BorderRadius => _borderRadius;
+        /// <summary>
         /// The currently set onclick action, this is not copied to childbuilders.
         /// </summary>
         protected Func<MouseEventArgs, Task>? _onClick;
@@ -134,6 +158,52 @@ namespace OptionA.Blog.Components.Core
         public Builder WithStyle(Style style)
         {
             _style = style;
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the margin to be used for this builder, margin is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <param name="strength"></param>
+        /// <returns></returns>
+        public Builder AddMargin(Side side, Strength strength)
+        {
+            _margin[side] = strength;
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the padding to be used for this builder, padding is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <param name="strength"></param>
+        /// <returns></returns>
+        public Builder AddPadding(Side side, Strength strength)
+        {
+            _padding[side] = strength;
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the border for this builder, this is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <returns></returns>
+        public Builder WithBorder(Side side)
+        {
+            _border = side;
+            return This();
+        }
+
+        /// <summary>
+        /// Sets the borderradius for this builder, this is not copied to child builders
+        /// </summary>
+        /// <param name="side"></param>
+        /// <returns></returns>
+        public Builder AddBorderRadius(Side side)
+        {
+            _borderRadius.Add(side);
             return This();
         }
 

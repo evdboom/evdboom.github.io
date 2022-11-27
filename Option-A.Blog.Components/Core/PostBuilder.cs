@@ -43,7 +43,7 @@ namespace OptionA.Blog.Components.Core
         public PostBuilder WithTags(params string[] tags)
         {
             var upper = tags
-                .Select(t => t.ToUpper());
+                .Select(t => t.ToLowerInvariant());
 
             var newTags = upper.Where(tag => !_result.Tags.Contains(tag));
 

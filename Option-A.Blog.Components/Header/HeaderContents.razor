@@ -1,0 +1,11 @@
+﻿@if (Content is not null)
+{
+    @if (!string.IsNullOrEmpty(Content.Text))
+    {
+        @Content.Text
+    }
+    @if (Content.ChildContent.Any())
+    {
+        <Compound Content="Content.ChildContent" />
+    }
+}

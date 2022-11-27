@@ -5,6 +5,7 @@ using OptionA.Blog.Components.Core.Enums;
 using OptionA.Blog.Components.Date;
 using OptionA.Blog.Components.Header;
 using OptionA.Blog.Components.Line;
+using OptionA.Blog.Components.Link;
 using System.Drawing;
 
 namespace OptionA.Blog.Components.Post
@@ -58,19 +59,21 @@ namespace OptionA.Blog.Components.Post
                         .AddDate(Content.PostDate, DateDisplayType.LongDate)
                         .WithTextAlignment(PositionType.Inherit)
                         .WithStyle(Style.Inherit)
-                        .CreateBlock()
-                            .WithBlockType(BlockType.Block)
-                            .AddClasses(DefaultClasses.CompactMode)
-                            .WithOnClick((e) =>
-                            {
-                                SelectPost();
-                                return Task.CompletedTask;
-                            })
+                        .CreateLink()
+                            .WithHref($"/post/{Content.TitleId}")
+                            .WithTextAlignment(PositionType.Inherit)
+                            .WithBlockAlignment(PositionType.FloatRight)
+                            .AddTags(Content.Tags)
                             .WithTextAlignment(PositionType.Left)
+                            .WithBlockAlignment(PositionType.Inherit)
+                            .WithBlockType(BlockType.Block)
+                            .AddClasses(DefaultClasses.CompactMode)                           
                             .AddHeader(Content.Title, HeaderSize.One)
                             .WithStyle(Style.Italic)
                             .WithColor(BlogColor.Subtle)
                             .AddParagraph(Content.Subtitle)
+                            .WithStyle(Style.Inherit)
+                            .WithColor(BlogColor.Text)
                             .AddLine()
                             .AddContents(Content.Content)
                             .Build()
@@ -81,9 +84,13 @@ namespace OptionA.Blog.Components.Post
             else
             {
                 _displayContent = builder
-                    .CreateBlock()
+                    .CreateBlock()                            
                         .WithTextAlignment(PositionType.Center)
                         .AddHeader(Content.Title, HeaderSize.One)
+                        .CreateBlock()                            
+                            .AddTags(Content.Tags)
+                            .WithBlockAlignment(PositionType.Center)
+                            .Build()
                         .WithStyle(Style.Italic)
                         .WithColor(BlogColor.Subtle)
                         .AddDate(Content.PostDate, DateDisplayType.LongDate)
@@ -96,53 +103,6 @@ namespace OptionA.Blog.Components.Post
                     .BuildOne<BlockContent>();
             }
 
-        }
-
-        private void AddDateContent(ComponentBuilder builder, DateTime date, PositionType textAlignment, Style style, BlogColor color)
-        {
-            builder
-                .CreateDate()
-                    .WithTextAlignment(textAlignment)
-                    .WithStyle(style)
-                    .WithColor(color)
-                    .WithDisplayType(DateDisplayType.LongDateTime)
-                    .ForDate(date)
-                    .Build();                               
-        }
-
-        private HeaderContent? GetHeaderContent(PositionType textAlignment)
-        {
-            if (Content is null)
-            {
-                return null;
-            }
-
-            return ComponentBuilder
-                .CreateBuilder(Content)
-                .WithTextAlignment(textAlignment)
-                .AddHeader(Content.Title, HeaderSize.One)
-                .BuildOne<HeaderContent>();                
-        }
-
-        private BlockContent? GetSubtitleContent(PositionType textAlignment)
-        {
-            if (string.IsNullOrEmpty(Content?.Subtitle))
-            {
-                return null;
-            }
-
-            return ComponentBuilder
-                .CreateBuilder(Content)
-                .WithTextAlignment(textAlignment)
-                .WithStyle(Style.Italic)
-                .WithColor(BlogColor.Subtle)
-                .AddParagraph(Content.Subtitle)
-                .BuildOne<BlockContent>();                
-        }        
-
-        private string? GetCompactModeClasses()
-        {
-            return string.Join(' ', DefaultClasses.CompactMode);
         }
     }
 }

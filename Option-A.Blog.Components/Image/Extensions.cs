@@ -36,7 +36,7 @@ namespace OptionA.Blog.Components.Image
         /// <typeparam name="Parent"></typeparam>
         /// <param name="parent"></param>
         /// <param name="source"></param>
-        /// <param name="description"></param>
+        /// <param name="title"></param>
         /// <returns></returns>
         public static Parent AddImage<Parent>(this Parent parent, string source, string title) where Parent : IParentBuilder
         {
