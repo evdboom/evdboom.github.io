@@ -21,13 +21,38 @@ namespace OptionA.Blog.Components.Image
         }
 
         /// <summary>
-        /// Sets the image source
+        /// Sets the size of the image
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public ImageBuilder<Parent> WithSize(string width, string height)
+        {
+            _content.Width = width;
+            _content.Height = height;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the image source, sets mode to post
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
         public ImageBuilder<Parent> WithSource(string source)
         {
-            _content.Name = source;
+            return WithSource(source, ImageMode.LocalPost);
+        }        
+
+        /// <summary>
+        /// Sets the image source, and mode
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public ImageBuilder<Parent> WithSource(string source, ImageMode mode)
+        {
+            _content.Source = source;
+            _content.Mode = mode;
             return this;
         }
 

@@ -1,5 +1,8 @@
-﻿using OptionA.Blog.Components.Core;
+﻿using OptionA.Blog.Components.Code;
+using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OptionA.Blog.Components.Image
 {
@@ -9,13 +12,21 @@ namespace OptionA.Blog.Components.Image
     public class ImageContent : PostContent
     {        
         /// <summary>
-        /// Name of the image
+        /// Source of the image
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Source { get; set; } = string.Empty;
         /// <summary>
-        /// Full source location of the image
+        /// Sets the width of the image
         /// </summary>
-        public string Source => $"/images/{Post!.DateId}/{Name}";
+        public string? Width { get; set; }
+        /// <summary>
+        /// Sets the height of the image
+        /// </summary>
+        public string? Height { get; set; }
+        /// <summary>
+        /// Mode for the image
+        /// </summary>
+        public ImageMode Mode { get; set; }
         /// <inheritdoc/>
         public override IDictionary<string, object?> Attributes
         {
@@ -24,19 +35,38 @@ namespace OptionA.Blog.Components.Image
                 var attributes = base.Attributes;                
                 if (!attributes.ContainsKey("title"))
                 {
-                    attributes["title"] = Source;
+                    attributes["title"] = GetSource();
                 }
                 if (!attributes.ContainsKey("alt"))
                 {
                     attributes["alt"] = attributes["title"];
                 }
+                if (!string.IsNullOrEmpty(Width))
+                {
+                    attributes["width"] = Width;
+                }
+                if (!string.IsNullOrEmpty(Height)) 
+                {
+                    attributes["height"] = Height;
+                }
 
-                attributes["src"] = Source;                
+                attributes["src"] = GetSource();                
 
                 return attributes;
             }
         }
         /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Image;
+
+        private string GetSource()
+        {
+            return Mode switch
+            {
+                ImageMode.LocalPost => $"/images/{Post!.DateId}/{Source}",
+                ImageMode.Local => $"/images/{Source}",
+                ImageMode.External => Source,
+                _ => throw new InvalidOperationException("Unknown ImageMode")
+            };
+        }
     }
 }

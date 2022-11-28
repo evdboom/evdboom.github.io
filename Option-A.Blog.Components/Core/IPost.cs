@@ -33,5 +33,9 @@
         /// Tags relevant for this post
         /// </summary>
         IList<string> Tags { get; }
+        /// <summary>
+        /// String used for searching, concat of title, subtitle and tags
+        /// </summary>
+        string SearchString { get; }
     }
 }

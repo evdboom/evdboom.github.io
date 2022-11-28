@@ -58,7 +58,6 @@ namespace OptionA.Blog.Components
         public static IList<string> ContainerHeader { get; set; } = new List<string>
         {
             "oa-container-header",
-            "oa-style-bold",
             "oa-text-center"
         };
 
@@ -142,61 +141,61 @@ namespace OptionA.Blog.Components
             { 
                 Side.Top, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-margin-top-1" },
-                    { Strength.ABitMore, "oa-margin-top-2" },
-                    { Strength.Average, "oa-margin-top-3" },
-                    { Strength.ALot, "oa-margin-top-4" },
-                    { Strength.Most, "oa-margin-top-5" },
-                    { Strength.ABitBelowZero, "oa-neg-margin-top-1" },
-                    { Strength.ABitMoreBelowZero, "oa-neg-margin-top-2" },
-                    { Strength.BelowZero, "oa-neg-margin-top-3" },
-                    { Strength.ALotBelowZero, "oa-neg-margin-top-4" },
-                    { Strength.MostBelowZero, "oa-neg-margin-top-5" },
+                    { Strength.One, "oa-margin-top-1" },
+                    { Strength.Two, "oa-margin-top-2" },
+                    { Strength.Three, "oa-margin-top-3" },
+                    { Strength.Four, "oa-margin-top-4" },
+                    { Strength.Five, "oa-margin-top-5" },
+                    { Strength.MinusOne, "oa-neg-margin-top-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-top-2" },
+                    { Strength.MinusThree, "oa-neg-margin-top-3" },
+                    { Strength.MinusFour, "oa-neg-margin-top-4" },
+                    { Strength.MinusFive, "oa-neg-margin-top-5" },
                 }
             },
             {
                 Side.Right, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-margin-right-1" },
-                    { Strength.ABitMore, "oa-margin-right-2" },
-                    { Strength.Average, "oa-margin-right-3" },
-                    { Strength.ALot, "oa-margin-right-4" },
-                    { Strength.Most, "oa-margin-right-5" },
-                    { Strength.ABitBelowZero, "oa-neg-margin-right-1" },
-                    { Strength.ABitMoreBelowZero, "oa-neg-margin-right-2" },
-                    { Strength.BelowZero, "oa-neg-margin-right-3" },
-                    { Strength.ALotBelowZero, "oa-neg-margin-right-4" },
-                    { Strength.MostBelowZero, "oa-neg-margin-right-5" },
+                    { Strength.One, "oa-margin-right-1" },
+                    { Strength.Two, "oa-margin-right-2" },
+                    { Strength.Three, "oa-margin-right-3" },
+                    { Strength.Four, "oa-margin-right-4" },
+                    { Strength.Five, "oa-margin-right-5" },
+                    { Strength.MinusOne, "oa-neg-margin-right-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-right-2" },
+                    { Strength.MinusThree, "oa-neg-margin-right-3" },
+                    { Strength.MinusFour, "oa-neg-margin-right-4" },
+                    { Strength.MinusFive, "oa-neg-margin-right-5" },
                 }
             },
             {
                 Side.Bottom, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-margin-bottom-1" },
-                    { Strength.ABitMore, "oa-margin-bottom-2" },
-                    { Strength.Average, "oa-margin-bottom-3" },
-                    { Strength.ALot, "oa-margin-bottom-4" },
-                    { Strength.Most, "oa-margin-bottom-5" },
-                    { Strength.ABitBelowZero, "oa-neg-margin-bottom-1" },
-                    { Strength.ABitMoreBelowZero, "oa-neg-margin-bottom-2" },
-                    { Strength.BelowZero, "oa-neg-margin-bottom-3" },
-                    { Strength.ALotBelowZero, "oa-neg-margin-bottom-4" },
-                    { Strength.MostBelowZero, "oa-neg-margin-bottom-5" },
+                    { Strength.One, "oa-margin-bottom-1" },
+                    { Strength.Two, "oa-margin-bottom-2" },
+                    { Strength.Three, "oa-margin-bottom-3" },
+                    { Strength.Four, "oa-margin-bottom-4" },
+                    { Strength.Five, "oa-margin-bottom-5" },
+                    { Strength.MinusOne, "oa-neg-margin-bottom-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-bottom-2" },
+                    { Strength.MinusThree, "oa-neg-margin-bottom-3" },
+                    { Strength.MinusFour, "oa-neg-margin-bottom-4" },
+                    { Strength.MinusFive, "oa-neg-margin-bottom-5" },
                 }
             },
             {
                 Side.Left, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-margin-left-1" },
-                    { Strength.ABitMore, "oa-margin-left-2" },
-                    { Strength.Average, "oa-margin-left-3" },
-                    { Strength.ALot, "oa-margin-left-4" },
-                    { Strength.Most, "oa-margin-left-5" },
-                    { Strength.ABitBelowZero, "oa-neg-margin-left-1" },
-                    { Strength.ABitMoreBelowZero, "oa-neg-margin-left-2" },
-                    { Strength.BelowZero, "oa-neg-margin-left-3" },
-                    { Strength.ALotBelowZero, "oa-neg-margin-left-4" },
-                    { Strength.MostBelowZero, "oa-neg-margin-left-5" },
+                    { Strength.One, "oa-margin-left-1" },
+                    { Strength.Two, "oa-margin-left-2" },
+                    { Strength.Three, "oa-margin-left-3" },
+                    { Strength.Four, "oa-margin-left-4" },
+                    { Strength.Five, "oa-margin-left-5" },
+                    { Strength.MinusOne, "oa-neg-margin-left-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-left-2" },
+                    { Strength.MinusThree, "oa-neg-margin-left-3" },
+                    { Strength.MinusFour, "oa-neg-margin-left-4" },
+                    { Strength.MinusFive, "oa-neg-margin-left-5" },
                 }
             },
         };
@@ -209,41 +208,41 @@ namespace OptionA.Blog.Components
             {
                 Side.Top, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-padding-top-1" },
-                    { Strength.ABitMore, "oa-padding-top-2" },
-                    { Strength.Average, "oa-padding-top-3" },
-                    { Strength.ALot, "oa-padding-top-4" },
-                    { Strength.Most, "oa-padding-top-5" },
+                    { Strength.One, "oa-padding-top-1" },
+                    { Strength.Two, "oa-padding-top-2" },
+                    { Strength.Three, "oa-padding-top-3" },
+                    { Strength.Four, "oa-padding-top-4" },
+                    { Strength.Five, "oa-padding-top-5" },
                 }
             },
             {
                 Side.Right, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-padding-right-1" },
-                    { Strength.ABitMore, "oa-padding-right-2" },
-                    { Strength.Average, "oa-padding-right-3" },
-                    { Strength.ALot, "oa-padding-right-4" },
-                    { Strength.Most, "oa-padding-right-5" },
+                    { Strength.One, "oa-padding-right-1" },
+                    { Strength.Two, "oa-padding-right-2" },
+                    { Strength.Three, "oa-padding-right-3" },
+                    { Strength.Four, "oa-padding-right-4" },
+                    { Strength.Five, "oa-padding-right-5" },
                 }
             },
             {
                 Side.Bottom, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-padding-bottom-1" },
-                    { Strength.ABitMore, "oa-padding-bottom-2" },
-                    { Strength.Average, "oa-padding-bottom-3" },
-                    { Strength.ALot, "oa-padding-bottom-4" },
-                    { Strength.Most, "oa-padding-bottom-5" },
+                    { Strength.One, "oa-padding-bottom-1" },
+                    { Strength.Two, "oa-padding-bottom-2" },
+                    { Strength.Three, "oa-padding-bottom-3" },
+                    { Strength.Four, "oa-padding-bottom-4" },
+                    { Strength.Five, "oa-padding-bottom-5" },
                 }
             },
             {
                 Side.Left, new Dictionary<Strength, string>
                 {
-                    { Strength.ABit, "oa-padding-left-1" },
-                    { Strength.ABitMore, "oa-padding-left-2" },
-                    { Strength.Average, "oa-padding-left-3" },
-                    { Strength.ALot, "oa-padding-left-4" },
-                    { Strength.Most, "oa-padding-left-5" },
+                    { Strength.One, "oa-padding-left-1" },
+                    { Strength.Two, "oa-padding-left-2" },
+                    { Strength.Three, "oa-padding-left-3" },
+                    { Strength.Four, "oa-padding-left-4" },
+                    { Strength.Five, "oa-padding-left-5" },
                 }
             },
         };

@@ -181,7 +181,7 @@ namespace OptionA.Blog.Components.Core
 
             if (!Margin.Any())
             {
-                Margin = builder.Padding;
+                Margin = builder.Margin;
             }
 
             if (Border == Side.Inherit)

@@ -35,7 +35,12 @@ body {
 }
 
 .shadowed-text {
-    text-shadow: var(--oa-strength-2) var(--oa-strength-1) var(--oa-strength-1) var(--oa-subtle);
+    text-shadow: var(--oa-strength-2) var(--oa-strength-1) var(--oa-strength-2) var(--oa-text);
+}
+
+.purple-block {
+    background: var(--oa-tag-bg);
+    color: var(--oa-tag-text);
 }
 
 :root {

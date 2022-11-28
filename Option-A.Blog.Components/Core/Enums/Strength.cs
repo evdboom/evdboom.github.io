@@ -12,42 +12,42 @@
         /// <summary>
         /// Lowest strength, should result in lowest applied value
         /// </summary>
-        ABit,
+        One,
         /// <summary>
         /// Should result in more then a bit, but less then avery value
         /// </summary>
-        ABitMore,
+        Two,
         /// <summary>
         /// Should result in the average value to apply
         /// </summary>
-        Average,
+        Three,
         /// <summary>
         /// Should result in more then average but less then most value
         /// </summary>
-        ALot,
+        Four,
         /// <summary>
         /// Higest strength, should result in highest applied value
         /// </summary>
-        Most,
+        Five,
         /// <summary>
         /// Lowest negative strength (only applies to margin)
         /// </summary>
-        ABitBelowZero,
+        MinusOne,
         /// <summary>
         /// A bit more negative strength (only applies to margin)
         /// </summary>
-        ABitMoreBelowZero,
+        MinusTwo,
         /// <summary>
         /// Average negative strength (only applies to margin)
         /// </summary>
-        BelowZero,
+        MinusThree,
         /// <summary>
         /// A bit more then average negative strength (only applies to margin)
         /// </summary>
-        ALotBelowZero,
+        MinusFour,
         /// <summary>
         /// Strongest negative strength (only applies to margin)
         /// </summary>
-        MostBelowZero,
+        MinusFive,
     }
 }

@@ -107,7 +107,7 @@ namespace OptionA.Blog.Components.Block
         /// <returns></returns>
         public static Parent AddContent<Parent>(this Parent parent, object? text) where Parent : IParentBuilder
         {
-            return CreateInline(parent)
+            return CreateContent(parent)
                 .WithText($"{text}")
                 .Build();
         }
@@ -155,7 +155,7 @@ namespace OptionA.Blog.Components.Block
                 .CreateBlock()
                     .WithBorder(Side.All)
                     .AddBorderRadius(Side.All)
-                    .AddPadding(Side.All, Strength.ABitMore)
+                    .AddPadding(Side.All, Strength.Two)
                     .WithBlockType(BlockType.Block)
                     .WithStyle(Style.Italic)
                     .WithText($"\"{quote}\"")
