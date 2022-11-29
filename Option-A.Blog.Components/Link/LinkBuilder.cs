@@ -37,6 +37,20 @@ namespace OptionA.Blog.Components.Link
         }
 
         /// <summary>
+        /// Sets the href and mode
+        /// </summary>
+        /// <param name="href"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public LinkBuilder<Parent> WithHref(string href, LinkMode mode)
+        {
+            WithHref(href);
+            WithMode(mode);
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the text
         /// </summary>
         /// <param name="text"></param>

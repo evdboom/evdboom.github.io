@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blog.Components.Core.Enums;
+using OptionA.Blog.Components.Core;
+using OptionA.Blog.Components.Image;
+using OptionA.Blog.Components.Link;
 using System.Web;
 
 namespace Blog.Navigation
@@ -19,6 +23,19 @@ namespace Blog.Navigation
             return parts
                 .Select(p => p.Split('='))
                 .ToDictionary(i => i[0], i => HttpUtility.UrlDecode(i[1]));
+        }
+
+        public static Parent AddNavMenuItem<Parent>(this Parent parent, string href, string description) where Parent : IParentBuilder
+        {
+            return parent
+                .CreateLink()
+                    .WithColor(BlogColor.Inherit)
+                    .WithHref(href)
+                    .WithMode(LinkMode.Self)
+                    .WithText(description)
+                    .WithTitle(description)
+                    .AddClasses("nav-item", "fs-3", "hover")
+                    .Build();
         }
     }
 }

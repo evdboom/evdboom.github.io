@@ -17,7 +17,7 @@ namespace OptionA.Blog.Components.Image
         public ImageBuilder(Parent parent) : base(parent)
         {
             _content.Post = _result.Post;
-            _content.BlockAlignment = PositionType.Center;
+            _blockAlignment = PositionType.Center;
         }
 
         /// <summary>
@@ -26,10 +26,34 @@ namespace OptionA.Blog.Components.Image
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public ImageBuilder<Parent> WithSize(string width, string height)
+        public ImageBuilder<Parent> WithSize(object? width, object? height)
         {
-            _content.Width = width;
-            _content.Height = height;
+            _content.Width = $"{width}";
+            _content.Height = $"{height}";
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the width of the image
+        /// </summary>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        public ImageBuilder<Parent> WithWidth(object? width)
+        {
+            _content.Width = $"{width}";
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the width of the image
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public ImageBuilder<Parent> WithHeight(object? height)
+        {
+            _content.Height = $"{height}";
+
             return this;
         }
 

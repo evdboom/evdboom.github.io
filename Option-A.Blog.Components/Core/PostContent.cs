@@ -29,6 +29,8 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public IList<string> AdditionalClasses { get; } = new List<string>();
         /// <inheritdoc/>
+        public IList<string> RemovedClasses { get; } = new List<string>();
+        /// <inheritdoc/>
         public virtual IDictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
         /// <inheritdoc/>
         public abstract ComponentType Type { get; }
@@ -57,6 +59,7 @@ namespace OptionA.Blog.Components.Core
             var list = GetBaseClassesList()
                 .Concat(GetContentClassesList())
                 .Concat(AdditionalClasses)
+                .Except(RemovedClasses)
                 .Distinct()
                 .ToList();
             return string.Join(' ', list);

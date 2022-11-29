@@ -1,8 +1,5 @@
-﻿using OptionA.Blog.Components.Code;
-using OptionA.Blog.Components.Core;
+﻿using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace OptionA.Blog.Components.Image
 {
@@ -10,7 +7,7 @@ namespace OptionA.Blog.Components.Image
     /// Content for the <see cref="Image.Image"/> component
     /// </summary>
     public class ImageContent : PostContent
-    {        
+    {
         /// <summary>
         /// Source of the image
         /// </summary>
@@ -32,7 +29,7 @@ namespace OptionA.Blog.Components.Image
         {
             get
             {
-                var attributes = base.Attributes;                
+                var attributes = base.Attributes;
                 if (!attributes.ContainsKey("title"))
                 {
                     attributes["title"] = GetSource();
@@ -45,12 +42,12 @@ namespace OptionA.Blog.Components.Image
                 {
                     attributes["width"] = Width;
                 }
-                if (!string.IsNullOrEmpty(Height)) 
+                if (!string.IsNullOrEmpty(Height))
                 {
                     attributes["height"] = Height;
                 }
 
-                attributes["src"] = GetSource();                
+                attributes["src"] = GetSource();
 
                 return attributes;
             }

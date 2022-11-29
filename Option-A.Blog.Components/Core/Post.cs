@@ -59,7 +59,7 @@
         public string TitleId => _titleId ?? string.Empty;
         
         /// <inheritdoc/>
-        public string SearchString => $"{_title} {Subtitle} {string.Join(' ', Tags)}";
+        public string SearchString => $"{_title} {Subtitle} {string.Join(' ', Tags)}".ToLowerInvariant();
 
         /// <summary>
         /// Method where Post content can be set for actual post classes

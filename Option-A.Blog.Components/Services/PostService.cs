@@ -160,5 +160,20 @@ namespace OptionA.Blog.Components.Services
 
             return Enumerable.Empty<IPost>();
         }
+
+        /// <inheritdoc/>
+        public IEnumerable<IPost> SearchPosts(string term)
+        {
+            foreach (var post in EnumeratePosts())
+            {
+                var parts = term
+                    .ToLowerInvariant()
+                    .Split(" ");
+                if (parts.All(p => post.SearchString.Contains(p)))
+                {
+                    yield return post;
+                }
+            }
+        }
     }
 }

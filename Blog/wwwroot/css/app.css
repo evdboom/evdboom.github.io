@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
+.pointer {
+    cursor: pointer;
+}
+
 .hover {
     transition: opacity 200ms;
 }
@@ -34,12 +38,39 @@ body {
     border-radius: var(--oa-radius);
 }
 
+.no-outline {
+    outline: none;
+}
+
 .shadowed-text {
     text-shadow: var(--oa-strength-2) var(--oa-strength-1) var(--oa-strength-2) var(--oa-text);
 }
 
 .purple-block {
     background: var(--oa-tag-bg);
+    color: var(--oa-tag-text);
+}
+
+.nav-item {
+    color: var(--oa-tag-text);
+    margin-left: var(--oa-strength-3);
+    user-select: none;
+    text-decoration: none;
+}
+
+.nav-item:link {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:visited {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:hover {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:active {
     color: var(--oa-tag-text);
 }
 
