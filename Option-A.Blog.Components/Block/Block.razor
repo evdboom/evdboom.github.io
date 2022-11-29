@@ -1,4 +1,4 @@
-﻿@using OptionA.Blog.Components.Core.Enums;
+﻿@using OptionA.Blog.Components.Core.Enums
 @if (Content is not null)
 {
     @switch (Content.BlockType)
@@ -6,20 +6,36 @@
         case BlockType.Block:
             <div class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
                 <BlockContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }
             </div>
             break;
         case BlockType.Inline:
             <span class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
                 <BlockContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }
             </span>
             break;
         case BlockType.Paragraph:
             <p class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
                 <BlockContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }
             </p>
             break;
         case BlockType.Content:
             <BlockContents Content="Content" />
+            @if (ChildContent is not null)
+            {
+                @ChildContent
+            }
             break;
     }
 }

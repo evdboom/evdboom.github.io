@@ -163,16 +163,16 @@
         };
 
         /// <inheritdoc/>
-        public IEnumerable<(string Part, CodePart Type, bool Selected)> GetParts(string text)
+        public IEnumerable<(string Part, CodePart Type, bool Selected)> GetParts(string code)
         {
             var current = string.Empty;
             var selected = false;
             var incomplete = WordType.Unknown;
             var endedInside = false;
-            while (!string.IsNullOrEmpty(text))
+            while (!string.IsNullOrEmpty(code))
             {
-                var word = FindNextWord(text, incomplete, out WordType wordType);
-                text = RemoveFromStart(text, word);
+                var word = FindNextWord(code, incomplete, out WordType wordType);
+                code = RemoveFromStart(code, word);
 
                 if (word == _selectionMarker)
                 {
@@ -241,7 +241,7 @@
                             }
                             yield return (word, CodePart.ControlKeyword, selected);
                         }
-                        else if (IsMethodStart(current, text.FirstOrDefault()))
+                        else if (IsMethodStart(current, code.FirstOrDefault()))
                         {
                             if (!string.IsNullOrEmpty(current))
                             {
@@ -316,22 +316,22 @@
 
         }
 
-        private string FindNextWord(string text, WordType incomplete, out WordType wordType)
+        private string FindNextWord(string code, WordType incomplete, out WordType wordType)
         {
 
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(code))
             {
                 wordType = WordType.Unknown;
                 return string.Empty;
             }
 
             var word = string.Empty;
-            var starter = _starters.FirstOrDefault(s => text.StartsWith(s.Key));
+            var starter = _starters.FirstOrDefault(s => code.StartsWith(s.Key));
             wordType = starter.Value;
 
             if (wordType == WordType.Marker)
             {
-                if (text.StartsWith(_selectionMarker))
+                if (code.StartsWith(_selectionMarker))
                 {
                     return _selectionMarker;
                 }
@@ -344,23 +344,23 @@
 
             if (wordType == WordType.Comment)
             {
-                word = FindTillValue(text, 0, Environment.NewLine);
+                word = FindTillValue(code, 0, Environment.NewLine);
             }
             else if (wordType != WordType.Unknown)
             {
-                word = FindTillValue(text, starter.Key?.Length ?? 0, "\"");
+                word = FindTillValue(code, starter.Key?.Length ?? 0, "\"");
             }
             else
             {
-                var firstChar = text[0];
+                var firstChar = code[0];
                 var special = _specials.Contains(firstChar);
                 word += firstChar;
 
                 var found = false;
                 var counter = 1;
-                while (!found && counter < text.Length)
+                while (!found && counter < code.Length)
                 {
-                    var c = text[counter];
+                    var c = code[counter];
                     var isSpecial = _specials.Contains(c);
                     if ((special && !isSpecial) || (!special && isSpecial))
                     {

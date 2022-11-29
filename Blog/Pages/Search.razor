@@ -1,0 +1,13 @@
+﻿@using OptionA.Blog.Components.Line
+@page "/search"
+@if (_content is not null)
+{
+    <Header Content="_content">
+        @_term
+    </Header>
+}
+<Line Content="new LineContent()" />
+@if (!string.IsNullOrEmpty(_term))
+{    
+    <PostList Content="PostService.SearchPosts(_term)" />
+}

@@ -13,6 +13,11 @@ namespace OptionA.Blog.Components.Header
         /// </summary>
         [Parameter]
         public HeaderContent? Content { get; set; }
+        /// <summary>
+        /// Childcontent to be placed after content
+        /// </summary>
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
         private async Task Click(MouseEventArgs args)
         {

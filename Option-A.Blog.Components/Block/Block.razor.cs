@@ -13,6 +13,11 @@ namespace OptionA.Blog.Components.Block
         /// </summary>
         [Parameter]
         public BlockContent? Content { get; set; }
+        /// <summary>
+        /// Optional child content to render after the content
+        /// </summary>
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
         private async Task Click(MouseEventArgs args)
         {

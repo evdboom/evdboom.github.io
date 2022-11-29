@@ -21,6 +21,10 @@ namespace OptionA.Blog.Components.Core
         /// </summary>
         IList<string> AdditionalClasses { get; }
         /// <summary>
+        /// List of classes to remove from the components
+        /// </summary>
+        IList<string> RemovedClasses { get; }
+        /// <summary>
         /// Attributes to be added to the components
         /// </summary>
         IDictionary<string, object?> Attributes { get; }

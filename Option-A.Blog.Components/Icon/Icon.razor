@@ -1,4 +1,18 @@
 ﻿@if (Content is not null)
 {
-    <i class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click></i>
+    @switch (Content.Mode)
+    {
+        case IconMode.IconClass:
+            <i class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click></i>
+            break;
+        case IconMode.Path:        
+            <svg class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                @foreach(var path in Content.Paths)
+                {
+                    <path d="@path" />
+                }
+            </svg>
+            break;
+
+    }
 }

@@ -21,7 +21,8 @@ namespace OptionA.Blog.Components.Code
         {
             _parsers = new Dictionary<CodeLanguage, IParser>()
             {
-                { CodeLanguage.CSharp, new CSharpParser() }
+                { CodeLanguage.CSharp, new CSharpParser() },
+                { CodeLanguage.Html, new HtmlParser() }
             };
 
             _style = Style.Inherit;

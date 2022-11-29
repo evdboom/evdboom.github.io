@@ -15,8 +15,11 @@
 }
 
 .oa-code-comment {
-    color: var(--oa-code-comment);
-    
+    color: var(--oa-code-comment);    
+}
+
+.oa-code-attribute {
+    color: var(--oa-code-attribute);
 }
 
 .oa-code-block {

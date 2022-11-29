@@ -98,7 +98,7 @@ namespace OptionA.Blog.Components.Core
         }
 
         /// <summary>
-        /// Method to add a specific class to the Content of this builder.
+        /// Method to remove a specific class from the Content of this builder.
         /// </summary>
         /// <param name="className"></param>
         /// <returns></returns>
@@ -118,9 +118,9 @@ namespace OptionA.Blog.Components.Core
         /// <returns></returns>
         public Builder RemoveClass(string className)
         {
-            if (!string.IsNullOrEmpty(className) && _content.AdditionalClasses.Contains(className))
+            if (!string.IsNullOrEmpty(className) && !_content.RemovedClasses.Contains(className))
             {
-                _content.AdditionalClasses.Remove(className);
+                _content.RemovedClasses.Add(className);
             }
             return This();
         }

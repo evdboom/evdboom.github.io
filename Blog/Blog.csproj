@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorWasmPreRendering.Build" Version="2.0.0-preview.4" />
-    <PackageReference Include="Delegate.SassBuilder" Version="1.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
     <PackageReference Include="PublishSPAforGitHubPages.Build" Version="2.0.2" />
@@ -17,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\2022110300\" />
   </ItemGroup>
 
   <ItemGroup>
