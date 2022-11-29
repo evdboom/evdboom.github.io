@@ -34,7 +34,7 @@ namespace Blog.Navigation
                             .WithBlockAlignment(PositionType.FloatRight)
                             .CreateImage()
                                 .WithSource("GitHub-Mark-Light-120px-plus.png", ImageMode.Local)
-                                .WithSize("32", "32")
+                            .WithHeight(32)
                                 .Build()
                             .CreateImage()
                                 .WithSource("LI-In-Bug-white.png", ImageMode.Local)
