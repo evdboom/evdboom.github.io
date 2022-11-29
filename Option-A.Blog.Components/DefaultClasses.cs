@@ -79,7 +79,8 @@ namespace OptionA.Blog.Components
             { CodePart.ControlKeyword, "oa-code-controlkeyword" },
             { CodePart.Method, "oa-code-method" },
             { CodePart.String, "oa-code-string" },
-            { CodePart.Comment, "oa-code-comment" }
+            { CodePart.Comment, "oa-code-comment" },
+            { CodePart.Attribute, "oa-code-attribute" }
         };
 
         /// <summary>

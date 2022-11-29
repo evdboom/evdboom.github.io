@@ -29,5 +29,14 @@
         /// Piece of comment in code
         /// </summary>
         Comment,
+        /// <summary>
+        /// Attribute of an element
+        /// </summary>
+        Attribute,
+        /// <summary>
+        /// Blazor component
+        /// </summary>
+        Component,
+        
     }
 }

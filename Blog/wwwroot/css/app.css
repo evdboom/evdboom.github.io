@@ -80,6 +80,8 @@ body {
     --oa-code-string: #ce9178;
     --oa-code-method: #dcdcaa;
     --oa-code-comment: #63b456;
+    --oa-code-attribute: #a699e6;
+    --oa-code-component: #0096aa;
     --oa-code-background: #2f2f2f;
     --oa-code-headerbackground: #3f3f3f;
     --oa-code-header-left: calc(var(--oa-strength-2) * -1);

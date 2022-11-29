@@ -22,12 +22,9 @@ namespace Blog.Posts
                     .Build()
                 .CreateParagraph()
                     .AddContent("Therefore I decided to build my own blog rendering engine to built this. And while there is still a lot to improve, I'm proud of the result so far. The results and current version can be seen on ").AddLink("GitHub", "https://github.com/evdboom/evdboom.github.io/tree/main/Option-A.Blog.Components").AddContent(".")
-                    .Build();                
+                    .Build()
+                ;
         }
     }
 }
 
-
-/*
- * $"My name is Erik van der Boom, currently {GetAge()} years old and living in the Netherlands together with my wife and three daughters. I am employed as a .Net developer/consultant (with various prefixes: lead, senior, etc..) at the (very nice!) Dutch company ").AddLink("Cavero", "https://www.cavero.nl").AddContent("  I am also a certified trainer and Azure developer.")
- */
