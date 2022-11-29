@@ -147,6 +147,8 @@ namespace OptionA.Blog.Components.Code.Parsers
                 var word = FindNextWord(code, out WordType wordType);
                 code = RemoveFromStart(code, word);
             }
+
+            throw new NotImplementedException();
         }
 
         private string FindNextWord(string code, out WordType wordType)
@@ -158,7 +160,7 @@ namespace OptionA.Blog.Components.Code.Parsers
             }
 
             var word = string.Empty;
-
+            throw new NotImplementedException();
         }
 
         private static string RemoveFromStart(string text, string toRemove)
