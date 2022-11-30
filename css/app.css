@@ -1,0 +1,115 @@
+﻿@import url('icons/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+.pointer {
+    cursor: pointer;
+}
+
+.hover {
+    transition: opacity 200ms;
+}
+
+.hover:hover {
+    opacity: 0.5;
+}
+
+body {
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
+}
+
+.shadowed-box {
+    box-shadow: 0 var(--oa-strength-2) var(--oa-strength-3) rgba(0,0,0,.3);
+}
+
+.padded {
+    padding: var(--oa-strength-3);
+}
+
+.lightly-padded {
+    padding: var(--oa-strength-2);
+}
+
+.bordered {
+    border: var(--oa-border);
+}
+
+.roundedborder {
+    border-radius: var(--oa-radius);
+}
+
+.no-outline {
+    outline: none;
+}
+
+.shadowed-text {
+    text-shadow: var(--oa-strength-2) var(--oa-strength-1) var(--oa-strength-2) var(--oa-text);
+}
+
+.purple-block {
+    background: var(--oa-tag-bg);
+    color: var(--oa-tag-text);
+}
+
+.nav-item {
+    color: var(--oa-tag-text);
+    margin-left: var(--oa-strength-3);
+    user-select: none;
+    text-decoration: none;
+}
+
+.nav-item:link {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:visited {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:hover {
+    color: var(--oa-tag-text);
+}
+
+.nav-item:active {
+    color: var(--oa-tag-text);
+}
+
+:root {
+    --oa-code-keyword: #569cd6;
+    --oa-code-controlkeyword: #d8a0df;
+    --oa-code-string: #ce9178;
+    --oa-code-method: #dcdcaa;
+    --oa-code-comment: #63b456;
+    --oa-code-attribute: #9cdcfe;
+    --oa-code-tagdelimiter: #808080;
+    --oa-code-directive: #a699e6;
+    --oa-code-component: #0096aa;
+    --oa-code-background: #2f2f2f;
+    --oa-code-headerbackground: #3f3f3f;
+    --oa-code-header-left: calc(var(--oa-strength-2) * -1);
+    --oa-code-color: #dcdcdc;
+    --oa-code-selected: rgba(51, 153, 255, .5);
+    --oa-strength-1: .25rem;
+    --oa-strength-2: .5rem;
+    --oa-strength-3: 1rem;
+    --oa-strength-4: 2rem;
+    --oa-strength-5: 3rem;
+    --oa-radius: .4rem;
+    --oa-link: cornflowerblue;
+    --oa-link-link: cornflowerblue;
+    --oa-link-visited: cornflowerblue;
+    --oa-link-hover: darkblue;
+    --oa-link-active: darkblue;
+    --oa-header: darkmagenta;
+    --oa-text: black;
+    --oa-quote: darkslategrey;
+    --oa-subtle: dimgray;
+    --oa-border: 1px solid lightgray;
+    --oa-containerheader-bg: darkmagenta;
+    --oa-containerheader-text: whitesmoke;
+    --oa-tag-bg: darkmagenta;
+    --oa-tag-text: whitesmoke;
+    --oa-fontweight-bold: 700;
+    --oa-fontweight-thin: 300;
+    --oa-compactmode-maxheight: 20vh;
+}
