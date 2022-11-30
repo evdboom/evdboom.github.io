@@ -37,6 +37,18 @@
         /// Blazor component
         /// </summary>
         Component,
-        
+        /// <summary>
+        /// Part of a tag, for instance the &lt; or &gt; characters
+        /// </summary>
+        TagDelimiter,
+        /// <summary>
+        /// Directive, for instance for blazor
+        /// </summary>
+        Directive,
+        /// <summary>
+        /// Language special, could be rendered as text but for escaping
+        /// </summary>
+        Special
+
     }
 }

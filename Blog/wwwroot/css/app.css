@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
 }
 
 .shadowed-box {
@@ -80,7 +80,9 @@ body {
     --oa-code-string: #ce9178;
     --oa-code-method: #dcdcaa;
     --oa-code-comment: #63b456;
-    --oa-code-attribute: #a699e6;
+    --oa-code-attribute: #9cdcfe;
+    --oa-code-tagdelimiter: #808080;
+    --oa-code-directive: #a699e6;
     --oa-code-component: #0096aa;
     --oa-code-background: #2f2f2f;
     --oa-code-headerbackground: #3f3f3f;

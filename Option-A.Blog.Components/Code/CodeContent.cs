@@ -64,9 +64,9 @@ namespace OptionA.Blog.Components.Code
                     .Build();
             }
 
-            foreach (var (part, type, selected) in Parser.GetParts(Code))
+            foreach (var (part, type, marker) in Parser.GetParts(Code))
             {
-                if (!selected && type == CodePart.Text)
+                if (marker == MarkerType.None && type == CodePart.Text)
                 {                   
                     builder
                         .AddContent(part);                    
@@ -78,7 +78,7 @@ namespace OptionA.Blog.Components.Code
                         .CreateInline()
                         .WithText(part)
                         .AddClass(type.GetPartClass());
-                    if (selected)
+                    if (marker.HasFlag(MarkerType.Selection))
                     {
                         content
                             .AddClass(DefaultClasses.SelectedCode);
