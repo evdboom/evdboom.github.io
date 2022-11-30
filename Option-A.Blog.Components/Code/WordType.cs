@@ -23,16 +23,16 @@
         /// </summary>
         Raw = 4,
         /// <summary>
-        /// Special marker for setting parser properties
-        /// </summary>
-        Marker = 8,
-        /// <summary>
         /// Start of a comment
         /// </summary>
-        Comment = 16,
+        Comment = 8,
         /// <summary>
         /// Set this flag if a comment or string is incomplete due to a marker.
         /// </summary>
-        Incomplete = 32
+        Incomplete = 16,
+        /// <summary>
+        /// The word is a marker
+        /// </summary>
+        Marker = 32
     }
 }

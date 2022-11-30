@@ -80,7 +80,10 @@ namespace OptionA.Blog.Components
             { CodePart.Method, "oa-code-method" },
             { CodePart.String, "oa-code-string" },
             { CodePart.Comment, "oa-code-comment" },
-            { CodePart.Attribute, "oa-code-attribute" }
+            { CodePart.Attribute, "oa-code-attribute" },
+            { CodePart.Component, "oa-code-component" },
+            { CodePart.Directive, "oa-code-directive" },
+            { CodePart.TagDelimiter, "oa-code-tagdelimiter" }
         };
 
         /// <summary>

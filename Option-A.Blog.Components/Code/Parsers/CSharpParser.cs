@@ -3,9 +3,19 @@
     /// <summary>
     /// Parser for parsing c# code to a more readable format.
     /// </summary>
-    public class CSharpParser : IParser
+    public class CSharpParser : ParserBase
     {
-        private readonly List<string> _controlKeyWords = new()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CSharpParser() : base()
+        {
+            _partCheckers.Add((code, word, current) => IsKeyword(word));
+            _partCheckers.Add((code, word, current) => IsControlKeyword(word));
+            _partCheckers.Add((code, word, current) => IsMethodStart(current, code));
+        }
+
+        private readonly List<string> _controlKeywords = new()
         {
             "break",
             "case",
@@ -131,9 +141,9 @@
             "where",
             "with",
         };
-        private readonly char[] _specials = new[]
+        /// <inheritdoc/>
+        protected override char[] Specials => new[]
         {
-            ' ',
             '(',
             '<',
             '.',
@@ -149,251 +159,41 @@
             '|',
         };
 
-        private readonly string _selectionMarker = "*M*";
-
-        private readonly Dictionary<string, WordType> _starters = new()
+        /// <inheritdoc/>
+        protected override Dictionary<string, WordTypeModel> StringStarters => new()
         {
-            { "\"", WordType.String },
-            { "@\"", WordType.String },
-            { "$\"", WordType.Interpolated },
-            { "$@\"", WordType.Interpolated },
-            { "@$\"", WordType.Interpolated },
-            { "*", WordType.Marker },
-            { "//", WordType.Comment }
+            { "\"", new(WordType.String, "\"", 1, "\"") },
+            { "@\"", new(WordType.String, "@\"", 2, "\"")  },
+            { "$\"", new(WordType.Interpolated, "$\"", 2, "\"") },
+            { "$@\"", new(WordType.Interpolated, "$@\"", 3, "\"") },
+            { "@$\"", new(WordType.Interpolated, "@$\"", 3, "\"") },
+            { "//", new(WordType.Comment, "//", 0, Environment.NewLine) },
+            { "///", new(WordType.Comment, "///", 0, Environment.NewLine) },
         };
 
-        /// <inheritdoc/>
-        public IEnumerable<(string Part, CodePart Type, bool Selected)> GetParts(string code)
+        private static CodePart IsMethodStart(string current, string code)
         {
-            var current = string.Empty;
-            var selected = false;
-            var incomplete = WordType.Unknown;
-            var endedInside = false;
-            while (!string.IsNullOrEmpty(code))
-            {
-                var word = FindNextWord(code, incomplete, out WordType wordType);
-                code = RemoveFromStart(code, word);
-
-                if (word == _selectionMarker)
-                {
-                    if (!string.IsNullOrEmpty(current))
-                    {
-                        yield return (current, CodePart.Text, selected);
-                        current = string.Empty;
-                    }
-                    selected = !selected;
-                    continue;
-                }
-
-                var isIncomplete = wordType.HasFlag(WordType.Incomplete);
-                wordType &= ~WordType.Incomplete;
-
-                incomplete = isIncomplete
-                    ? wordType
-                    : WordType.Unknown;
-
-                switch (wordType)
-                {
-                    case WordType.String:
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text, selected);
-                            current = string.Empty;
-                        }
-                        yield return (word, CodePart.String, selected);
-                        break;
-                    case WordType.Interpolated:
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text, selected);
-                            current = string.Empty;
-                        }                        
-                        foreach (var (part, type, inside) in ParseInterpolatedString(word, endedInside))
-                        {
-                            endedInside = inside;
-                            yield return (part, type, selected);
-                        }
-                        break;
-                    case WordType.Comment:
-                        if (!string.IsNullOrEmpty(current))
-                        {
-                            yield return (current, CodePart.Text, selected);
-                            current = string.Empty;
-                        }
-                        yield return (word, CodePart.Comment, selected);
-                        break;
-                    case WordType.Unknown:
-                        if (_keyWords.Contains(word))
-                        {
-                            if (!string.IsNullOrEmpty(current))
-                            {
-                                yield return (current, CodePart.Text, selected);
-                                current = string.Empty;
-                            }
-                            yield return (word, CodePart.Keyword, selected);
-                        }
-                        else if (_controlKeyWords.Contains(word))
-                        {
-                            if (!string.IsNullOrEmpty(current))
-                            {
-                                yield return (current, CodePart.Text, selected);
-                                current = string.Empty;
-                            }
-                            yield return (word, CodePart.ControlKeyword, selected);
-                        }
-                        else if (IsMethodStart(current, code.FirstOrDefault()))
-                        {
-                            if (!string.IsNullOrEmpty(current))
-                            {
-                                yield return (current, CodePart.Text, selected);
-                                current = string.Empty;
-                            }
-                            yield return (word, CodePart.Method, selected);
-                        }
-                        else
-                        {
-                            current += word;
-                        }
-                        break;
-                }
-            }
-            if (!string.IsNullOrEmpty(current))
-            {
-                yield return (current, CodePart.Text, selected);
-            }
-        }
-
-        private static bool IsMethodStart(string current, char nextChar)
-        {
+            var nextChar = code.FirstOrDefault();
             return nextChar == '(' &&
                 (string.IsNullOrEmpty(current)
                 || current.EndsWith(' ')
-                || current.EndsWith('.'));
+                || current.EndsWith('.'))
+                ? CodePart.Method
+                : CodePart.Text;
         }
 
-        private IEnumerable<(string Part, CodePart Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside)
+        private CodePart IsKeyword(string word)
         {
-            var interpolated = word.Split('{', '}');
-            var inside = beginInside;
-            for (int i = 0; i < interpolated.Length; i++)
-            {
-                var part = interpolated[i];
-                var last = i == interpolated.Length - 1;
-
-                if (inside)
-                {
-                    var start = beginInside
-                        ? string.Empty
-                        : "{";
-                    var end = last
-                        ? string.Empty
-                        : "}";
-
-                    var insidePart = $"{start}{part}{end}";
-                    beginInside = false;
-
-                    foreach (var p in GetParts(insidePart))
-                    {
-                        yield return (p.Part, p.Type, last);
-                    }
-                }
-                else
-                {
-                    yield return (part, CodePart.String, false);
-                }
-                inside = !inside;
-            }
+            return _keyWords.Contains(word)
+                ? CodePart.Keyword
+                : CodePart.Text;
         }
 
-        private static string RemoveFromStart(string text, string toRemove)
+        private CodePart IsControlKeyword(string word)
         {
-            if (!text.StartsWith(toRemove))
-            {
-                throw new ArgumentException($"{toRemove} is not the start of {text})");
-            }
-
-            return text.Substring(toRemove.Length);
-
-        }
-
-        private string FindNextWord(string code, WordType incomplete, out WordType wordType)
-        {
-
-            if (string.IsNullOrEmpty(code))
-            {
-                wordType = WordType.Unknown;
-                return string.Empty;
-            }
-
-            var word = string.Empty;
-            var starter = _starters.FirstOrDefault(s => code.StartsWith(s.Key));
-            wordType = starter.Value;
-
-            if (wordType == WordType.Marker)
-            {
-                if (code.StartsWith(_selectionMarker))
-                {
-                    return _selectionMarker;
-                }
-            }
-            else if (incomplete != WordType.Unknown)
-            {
-                wordType = incomplete;
-            }
-
-
-            if (wordType == WordType.Comment)
-            {
-                word = FindTillValue(code, 0, Environment.NewLine);
-            }
-            else if (wordType != WordType.Unknown)
-            {
-                word = FindTillValue(code, starter.Key?.Length ?? 0, "\"");
-            }
-            else
-            {
-                var firstChar = code[0];
-                var special = _specials.Contains(firstChar);
-                word += firstChar;
-
-                var found = false;
-                var counter = 1;
-                while (!found && counter < code.Length)
-                {
-                    var c = code[counter];
-                    var isSpecial = _specials.Contains(c);
-                    if ((special && !isSpecial) || (!special && isSpecial))
-                    {
-                        found = true;
-                    }
-                    else
-                    {
-                        word += c;
-                    }
-                    counter++;
-                }
-            }
-
-            if (word.Contains(_selectionMarker))
-            {
-                wordType |= WordType.Incomplete;
-            }
-
-            return word
-                .Split(_selectionMarker)
-                .FirstOrDefault() ?? string.Empty;
-        }
-
-        private static string FindTillValue(string text, int start, string searchValue)
-        {
-            var next = text.IndexOf(searchValue, start);
-            if (next < 0)
-            {
-                return text;
-            }
-            var untill = next + searchValue.Length;
-            var result = text[..untill];
-            return result;
-        }
+            return _controlKeywords.Contains(word)
+                ? CodePart.ControlKeyword
+                : CodePart.Text;
+        }        
     }
 }

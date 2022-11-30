@@ -7,6 +7,10 @@
             {
                 <ListItem Content="(ListItemContent)child"/>            
             }
+            @if (ChildContent is not null)
+            {
+                @ChildContent
+            }
         </ol>
     }
     else
@@ -15,6 +19,10 @@
             @foreach (var child in Content.ChildContent)
             {
                 <ListItem Content="(ListItemContent)child" />
+            }
+            @if (ChildContent is not null)
+            {
+                @ChildContent
             }
         </ul>   
     }    

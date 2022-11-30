@@ -13,6 +13,11 @@ namespace OptionA.Blog.Components.List
         /// </summary>
         [Parameter]
         public ListContent? Content { get; set; }
+        /// <summary>
+        /// Child items to be added after the rendered part
+        /// </summary>
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
         private async Task Click(MouseEventArgs args)
         {

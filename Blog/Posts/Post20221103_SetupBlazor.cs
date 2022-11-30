@@ -57,13 +57,26 @@ namespace Blog.Posts
                         string";
                     }
                     """)
-                .AddCode(CodeLanguage.CSharp, """
-                    var x = 4; // This is a very long comment to see if th aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa scroll part actually works, or if I have to include more in the class to make sure this will scroll for me :D.
-                    // method after command();
-                    public void Test(string x) // Does some work
-                    {
-                        //Do work
-                    }
+                .AddCode(CodeLanguage.Html, """
+                    @using Blog.Navigation
+                    @inherits LayoutComponentBase
+
+                    <div class="page">
+                        <NavMenu />
+                        <main> <!-- Some comments here -->
+                            <article class="content px-4">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        @Body
+                       <!--   dont want this part          </div>
+                                    <div class="col-lg-4">
+                                        <TagContainer />
+                                        <ArchiveContainer />                    
+                                   --> </div> 
+                                </div>            
+                            </article>
+                        </main>
+                    </div>
                     """)
                 .CreateTable()
                     .WithColumns("First", "Second", string.Empty)
