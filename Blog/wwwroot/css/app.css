@@ -2,6 +2,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
+div[id="app"] {
+    display: flex;
+    flex-flow: column;
+    gap: var(--oa-strength-3);
+}
+
+.main-container {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 0 0 100%;
+}
+
+main {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 2.5;
+}
+
+aside {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 2;
+}
+
+
 .pointer {
     cursor: pointer;
 }
@@ -16,6 +41,7 @@
 
 body {
     font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
+    margin: 0;
 }
 
 .shadowed-box {

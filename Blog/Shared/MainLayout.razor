@@ -1,19 +1,15 @@
 ﻿@using Blog.Navigation
 @inherits LayoutComponentBase
 
-<div class="page">
+<header>
     <NavMenu />
+</header>
+<div class="main-container">
     <main>
-        <article class="content px-4">
-            <div class="row">
-                <div class="col-lg-9">
-                    @Body
-                </div>
-                <div class="col-lg-3">
-                    <TagContainer />
-                    <ArchiveContainer />                    
-                </div>
-            </div>            
-        </article>
+        @Body
     </main>
+    <aside>
+        <TagContainer />
+        <ArchiveContainer />
+    </aside>
 </div>
