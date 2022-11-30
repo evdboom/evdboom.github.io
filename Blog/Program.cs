@@ -23,8 +23,6 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
     DefaultClasses.Tag.AddRange(
         "hover", 
         "oa-style-none",
-        "oa-margin-bottom-2",
-        "oa-margin-right-2",
         "oa-padding-top-1",
         "oa-padding-bottom-1",
         "oa-padding-left-2",
@@ -33,29 +31,25 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
         "shadowed-box", 
         "padded", 
         "bordered", 
-        "roundedborder", 
-        "oa-margin-bottom-3");
+        "roundedborder");
     DefaultClasses.CompactMode.AddRange(
         "hover", 
         "shadowed-box", 
         "oa-style-none", 
         "bordered", 
-        "roundedborder", 
-        "oa-margin-bottom-3",
+        "roundedborder",
         "padded");
     DefaultClasses.TagContainer.AddRange(
         "shadowed-box", 
         "padded", 
         "bordered", 
-        "roundedborder", 
-        "oa-margin-bottom-3");
+        "roundedborder");
     DefaultClasses.ContainerHeader.AddRange(
         "oa-neg-margin-top-3", 
         "oa-neg-margin-left-3", 
         "oa-borderradius-topleft", 
         "oa-borderradius-bottomright", 
-        "bordered", 
-        "oa-margin-bottom-3",
+        "bordered",
         "oa-padding-top-2",
         "oa-padding-bottom-2",
         "oa-padding-left-3",

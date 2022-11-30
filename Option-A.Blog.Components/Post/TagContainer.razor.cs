@@ -39,7 +39,10 @@ namespace OptionA.Blog.Components.Post
                             .AddClasses(DefaultClasses.ContainerHeader)
                             .WithText("Most common tags")
                             .Build()
-                        .AddTags(tags)
+                        .CreateBlock()
+                            .AddClass("oa-tag-container")
+                            .AddTags(tags)
+                            .Build()
                         .Build()
                     .BuildOne<BlockContent>();
         }

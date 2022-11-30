@@ -35,12 +35,6 @@
     color: var(--oa-code-tagdelimiter);
 }
 
-.oa-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: var(--oa-strength-3);
-}
-
 .oa-code-block {
     background-color: var(--oa-code-background);
     color: var(--oa-code-color);
@@ -102,8 +96,18 @@
     width: fit-content;
 }
 
+.oa-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    gap: var(--oa-strength-3);
+}
+
 .oa-tag-container {
-    overflow-wrap: anywhere;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: var(--oa-strength-2);
 }
 
 .oa-tag-item {

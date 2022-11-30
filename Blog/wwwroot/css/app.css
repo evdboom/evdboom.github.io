@@ -12,6 +12,7 @@ div[id="app"] {
     display: flex;
     flex-flow: row wrap;
     flex: 0 0 100%;
+    gap: var(--oa-strength-3);
 }
 
 main {
@@ -24,6 +25,7 @@ aside {
     display: flex;
     flex-flow: column nowrap;
     flex: 1 2;
+    gap: var(--oa-strength-3);
 }
 
 

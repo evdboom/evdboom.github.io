@@ -44,7 +44,7 @@ namespace OptionA.Blog.Components
         /// </summary>
         public static IList<string> TagContainer { get; set; } = new List<string>
         {
-            "oa-tag-container",
+            "oa-container",
         };
 
         /// <summary>

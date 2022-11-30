@@ -24,7 +24,6 @@ namespace Blog.Navigation
                 .CreateBlock()
                     .AddPadding(Side.X | Side.Bottom, Strength.Three)
                     .AddPadding(Side.Top, Strength.Two)
-                    .AddMargin(Side.Bottom, Strength.Three)
                     .CreateInline()
                         .AddClasses("fs-1", "shadowed-text")
                         .CreateLink()
