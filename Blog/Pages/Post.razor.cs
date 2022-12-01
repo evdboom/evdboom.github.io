@@ -36,6 +36,7 @@ namespace Blog.Pages
             else
             {
                 _currentPost = post;
+                PostService.SelectPost(post);
                 StateHasChanged();
             }
         }

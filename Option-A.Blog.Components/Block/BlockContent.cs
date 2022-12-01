@@ -28,10 +28,7 @@ namespace OptionA.Blog.Components.Block
         public override void SetProperties(IBuilder builder)
         {
             base.SetProperties(builder);
-            if (BlockType == BlockType.Inherit)
-            {
-                BlockType = builder.BlockType;
-            }
+            BlockType = builder.BlockType;            
         }
     }
 }

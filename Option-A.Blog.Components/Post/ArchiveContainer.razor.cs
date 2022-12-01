@@ -26,13 +26,9 @@ namespace OptionA.Blog.Components.Post
             var months = PostService.GetMonthsWithPosts();
 
             var listBuilder = ComponentBuilder
-                .CreateBuilder(null)
+                .CreateBuilder()
                     .CreateBlock()
                         .AddClasses(DefaultClasses.ArchiveContainer)
-                        .CreateBlock()
-                            .AddClasses(DefaultClasses.ContainerHeader)
-                            .WithText("Archive")
-                            .Build()
                         .CreateList()
                             .WithListStyle(ListStyle.DisclosureClosed);
             

@@ -16,6 +16,9 @@ namespace OptionA.Blog.Components.Services
 
         private const string PostNamespace = "Blog.Posts";
 
+        /// <inheritdoc/>
+        public event EventHandler<IPost?>? PostSelected;
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -45,6 +48,12 @@ namespace OptionA.Blog.Components.Services
             {
                 AddPost(post);
             }
+        }
+
+        /// <inheritdoc/>
+        public void SelectPost(IPost? post)
+        {
+            PostSelected?.Invoke(this, post);
         }
 
         private void AddPost(IPost? post)

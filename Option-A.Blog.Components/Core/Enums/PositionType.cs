@@ -6,7 +6,7 @@
     public enum PositionType
     {
         /// <summary>
-        /// Tells the builder to use the <see cref="PositionType"/> set by the parent builder
+        /// Don't set postition type
         /// </summary>
         Inherit,
         /// <summary>
@@ -21,13 +21,5 @@
         /// Position center
         /// </summary>
         Center,
-        /// <summary>
-        /// Float left, in the default this is ignored for the <see cref="PostContent.TextAlignment"/> property
-        /// </summary>
-        FloatLeft,
-        /// <summary>
-        /// Float right, in the default this is ignored for the <see cref="PostContent.TextAlignment"/> property
-        /// </summary>
-        FloatRight,
     }
 }

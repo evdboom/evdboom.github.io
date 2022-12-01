@@ -10,18 +10,27 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public IPost? Post { get; }
 
-        private ComponentBuilder(IPost? post, IList<IPostContent> result, Style style, PositionType textAlignment, BlockType blockType, PositionType blockAlignment, BlogColor color) : base(result, style, textAlignment, blockType, blockAlignment, color)
+        private ComponentBuilder(IPost? post, IList<IPostContent> result) : base(result)
         {
             Post = post;
-        }        
+        }
 
         /// <summary>
         /// Creates a new component builder for building child collections.
         /// </summary>
         /// <returns></returns>
+        public static ComponentBuilder CreateBuilder()
+        {
+            return CreateBuilder(null);
+        }
+
+        /// <summary>
+        /// Creates a new component builder for building child collections for the given post.
+        /// </summary>
+        /// <returns></returns>
         public static ComponentBuilder CreateBuilder(IPost? post)
         {
-            return new ComponentBuilder(post, new List<IPostContent>(), Style.Inherit, PositionType.Inherit, BlockType.Block, PositionType.Inherit, BlogColor.Inherit);
+            return new ComponentBuilder(post, new List<IPostContent>());
         }
 
         /// <inheritdoc/>

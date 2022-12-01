@@ -10,7 +10,7 @@ namespace OptionA.Blog.Components.Core
         /// <inheritdoc/>
         public IPost Post => _result;
 
-        private PostBuilder(Post result) : base(result, Style.Inherit, PositionType.Inherit, BlockType.Block, PositionType.Inherit, BlogColor.Inherit)
+        private PostBuilder(Post result) : base(result)
         {
         }
 

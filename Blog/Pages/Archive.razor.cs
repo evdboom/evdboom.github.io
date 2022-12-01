@@ -24,7 +24,7 @@ namespace Blog.Pages
         protected override void OnParametersSet()
         {
             _content = ComponentBuilder
-                .CreateBuilder(null)
+                .CreateBuilder()
                     .WithTextAlignment(PositionType.Center)
                     .CreateContent()
                         .CreateHeader()

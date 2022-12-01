@@ -19,6 +19,21 @@ namespace OptionA.Blog.Components.Core
             Side.Bottom | Side.Right,
         };
 
+
+        /// <summary>
+        /// Gets the possible base sides for border, padding and margin
+        /// </summary>
+        protected readonly IList<Side> _sides = new List<Side>
+        {
+            Side.All,
+            Side.Y,
+            Side.X,
+            Side.Top,
+            Side.Right,
+            Side.Bottom,
+            Side.Left
+        };
+
         /// <inheritdoc/>
         public IPost? Post { get; set; }
         /// <summary>
@@ -106,48 +121,78 @@ namespace OptionA.Blog.Components.Core
                 yield return style;
             }
 
-            foreach (var side in Enum.GetValues<Side>())
+            var allowedPaddings = Side.All;
+            var allowedMargins = Side.All;
+            var allowedBorders = Side.All;
+
+            foreach (var side in _sides)
             {
-                foreach (var padding in Padding)
+
+                if ((allowedBorders == Side.Inherit || Border == Side.Inherit) &&
+                    (allowedMargins == Side.Inherit || !Margin.Any()) &&
+                    (allowedPaddings == Side.Inherit || !Padding.Any()))
                 {
-                    if (padding.Key.HasFlag(side) &&
-                    DefaultClasses.PaddingClasses.TryGetValue(side, out var paddingStrength) &&
-                    paddingStrength.TryGetValue(padding.Value, out string? paddingClass))
+                    break;
+                }
+
+                if (allowedPaddings.HasFlag(side))
+                {
+                    foreach (var padding in Padding)
                     {
-                        yield return paddingClass;
+                        if (allowedPaddings.HasFlag(side) && 
+                            padding.Key.HasFlag(side) &&
+                            DefaultClasses.PaddingClasses.TryGetValue(side, out var paddingStrength) &&
+                            paddingStrength.TryGetValue(padding.Value, out string? paddingClass))
+                        {
+                            allowedPaddings &= ~side;
+                            yield return paddingClass;
+                        }
                     }
                 }
 
-                foreach (var margin in Margin)
+                if (allowedMargins.HasFlag(side))
                 {
-                    if (margin.Key.HasFlag(side) &&
-                        DefaultClasses.MarginClasses.TryGetValue(side, out var marginStrength) &&
-                        marginStrength.TryGetValue(margin.Value, out string? marginClass))
+                    foreach (var margin in Margin)
                     {
-                        yield return marginClass;
+                        if (allowedMargins.HasFlag(side) && 
+                            margin.Key.HasFlag(side) &&
+                            DefaultClasses.MarginClasses.TryGetValue(side, out var marginStrength) &&
+                            marginStrength.TryGetValue(margin.Value, out string? marginClass))
+                        {
+                            allowedMargins &= ~side;
+                            yield return marginClass;
+                        }
                     }
                 }
 
-
-                if (Border.HasFlag(side) &&
+                if (allowedBorders.HasFlag(side) && 
+                    Border.HasFlag(side) &&
                     DefaultClasses.BorderClasses.TryGetValue(side, out string? borderClass))
                 {
+                    allowedBorders &= ~side;
                     yield return borderClass;
                 }
+
             }
 
-            foreach (var corner in BorderRadius)
+            if (BorderRadius.Any(r => r == Side.All) && DefaultClasses.BorderRadiusClasses.TryGetValue(Side.All, out string? radiusClass))
             {
-                foreach (var side in _radiusSides)
+                yield return radiusClass;
+            }
+            else
+            {
+                foreach (var corner in BorderRadius)
                 {
-                    if (corner.HasFlag(side) &&
-                        DefaultClasses.BorderRadiusClasses.TryGetValue(side, out string? radiusClass))
+                    foreach (var side in _radiusSides)
                     {
-                        yield return radiusClass;
+                        if (corner.HasFlag(side) &&
+                            DefaultClasses.BorderRadiusClasses.TryGetValue(side, out radiusClass))
+                        {
+                            yield return radiusClass;
+                        }
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -157,46 +202,14 @@ namespace OptionA.Blog.Components.Core
         /// <param name="builder"></param>
         public virtual void SetProperties(IBuilder builder)
         {
-            if (TextAlignment == PositionType.Inherit)
-            {
-                TextAlignment = builder.TextAlignment;
-            }
-
-            if (Style == Style.Inherit)
-            {
-                Style = builder.Style;
-            }
-
-            if (BlockAlignment == PositionType.Inherit)
-            {
-                BlockAlignment = builder.BlockAlignment;
-            }
-
-            if (Color == BlogColor.Inherit)
-            {
-                Color = builder.Color;
-            }
-
-            if (!Padding.Any())
-            {
-                Padding = builder.Padding;
-            }
-
-            if (!Margin.Any())
-            {
-                Margin = builder.Margin;
-            }
-
-            if (Border == Side.Inherit)
-            {
-                Border = builder.Border;
-            }
-
-            if (!BorderRadius.Any())
-            {
-                BorderRadius = builder.BorderRadius;
-            }
-
+            TextAlignment = builder.TextAlignment;
+            Style = builder.Style;
+            BlockAlignment = builder.BlockAlignment;
+            Color = builder.Color;
+            Padding = builder.Padding;
+            Margin = builder.Margin;
+            Border = builder.Border;
+            BorderRadius = builder.BorderRadius;
             OnClick ??= builder.OnClick;
         }
     }

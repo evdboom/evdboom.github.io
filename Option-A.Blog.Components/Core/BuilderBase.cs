@@ -90,21 +90,11 @@ namespace OptionA.Blog.Components.Core
         /// Default constructor
         /// </summary>
         /// <param name="result"></param>
-        /// <param name="style"></param>
-        /// <param name="textAlignment"></param>
-        /// <param name="blockType"></param>
-        /// <param name="blockAlignment"></param>
-        /// <param name="color"></param>
-        protected BuilderBase(Result result, Style style, PositionType textAlignment, BlockType blockType, PositionType blockAlignment, BlogColor color)
+        protected BuilderBase(Result result)
         {
-            _style = style;
-            _textAlignment = textAlignment;
-            _blockAlignment = blockAlignment;
-            _blockType = blockType;
             _result = result;
-            _color = OwnColor != BlogColor.Inherit
-                ? OwnColor
-                : color;
+            _color = OwnColor;
+            _blockType = BlockType.Block;
         }
 
         /// <summary>

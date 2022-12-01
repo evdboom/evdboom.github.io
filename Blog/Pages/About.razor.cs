@@ -15,7 +15,7 @@ namespace Blog.Pages
         protected override void OnInitialized()
         {
             _content = ComponentBuilder
-                .CreateBuilder(null)
+                .CreateBuilder()
                     .CreateContent()
                         .WithTextAlignment(PositionType.Center)
                         .AddHeader("About me", HeaderSize.Two)

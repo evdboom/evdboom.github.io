@@ -37,5 +37,11 @@
         /// String used for searching, concat of title, subtitle and tags
         /// </summary>
         string SearchString { get; }
+
+        /// <summary>
+        /// Returns all the headers for this post (for table of contents)
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<(string Value, string Id, int Size)> GetHeaders();
     }
 }

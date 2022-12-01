@@ -8,26 +8,26 @@
         /// <summary>
         /// &lt;h1&gt; tag
         /// </summary>
-        One,
+        One = 1,
         /// <summary>
         /// &lt;h2&gt; tag
         /// </summary>
-        Two,
+        Two = 2,
         /// <summary>
         /// &lt;h3&gt; tag
         /// </summary>
-        Three,
+        Three = 3,
         /// <summary>
         /// &lt;h4&gt; tag
         /// </summary>
-        Four,
+        Four = 4,
         /// <summary>
         /// &lt;h5&gt; tag
         /// </summary>
-        Five,
+        Five = 5,
         /// <summary>
         /// &lt;h6&gt; tag
         /// </summary>
-        Six
+        Six = 6
     }
 }

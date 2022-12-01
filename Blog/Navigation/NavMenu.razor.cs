@@ -20,10 +20,9 @@ namespace Blog.Navigation
         protected override void OnInitialized()
         {
             _content = ComponentBuilder
-                .CreateBuilder(null)
-                .CreateBlock()
-                    .AddPadding(Side.X | Side.Bottom, Strength.Three)
-                    .AddPadding(Side.Top, Strength.Two)
+                .CreateBuilder()
+                .CreateBlock()                 
+                    .AddPadding(Side.All, Strength.Three)
                     .CreateInline()
                         .AddClasses("fs-1", "shadowed-text")
                         .CreateLink()
@@ -44,7 +43,7 @@ namespace Blog.Navigation
                     .AddNavMenuItem("/about", "About")  
                     .AddNavMenuItem("/series/NotImplementedYet", "Series")
                     .CreateBlock()
-                        .WithBlockAlignment(PositionType.FloatRight)
+                        .WithBlockAlignment(PositionType.Right)
                         .AddLinkImage("https://www.linkedin.com/in/evdboom/", LinkMode.NewTab, "LI-In-Bug-white.png", ImageMode.Local)
                         .AddLinkImage("https://github.com/evdboom", LinkMode.NewTab, "GitHub-Mark-Light-120px-plus.png", ImageMode.Local)
                         .CreateLink()
@@ -60,7 +59,7 @@ namespace Blog.Navigation
                                 .Build()
                             .Build()
                         .Build()
-                    .AddClasses("sticky-top", "purple-block", "shadowed-box")
+                    .AddClasses("sticky", "purple-block", "shadowed-box")
                     .Build()
                 .BuildOne<BlockContent>();
         }

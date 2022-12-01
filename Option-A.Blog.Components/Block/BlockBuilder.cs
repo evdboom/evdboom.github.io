@@ -59,18 +59,5 @@ namespace OptionA.Blog.Components.Block
         {
             return this;
         }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// <para>After the base <see cref="OnBuild"/>, sets the <see cref="BlockContent.BlockType"/> to <see cref="BlockType.Block"/> if still at <see cref="BlockType.Inherit"/></para>
-        /// </summary>
-        protected override void OnBuild()
-        {
-            base.OnBuild();
-            if (_content.BlockType == BlockType.Inherit)
-            {
-                _content.BlockType = BlockType.Block;
-            }
-        }
     }
 }

@@ -8,6 +8,10 @@ namespace OptionA.Blog.Components.Services
     public interface IPostService
     {
         /// <summary>
+        /// Event for when a Post has been selected
+        /// </summary>
+        event EventHandler<IPost?> PostSelected;
+        /// <summary>
         /// Tries to find a post by either <see cref="IPost.DateId"/> or <see cref="IPost.TitleId"/>
         /// </summary>
         /// <param name="id"></param>
@@ -47,5 +51,10 @@ namespace OptionA.Blog.Components.Services
         /// <param name="term"></param>
         /// <returns></returns>
         IEnumerable<IPost> SearchPosts(string term);
+        /// <summary>
+        /// Tells the post service a post has been selected
+        /// </summary>
+        /// <param name="post"></param>
+        void SelectPost(IPost? post);
     }
 }

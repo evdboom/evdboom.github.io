@@ -23,37 +23,29 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
     DefaultClasses.Tag.AddRange(
         "hover", 
         "oa-style-none",
-        "oa-padding-top-1",
-        "oa-padding-bottom-1",
-        "oa-padding-left-2",
-        "oa-padding-right-2");
-    DefaultClasses.ArchiveContainer.AddRange(
-        "shadowed-box", 
-        "padded", 
-        "bordered", 
-        "roundedborder");
+        "oa-padding-y-1",
+        "oa-padding-x-2");
     DefaultClasses.CompactMode.AddRange(
         "hover", 
         "shadowed-box", 
         "oa-style-none", 
-        "bordered", 
-        "roundedborder",
-        "padded");
-    DefaultClasses.TagContainer.AddRange(
-        "shadowed-box", 
-        "padded", 
-        "bordered", 
-        "roundedborder");
-    DefaultClasses.ContainerHeader.AddRange(
-        "oa-neg-margin-top-3", 
-        "oa-neg-margin-left-3", 
-        "oa-borderradius-topleft", 
-        "oa-borderradius-bottomright", 
-        "bordered",
-        "oa-padding-top-2",
-        "oa-padding-bottom-2",
-        "oa-padding-left-3",
-        "oa-padding-right-3");
+        "oa-border", 
+        "oa-borderradius",
+        "oa-padding-3");
+    DefaultClasses.Container.AddRange(
+        "shadowed-box",
+        "oa-border",
+        "oa-borderradius",
+        "oa-padding-3");
+    DefaultClasses.ContainerHeaderName.AddRange(
+        "oa-neg-margin-top-3",
+        "oa-neg-margin-left-3",
+        "oa-padding-y-2",
+        "oa-padding-x-3",
+        "oa-borderradius-topleft",
+        "oa-borderradius-bottomright");
+    DefaultClasses.ContainerHideButton.AddRange(
+        "pointer");
     DefaultClasses.CodeBlock.AddRange(
         "lightly-padded",
         "roundedborder");
@@ -61,8 +53,6 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
         "lightly-padded",
         "oa-borderradius-topleft",
         "oa-borderradius-topright",
-        "oa-margin-bottom-1",
-        "oa-neg-margin-left-2",
-        "oa-neg-margin-top-2",
-        "oa-neg-margin-right-2");
+        "oa-neg-margin-x-2",
+        "oa-neg-margin-top-2");
 }

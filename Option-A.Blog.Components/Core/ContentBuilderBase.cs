@@ -22,7 +22,7 @@ namespace OptionA.Blog.Components.Core
         /// Default constructor
         /// </summary>
         /// <param name="parent"></param>
-        protected ContentBuilderBase(Parent parent) : base(parent, parent.Style, parent.TextAlignment, parent.BlockType, parent.BlockAlignment, parent.Color)
+        protected ContentBuilderBase(Parent parent) : base(parent)
         {
             _content = new();
             if (DefaultClasses.ContentClasses.TryGetValue(typeof(Content), out var classes))
@@ -48,7 +48,7 @@ namespace OptionA.Blog.Components.Core
         /// <returns></returns>
         public Builder WithAttribute(string attributeName)
         {
-            return WithAttribute(attributeName, null);
+            return WithAttribute(attributeName, true);
         }
 
         /// <summary>

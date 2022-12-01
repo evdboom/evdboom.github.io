@@ -12,23 +12,23 @@
         /// <summary>
         /// Lowest strength, should result in lowest applied value
         /// </summary>
-        One,
+        One = 1,
         /// <summary>
         /// Should result in more then a bit, but less then avery value
         /// </summary>
-        Two,
+        Two = 2,
         /// <summary>
         /// Should result in the average value to apply
         /// </summary>
-        Three,
+        Three = 3,
         /// <summary>
         /// Should result in more then average but less then most value
         /// </summary>
-        Four,
+        Four = 4,
         /// <summary>
         /// Higest strength, should result in highest applied value
         /// </summary>
-        Five,
+        Five = 5,
         /// <summary>
         /// Lowest negative strength (only applies to margin)
         /// </summary>
@@ -49,5 +49,9 @@
         /// Strongest negative strength (only applies to margin)
         /// </summary>
         MinusFive,
+        /// <summary>
+        /// Sets the margin or padding to auto
+        /// </summary>
+        Auto
     }
 }

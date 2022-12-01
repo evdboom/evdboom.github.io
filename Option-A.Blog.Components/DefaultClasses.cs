@@ -14,7 +14,7 @@ namespace OptionA.Blog.Components
         /// </summary>
         public static IList<string> CodeBlock { get; set; } = new List<string>
         {
-            "oa-code-block",           
+            "oa-code-block",
         };
 
         /// <summary>
@@ -40,11 +40,48 @@ namespace OptionA.Blog.Components
         };
 
         /// <summary>
+        /// Default classes for containers
+        /// </summary>
+        public static IList<string> Container { get; set; } = new List<string>
+        {
+            "oa-container",
+        };
+
+        /// <summary>
+        /// Default classes for containers hide button
+        /// </summary>
+        public static IList<string> ContainerHideButton { get; set; } = new List<string>();
+        
+        /// <summary>
+        /// Default classes for container headers (Tag container, Archive container)
+        /// </summary>
+        public static IList<string> ContainerHeader { get; set; } = new List<string>
+        {
+            "oa-container-header",
+        };
+
+        /// <summary>
+        /// Default classes for the name of the header.
+        /// </summary>
+        public static IList<string> ContainerHeaderName { get; set; } = new List<string>
+        {
+            "oa-container-headername",
+        };
+
+        /// <summary>
+        /// Default classes for the name of the header.
+        /// </summary>
+        public static IList<string> ContainerContent { get; set; } = new List<string>
+        {
+            "oa-container-content",
+        };
+
+        /// <summary>
         /// Default classes for container displaying tags
         /// </summary>
         public static IList<string> TagContainer { get; set; } = new List<string>
         {
-            "oa-container",
+            "oa-tag-container",
         };
 
         /// <summary>
@@ -53,14 +90,12 @@ namespace OptionA.Blog.Components
         public static IList<string> ArchiveContainer { get; set; } = new List<string>();
 
         /// <summary>
-        /// Default classes for container headers (Tag container, Archive container)
+        /// Default classes for container displaying the archive
         /// </summary>
-        public static IList<string> ContainerHeader { get; set; } = new List<string>
+        public static IList<string> TableOfContentsContainer { get; set; } = new List<string>()
         {
-            "oa-container-header",
-            "oa-text-center"
+            "oa-container"
         };
-
 
         /// <summary>
         /// Default class for diplaying posts in compact mode.
@@ -123,7 +158,10 @@ namespace OptionA.Blog.Components
             { Side.Top, "oa-border-top" },
             { Side.Right, "oa-border-right" },
             { Side.Bottom, "oa-border-bottom" },
-            { Side.Left, "oa-border-left" }
+            { Side.Left, "oa-border-left" },
+            { Side.X, "oa-border-x"},
+            { Side.Y, "oa-border-y" },
+            { Side.All, "oa-border" }
         };
 
         /// <summary>
@@ -131,6 +169,7 @@ namespace OptionA.Blog.Components
         /// </summary>
         public static IDictionary<Side, string> BorderRadiusClasses { get; set; } = new Dictionary<Side, string>
         {
+            { Side.All, "oa-borderradius" },
             { Side.Top | Side.Left, "oa-borderradius-topleft" },
             { Side.Top | Side.Right, "oa-borderradius-topright" },
             { Side.Bottom | Side.Left, "oa-borderradius-bottomleft" },
@@ -150,6 +189,7 @@ namespace OptionA.Blog.Components
                     { Strength.Three, "oa-margin-top-3" },
                     { Strength.Four, "oa-margin-top-4" },
                     { Strength.Five, "oa-margin-top-5" },
+                    { Strength.Auto, "oa-margin-top-auto" },
                     { Strength.MinusOne, "oa-neg-margin-top-1" },
                     { Strength.MinusTwo, "oa-neg-margin-top-2" },
                     { Strength.MinusThree, "oa-neg-margin-top-3" },
@@ -165,6 +205,7 @@ namespace OptionA.Blog.Components
                     { Strength.Three, "oa-margin-right-3" },
                     { Strength.Four, "oa-margin-right-4" },
                     { Strength.Five, "oa-margin-right-5" },
+                    { Strength.Auto, "oa-margin-right-auto" },
                     { Strength.MinusOne, "oa-neg-margin-right-1" },
                     { Strength.MinusTwo, "oa-neg-margin-right-2" },
                     { Strength.MinusThree, "oa-neg-margin-right-3" },
@@ -180,6 +221,7 @@ namespace OptionA.Blog.Components
                     { Strength.Three, "oa-margin-bottom-3" },
                     { Strength.Four, "oa-margin-bottom-4" },
                     { Strength.Five, "oa-margin-bottom-5" },
+                    { Strength.Auto, "oa-margin-bottom-auto" },
                     { Strength.MinusOne, "oa-neg-margin-bottom-1" },
                     { Strength.MinusTwo, "oa-neg-margin-bottom-2" },
                     { Strength.MinusThree, "oa-neg-margin-bottom-3" },
@@ -195,6 +237,7 @@ namespace OptionA.Blog.Components
                     { Strength.Three, "oa-margin-left-3" },
                     { Strength.Four, "oa-margin-left-4" },
                     { Strength.Five, "oa-margin-left-5" },
+                    { Strength.Auto, "oa-margin-left-auto" },
                     { Strength.MinusOne, "oa-neg-margin-left-1" },
                     { Strength.MinusTwo, "oa-neg-margin-left-2" },
                     { Strength.MinusThree, "oa-neg-margin-left-3" },
@@ -202,6 +245,54 @@ namespace OptionA.Blog.Components
                     { Strength.MinusFive, "oa-neg-margin-left-5" },
                 }
             },
+            {
+                Side.X, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-margin-x-1" },
+                    { Strength.Two, "oa-margin-x-2" },
+                    { Strength.Three, "oa-margin-x-3" },
+                    { Strength.Four, "oa-margin-x-4" },
+                    { Strength.Five, "oa-margin-x-5" },
+                    { Strength.Auto, "oa-margin-x-auto" },
+                    { Strength.MinusOne, "oa-neg-margin-x-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-x-2" },
+                    { Strength.MinusThree, "oa-neg-margin-x-3" },
+                    { Strength.MinusFour, "oa-neg-margin-x-4" },
+                    { Strength.MinusFive, "oa-neg-margin-x-5" },
+                }
+            },
+            {
+                Side.Y, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-margin-y-1" },
+                    { Strength.Two, "oa-margin-y-2" },
+                    { Strength.Three, "oa-margin-y-3" },
+                    { Strength.Four, "oa-margin-y-4" },
+                    { Strength.Five, "oa-margin-y-5" },
+                    { Strength.Auto, "oa-margin-y-auto" },
+                    { Strength.MinusOne, "oa-neg-margin-y-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-y-2" },
+                    { Strength.MinusThree, "oa-neg-margin-y-3" },
+                    { Strength.MinusFour, "oa-neg-margin-y-4" },
+                    { Strength.MinusFive, "oa-neg-margin-y-5" },
+                }
+            },
+            {
+                Side.All, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-margin-1" },
+                    { Strength.Two, "oa-margin-2" },
+                    { Strength.Three, "oa-margin-3" },
+                    { Strength.Four, "oa-margin-4" },
+                    { Strength.Five, "oa-margin-5" },
+                    { Strength.Auto, "oa-margin-auto" },
+                    { Strength.MinusOne, "oa-neg-margin-1" },
+                    { Strength.MinusTwo, "oa-neg-margin-2" },
+                    { Strength.MinusThree, "oa-neg-margin-3" },
+                    { Strength.MinusFour, "oa-neg-margin-4" },
+                    { Strength.MinusFive, "oa-neg-margin-5" },
+                }
+            }
         };
 
         /// <summary>
@@ -249,6 +340,36 @@ namespace OptionA.Blog.Components
                     { Strength.Five, "oa-padding-left-5" },
                 }
             },
+            {
+                Side.X, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-padding-x-1" },
+                    { Strength.Two, "oa-padding-x-2" },
+                    { Strength.Three, "oa-padding-x-3" },
+                    { Strength.Four, "oa-padding-x-4" },
+                    { Strength.Five, "oa-padding-x-5" },
+                }
+            },
+            {
+                Side.Y, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-padding-y-1" },
+                    { Strength.Two, "oa-padding-y-2" },
+                    { Strength.Three, "oa-padding-y-3" },
+                    { Strength.Four, "oa-padding-y-4" },
+                    { Strength.Five, "oa-padding-y-5" },
+                }
+            },
+            {
+                Side.All, new Dictionary<Strength, string>
+                {
+                    { Strength.One, "oa-padding-1" },
+                    { Strength.Two, "oa-padding-2" },
+                    { Strength.Three, "oa-padding-3" },
+                    { Strength.Four, "oa-padding-4" },
+                    { Strength.Five, "oa-padding-5" },
+                }
+            },
         };
 
         /// <summary>
@@ -285,15 +406,13 @@ namespace OptionA.Blog.Components
         {
             { PositionType.Left, "oa-block-left" },
             { PositionType.Right, "oa-block-right" },
-            { PositionType.Center, "oa-block-center" },
-            { PositionType.FloatLeft, "oa-block-floatleft" },
-            { PositionType.FloatRight, "oa-block-floatright" }
+            { PositionType.Center, "oa-block-center" }
         };
 
         /// <summary>
         /// Optional classes for each Content class, they are injected through the builders of the various content classes. If you directly create content classes you have to insert these yourself
         /// </summary>
-        public static IDictionary<Type, IList<string>> ContentClasses { get; set; } = new Dictionary<Type, IList<string>>();
+        public static IDictionary<Type, IList<string>> ContentClasses { get; set; } = new Dictionary<Type, IList<string>>();       
 
         /// <summary>
         /// Adds multiple values to the list if not already present.

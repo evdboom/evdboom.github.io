@@ -62,7 +62,6 @@ namespace OptionA.Blog.Components.Post
                         .CreateLink()
                             .WithHref($"/post/{Content.TitleId}")
                             .WithTextAlignment(PositionType.Inherit)
-                            .WithBlockAlignment(PositionType.FloatRight)
                             .AddTags(Content.Tags)
                             .WithTextAlignment(PositionType.Left)
                             .WithBlockAlignment(PositionType.Inherit)

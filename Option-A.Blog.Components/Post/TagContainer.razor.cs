@@ -32,19 +32,12 @@ namespace OptionA.Blog.Components.Post
                 tags = tags.Take(MaxCount.Value);
             }
             _content = ComponentBuilder
-                .CreateBuilder(null)
+                .CreateBuilder()
                     .CreateBlock()
-                        .AddClasses(DefaultClasses.TagContainer)
-                        .CreateBlock()
-                            .AddClasses(DefaultClasses.ContainerHeader)
-                            .WithText("Most common tags")
-                            .Build()
-                        .CreateBlock()
-                            .AddClass("oa-tag-container")
-                            .AddTags(tags)
-                            .Build()
-                        .Build()
-                    .BuildOne<BlockContent>();
+                    .AddClasses(DefaultClasses.TagContainer)
+                    .AddTags(tags)
+                    .Build()
+                .BuildOne<BlockContent>();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace OptionA.Blog.Components.Core
+﻿using OptionA.Blog.Components.Header;
+
+namespace OptionA.Blog.Components.Core
 {
     /// <summary>
     /// Base classes for posts, can be inherited to construct posts.
@@ -66,5 +68,36 @@
         /// </summary>
         /// <param name="builder"></param>
         public abstract void OnBuildPost(PostBuilder builder);
+
+        /// <inheritdoc/>
+        public IEnumerable<(string Value, string Id, int Size)> GetHeaders()
+        {
+            foreach(var content in Content)
+            {
+                foreach(var header in GetHeaders(content))
+                {
+                    yield return header;
+                }
+            }
+        }
+
+        private IEnumerable<(string Value, string Id, int Size)> GetHeaders(IPostContent content)
+        {
+            if (content is HeaderContent header && header.Attributes.TryGetValue("id", out var id))
+            {
+                var value = string.IsNullOrEmpty(header.Text)
+                    ? $"{id}"
+                    : header.Text;
+                yield return (value, $"{id}", (int)header.HeaderSize);
+            }
+
+            foreach(var child in content.ChildContent)
+            {
+                foreach(var childHeader in GetHeaders(child))
+                {
+                    yield return childHeader;
+                }
+            }
+        }
     }
 }
