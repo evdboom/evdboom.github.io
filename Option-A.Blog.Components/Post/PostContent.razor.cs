@@ -53,12 +53,14 @@ namespace OptionA.Blog.Components.Post
             if (CompactMode)
             {
                 _displayContent = builder
-                    .CreateBlock()
+                    .CreateBlock()                        
+                        .CreateDate()
+                        .ForDate(Content.PostDate)
+                        .WithDisplayType(DateDisplayType.LongDate)
                         .WithTextAlignment(PositionType.Right)
                         .WithStyle(Style.Bold)
-                        .AddDate(Content.PostDate, DateDisplayType.LongDate)
-                        .WithTextAlignment(PositionType.Inherit)
-                        .WithStyle(Style.Inherit)
+                        .Build() 
+                            
                         .CreateLink()
                             .WithHref($"/post/{Content.TitleId}")
                             .WithTextAlignment(PositionType.Inherit)
@@ -76,7 +78,6 @@ namespace OptionA.Blog.Components.Post
                             .AddLine()
                             .AddContents(Content.Content)
                             .Build()
-                        .WithBlockType(BlockType.Content)
                         .Build()
                     .BuildOne<BlockContent>();                
             }
