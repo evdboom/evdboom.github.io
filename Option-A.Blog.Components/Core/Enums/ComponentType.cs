@@ -1,4 +1,6 @@
-﻿namespace OptionA.Blog.Components.Core.Enums
+﻿using Microsoft.AspNetCore.Components;
+
+namespace OptionA.Blog.Components.Core.Enums
 {
     /// <summary>
     /// The component types to render
@@ -48,6 +50,10 @@
         /// <summary>
         /// An Icon resulting in a &lt;i&gt; tag, set the icon through classes
         /// </summary>
-        Icon
+        Icon,
+        /// <summary>
+        /// Custom type, to be used with your own content as <see cref="RenderFragment"/>
+        /// </summary>
+        Custom
     }
 }

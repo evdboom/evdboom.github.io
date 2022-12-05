@@ -1,8 +1,10 @@
-﻿using Blog.Extensions;
+﻿using Blog.Components;
+using Blog.Extensions;
 using Microsoft.AspNetCore.Components;
 using OptionA.Blog.Components.Block;
 using OptionA.Blog.Components.Core;
 using OptionA.Blog.Components.Core.Enums;
+using OptionA.Blog.Components.Custom;
 using OptionA.Blog.Components.Icon;
 using OptionA.Blog.Components.Image;
 using OptionA.Blog.Components.Link;
@@ -27,21 +29,22 @@ namespace Blog.Navigation
                         .AddClasses("fs-1", "shadowed-text")
                         .CreateLink()
                             .AddClasses("shadowed-box")
-                            .WithHref("/", LinkMode.Self)                        
+                            .WithHref("/", LinkMode.Self)
                             .AddBorderRadius(Side.All)
                             .AddMargin(Side.Right, Strength.Three)
                             .CreateImage()
                                 .WithBlockAlignment(PositionType.Inherit)
                                 .WithSource("LogoOptionA.png", ImageMode.Local)
                                 .WithTitle("Home")
-                                .WithHeight(45)                                
-                                .Build()                                            
+                                .WithHeight(45)
+                                .Build()
                             .Build()
                         .AddContent(" Option A")
                         .Build()
                     .AddNavMenuItem("/", "Home")
-                    .AddNavMenuItem("/about", "About")  
+                    .AddNavMenuItem("/about", "About")
                     .AddNavMenuItem("/series/NotImplementedYet", "Series")
+                    .AddCustom(typeof(SearchComponent))
                     .CreateBlock()
                         .WithBlockAlignment(PositionType.Right)
                         .AddLinkImage("https://www.linkedin.com/in/evdboom/", LinkMode.NewTab, "LI-In-Bug-white.png", ImageMode.Local)
