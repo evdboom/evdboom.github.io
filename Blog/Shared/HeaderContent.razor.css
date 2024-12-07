@@ -1,0 +1,8 @@
+﻿[opta-header-items] {
+    display: flex;
+    flex-direction: row;
+}
+
+[opta-header-item][small] {
+    flex-direction: column-reverse;
+}

@@ -1,6 +1,2 @@
-﻿@page "/archive/{year:int}/{month:int}"
-@if (Year > 0 && Month > 0 && _content is not null)
-{
-    <Block Content="_content" />
-    <PostList Content="PostService.GetPostsForMonth(Year, Month)" />
-}
+﻿@page "/blog/archive/{year:int}/{month:int}"
+archive

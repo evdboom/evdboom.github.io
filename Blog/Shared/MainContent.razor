@@ -1,0 +1,28 @@
+﻿<main>
+    <OptAMenu>
+        <OptAMenuItem Name="Home"
+                      Description="The home button"
+                      Href="/" />
+        <OptAMenuGroup Name="Documentation"
+                       Description="documentaton for nuget packages"
+                       ActiveRoute="/documentation/">
+            <OptAMenuItem Name="Blog"
+                          Href="/documentation/blog" />
+            <OptAMenuItem Name="Blog.Builder"
+                          Href="/documentation/blog-builder" />
+            <OptAMenuItem Name="Components"
+                          Href="/documentation/components" />
+            <OptAMenuItem Name="Components.Direct"
+                          Href="/documentation/components-direct" />
+            <OptAMenuItem Name="Storage"
+                          Href="/documentation/storage" />
+        </OptAMenuGroup>
+        <OptAMenuItem Name="Blog"
+                      Href="/blog" />
+        <OptAMenuItem Name="About"
+                      Href="/about" />
+    </OptAMenu>
+    <article>
+        @ChildContent
+    </article>
+</main>

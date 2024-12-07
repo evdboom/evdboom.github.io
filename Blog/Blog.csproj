@@ -1,31 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<GHPages>true</GHPages>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorWasmPreRendering.Build" Version="2.0.0-preview.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
-    <PackageReference Include="PublishSPAforGitHubPages.Build" Version="2.0.2" />
+    <Compile Remove="wwwroot\images\2022110300\**" />
+    <Content Remove="wwwroot\images\2022110300\**" />
+    <EmbeddedResource Remove="wwwroot\images\2022110300\**" />
+    <None Remove="wwwroot\images\2022110300\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\" />
-    <Folder Include="wwwroot\images\2022110300\" />
+    <Content Remove="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Option-A.Blog.Components\OptionA.Blog.Components.csproj" />
+    <None Include="wwwroot\appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorWasmPreRendering.Build" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
+    <PackageReference Include="OptionA.Blazor.Blog" Version="9.1.0" />
+    <PackageReference Include="OptionA.Blazor.Components" Version="9.1.0" />
+    <PackageReference Include="PublishSPAforGitHubPages.Build" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="wwwroot\CNAME">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\icons\" />
   </ItemGroup>
 </Project>
