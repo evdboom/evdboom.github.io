@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components;
 
 namespace Blog.Shared
 {
     public partial class HeaderContent
     {
+        [CascadingParameter(Name = OptAResponsive.ValidDimensionsParameterName)]
+        public List<string> Dimensions { get; set; } = [];
         [Parameter]
         public bool ShowToggler { get; set; }
-        [CascadingParameter(Name = ConfigurationComponent.DataUrlParameter)]
-        public string? DataUrl { get; set; }
-        private bool _open;
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        
+        private bool _open = true;
     }
 }

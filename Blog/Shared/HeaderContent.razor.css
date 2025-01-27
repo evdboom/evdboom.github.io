@@ -1,8 +1,11 @@
-﻿[opta-header-items] {
+﻿[opta-header] {
     display: flex;
     flex-direction: row;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
 
-[opta-header-item][small] {
-    flex-direction: column-reverse;
-}
+

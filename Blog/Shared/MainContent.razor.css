@@ -1,18 +1,10 @@
-﻿header {
-    position: sticky;
-    top: 0;
-    z-index: 1500;
+﻿
+main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
+    color: var(--oa-main-color);
 }
 
-[opta-main] {
-    display: flex;
-    flex-direction: row;
-}
-
-[opta-main][small] {
+main[small] {
     flex-direction: column;
 }

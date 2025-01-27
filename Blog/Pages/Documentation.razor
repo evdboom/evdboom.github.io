@@ -1,3 +1,6 @@
-﻿@page "/documentation/{package-name}"
-
+﻿@page "/documentation/{PackageName}"
+@if (_post is not null)
+{
+    <OptAPost Post="_post" />
+}
 

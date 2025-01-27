@@ -5,6 +5,7 @@
 body {
     font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
     color: var(--oa-inverse-main-color);
+    margin: 0px;
 }
 
 [loader] {
@@ -15,10 +16,10 @@ body {
     text-align: center;
 }
 
-    [loader] svg {
-        height: 100%;
-        filter: drop-shadow(3px 3px 3px rgba(0,0,0,.7));
-    }
+[loader] svg {
+    height: 100%;
+    filter: drop-shadow(3px 3px 3px rgba(0,0,0,.7));
+}
 
 #a-outline {
     fill: var(--oa-inverse-main-color);
@@ -44,12 +45,8 @@ body {
 }
 
 .nav-menu {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-    padding-top: .5em;
-    padding-bottom: .5em;
+    display: flex;
+    flex-direction: row;
 }
 
 .opta-bg {
@@ -62,17 +59,41 @@ body {
 }
 
 .opta-dropdown {
+    padding-top: .5em;
     transition: height 250ms ease-in-out;
 }
 
-    .opta-dropdown li:hover {
-        background-color: var(--oa-main-hover-color);
-    }
+.opta-dropdown li {
+    transition: background-color 200ms ease-in-out;
+}
+
+.opta-dropdown li:hover {
+    background-color: var(--oa-main-hover-color);
+}
 
 .opta-menu-item {
-    padding-left: .5em;
-    padding-right: .5em;
+
 }
+
+.opta-menu-item a {
+    display: inline-block;
+    width: 100%;
+    padding: .5em;
+    color: var(--oa-main-inactive-color);
+    transition: color 200ms ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.opta-menu-item a.active {
+    color: var(--oa-inverse-main-color);
+}
+
+.opta-menu-item a:hover {
+    color: var(--oa-main-semi-active-color);
+}
+
+
 
 [opta-carousel-image] {
     max-height: 300px;
@@ -141,4 +162,6 @@ body {
     --oa-inverse-main-color: #f5f5f5;
     --oa-main-hover-color: #3e2672;
     --oa-main-active-color: #5c4490;
+    --oa-main-inactive-color: #f5f5f580;
+    --oa-main-semi-active-color: #f5f5f5cc;
 }

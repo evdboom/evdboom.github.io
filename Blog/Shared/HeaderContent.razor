@@ -1,35 +1,14 @@
-﻿@if (ShowToggler)
-{
-    @if (!_open)
+﻿<header opta-header class="opta-bg">
+    @if (ShowToggler)
     {
         <div opta-toggler>
             <button type="button" @onclick="() => _open = !_open">
                 <i class="bi bi-list" />
             </button>
         </div>
-    }   
+    }
     @if (_open)
     {
-        <div opta-header-items small>
-            <div opta-toggler>
-                <button type="button" @onclick="() => _open = !_open">
-                    <i class="bi bi-list" />
-                </button>
-            </div>
-            <NavMenu />
-            <SearchComponent />
-        </div>        
-        <div opta-menu-backdrop @onclick="() => _open = !_open"></div>
-    }
-}
-<a href="/" target="_self">
-    <img src="@($"{DataUrl}/banner/LogoOptionA.png")" alt="Home" style="height:100%;cursor:pointer;"  />
-</a>
-
-@if (!ShowToggler)
-{
-    <div opta-header-items>
-        <NavMenu />
-        <SearchComponent />
-    </div>
-}
+        @ChildContent
+    }    
+</header>
