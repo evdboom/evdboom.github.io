@@ -1,7 +1,6 @@
-namespace Blog.Examples
-{
-    public partial class OptAEnumRadioGroupExample
-    {
+namespace Blog.Pages.Examples;
 
-    }
+public partial class OptAEnumRadioGroupExample
+{
+
 }
