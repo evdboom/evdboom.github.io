@@ -1,0 +1,26 @@
+﻿<h2>
+    @ComponentName
+</h2>
+<div container @ref="_container">
+    @Component
+</div>
+@if (Result != null)
+{
+    <h3>Result</h3>
+    @Result
+}
+<h3>Parameters</h3>
+<p>
+    <label>Additional classes</label><OptAInputText @bind-Value="InternalAdditionalClasses" /><span>Seperate using a space</span><br />
+    <label>Removed classes</label><OptAInputText @bind-Value="InternalRemovedClasses" /><span>Seperate using a space</span><br />
+    <label>Attributes classes</label><OptAInputText @bind-Value="InternalAttributes" /><span>Seperate using a space</span><br />
+
+@if (Parameters != null)
+{
+    @Parameters
+}
+</p>
+@if (_content != null)
+{
+    <OptACode Content="_content" />
+}

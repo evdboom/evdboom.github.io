@@ -1,5 +1,42 @@
 ﻿@page "/examples/enumcheckboxgroup"
 @layout ExampleLayout
-<OptAEnumCheckboxGroup TEnum="ExampleEnum"/>
+<ComponentTester @ref="_tester"
+                 ComponentName="OptAEnumCheckboxGroup"
+                 @bind-AdditionalClasses="AdditionalClasses"
+                 @bind-RemovedClasses="RemovedClasses"
+                 @bind-Attributes="Attributes">
+    <Component>
+        <OptAEnumCheckboxGroup TEnum="ExampleEnum"
+                               @bind-Value="_selectedEnums"
+                               OrderDescending="_orderDescending"
+                               OrderMode="_orderMode"
+                               NameMappings="NameMappings"
+                               TitleMappings="TitleMappings"
+                               Orientation="_orientation"
+                               AdditionalClasses="@_tester?.AdditionalClasses"
+                               RemovedClasses="_tester?.RemovedClasses"
+                               Attributes="_tester?.Attributes"/>
+    </Component>
+    <Result>
+        @if (_selectedEnums != null && _selectedEnums.Any())
+        {
+            <p>
+                Selected values: @string.Join(", ", _selectedEnums)    
+            </p>
+        }
+        else
+        {
+            <p>No value selected</p>
+        }
+    </Result>
+    <Parameters>
+        <OptAInputCheckbox @bind-Value="OrderDescending" Description="Order Descending" /><br />
+        <OptAInputCheckbox @bind-Value="UseMappings" Description="Use name mappings" /><br />
+        <label>Order mode</label><OptAEnumSelect TEnum="EnumOrder" @bind-Value="OrderMode" /><br />
+        <label>Orientation</label><OptAEnumSelect TEnum="Orientation" @bind-Value="Orientation" /><br />
+    </Parameters>
+</ComponentTester>
+
+
 
 
