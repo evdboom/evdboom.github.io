@@ -31,7 +31,7 @@ jobs:
 
       # Publish the site
       - name: Publish
-        run: dotnet publish OptionA.Site.sln -c:Release -o:publish -p:GHPages=true
+        run: dotnet publish OptionA.Site.slnx -c:Release -o:publish -p:GHPages=true
 
       # Upload artifact
       - name: Upload Pages artifact

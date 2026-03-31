@@ -1,0 +1,135 @@
+.bindery-landing {
+    overflow-x: hidden;
+}
+
+.hero-section {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+.hero-section .lead {
+    font-size: 1.3rem;
+    opacity: 0.95;
+}
+
+.hero-section .fs-5 {
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15) !important;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+}
+
+.feature-icon-primary {
+    color: #667eea;
+}
+
+.feature-icon-secondary {
+    color: #764ba2;
+}
+
+.problem-section-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.problem-section-list li {
+    margin-bottom: 1rem;
+}
+
+.problem-section-list i {
+    color: #667eea;
+    margin-right: 0.5rem;
+}
+
+.solution-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.component-card {
+    transition: all 0.3s ease;
+}
+
+.component-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+.component-card-title-primary {
+    color: #667eea;
+}
+
+.component-card-title-secondary {
+    color: #764ba2;
+}
+
+.badge-light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.quickstart-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #667eea;
+}
+
+.quickstart-item code {
+    font-size: 0.9rem;
+    color: #764ba2;
+    background-color: #f8f9fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.privacy-section {
+    background-color: #f8f9fa;
+}
+
+.footer-section {
+    background-color: #f8f9fa;
+}
+
+.btn-light-custom {
+    background-color: white;
+    border-color: white;
+    color: #667eea;
+    font-weight: 700;
+}
+
+.btn-light-custom:hover {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-outline-light-custom {
+    border-color: white;
+    color: white;
+    font-weight: 700;
+}
+
+.btn-outline-light-custom:hover {
+    background-color: white;
+    color: #667eea;
+}
