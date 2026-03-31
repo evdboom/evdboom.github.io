@@ -1,0 +1,32 @@
+@inherits LayoutComponentBase
+<OptAResponsive>
+    <HeaderContent>
+        <OptAMenu>
+            <OptAMenuItem Name="Home"
+                            Description="The home button"
+                            Href="/" />
+            <OptAMenuGroup Name="Documentation"
+                            Description="documentaton for nuget packages"
+                            ActiveRoute="/documentation/">
+                <OptAMenuItem Name="Blog"
+                                Href="/documentation/blog" />
+                <OptAMenuItem Name="Blog.Builder"
+                                Href="/documentation/blogbuilder" />
+                <OptAMenuItem Name="Components"
+                                Href="/documentation/components" />
+                <OptAMenuItem Name="Components.Direct"
+                                Href="/documentation/componentsdirect" />
+                <OptAMenuItem Name="Storage"
+                                Href="/documentation/storage" />
+            </OptAMenuGroup>
+            <OptAMenuItem Name="Blog"
+                            Href="/blog" />
+            <OptAMenuItem Name="About"
+                            Href="/about" />
+        </OptAMenu>
+    </HeaderContent>
+    <MainContent Center="true">
+        @Body
+    </MainContent>
+    <OptAMessageBox />
+</OptAResponsive>

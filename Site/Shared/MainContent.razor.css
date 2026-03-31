@@ -1,0 +1,19 @@
+﻿
+main {
+    display: flex;
+    flex-direction: row;
+    color: var(--oa-main-color);    
+}
+
+main[center] {
+    justify-content: center;
+}
+
+main[small] {
+    flex-direction: column;
+}
+
+article {
+    max-width: 80%;
+    padding: 1em;
+}

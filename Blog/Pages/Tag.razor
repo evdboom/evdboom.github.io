@@ -1,6 +1,0 @@
-﻿@page "/tag/{tagName}"
-@if (!string.IsNullOrEmpty(TagName) && _content is not null)
-{
-    <Block Content="_content" />
-    <PostList Content="PostService.GetPostsForTag(TagName)" />
-}

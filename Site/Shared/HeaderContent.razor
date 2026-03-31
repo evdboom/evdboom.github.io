@@ -1,0 +1,14 @@
+﻿<header opta-header class="opta-bg">
+    @if (ShowToggler)
+    {
+        <div opta-toggler>
+            <button type="button" @onclick="() => _open = !_open">
+                <i class="bi bi-list" />
+            </button>
+        </div>
+    }
+    @if (_open)
+    {
+        @ChildContent
+    }    
+</header>
