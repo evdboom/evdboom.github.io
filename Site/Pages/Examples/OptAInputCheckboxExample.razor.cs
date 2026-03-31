@@ -1,4 +1,4 @@
-namespace Blog.Pages.Examples;
+namespace OptionA.Site.Pages.Examples;
 
 public partial class OptAInputCheckboxExample
 {

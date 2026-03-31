@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using OptionA.Blazor.Blog;
 
-namespace Blog.Shared
+namespace OptionA.Site.Shared
 {
     public partial class ComponentTester
     {

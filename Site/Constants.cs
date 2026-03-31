@@ -1,4 +1,4 @@
-﻿namespace Blog
+namespace OptionA.Site
 {
     public static class Constants
     {

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 
-namespace Blog.Pages
+namespace OptionA.Site.Pages
 {
 
 }

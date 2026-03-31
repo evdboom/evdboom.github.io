@@ -1,4 +1,4 @@
-﻿namespace Blog.Examples
+namespace OptionA.Site.Examples
 {
     public class ExampleValueComparer : IComparer<ExampleObject>
     {

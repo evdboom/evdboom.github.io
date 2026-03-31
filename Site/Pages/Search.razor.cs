@@ -1,4 +1,4 @@
-﻿namespace Blog.Pages
+namespace OptionA.Site.Pages
 {
 
 }

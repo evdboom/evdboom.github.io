@@ -1,5 +1,4 @@
-using Blog;
-using Blog.Client;
+using OptionA.Site;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using OptionA.Blazor.Blog;
@@ -17,7 +16,6 @@ static void ConfigureServices(IServiceCollection services, string baseAddress)
 {
     services
         .AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) })
-        .AddScoped<IPostClient, PostClient>()
         .AddOptionABlog(options =>
         {
             options.PostTitleClass = "opta-header text-center";

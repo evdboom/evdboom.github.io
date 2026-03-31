@@ -1,4 +1,4 @@
-﻿namespace Blog.Shared
+namespace OptionA.Site.Shared
 {
     public partial class SearchComponent
     {

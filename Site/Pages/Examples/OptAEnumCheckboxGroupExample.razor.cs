@@ -1,8 +1,8 @@
-using Blog.Examples;
-using Blog.Shared;
+using OptionA.Site.Examples;
+using OptionA.Site.Shared;
 using OptionA.Blazor.Components;
 
-namespace Blog.Pages.Examples
+namespace OptionA.Site.Pages.Examples
 {
     public partial class OptAEnumCheckboxGroupExample
     {

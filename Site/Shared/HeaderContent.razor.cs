@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using OptionA.Blazor.Components;
 
-namespace Blog.Shared
+namespace OptionA.Site.Shared
 {
     public partial class HeaderContent
     {

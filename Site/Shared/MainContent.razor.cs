@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 
-namespace Blog.Shared
+namespace OptionA.Site.Shared
 {
     public partial class MainContent
     {
