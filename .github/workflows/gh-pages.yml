@@ -33,6 +33,42 @@ jobs:
       - name: Publish
         run: dotnet publish OptionA.Site.slnx -c:Release -o:publish -p:GHPages=true
 
+      # Create index.html copies for all client-side routes so GitHub Pages
+      # serves them with HTTP 200 instead of falling back to 404.html.
+      - name: Create route index files
+        run: |
+          PUBLISH_DIR=publish/wwwroot
+          INDEX=$PUBLISH_DIR/index.html
+
+          # Parameterised routes that cannot be auto-discovered from @page directives.
+          # Add a line here whenever a new concrete parameterised route is deployed.
+          STATIC_ROUTES=(
+            projects/blazor
+            projects/devteam
+            projects/bindery
+            projects/bindery/privacy
+            documentation/blog
+            documentation/blogbuilder
+            documentation/components
+            documentation/componentsdirect
+            documentation/storage
+          )
+
+          # Auto-discover non-parameterised @page routes from razor files
+          while IFS= read -r route; do
+            [[ -z "$route" ]] && continue
+            mkdir -p "$PUBLISH_DIR/$route"
+            cp "$INDEX" "$PUBLISH_DIR/$route/index.html"
+          done < <(grep -r '@page "/' Site --include="*.razor" \
+                     | grep -v '{' \
+                     | sed 's/.*@page "\/\([^"]*\)".*/\1/')
+
+          # Create index.html for known parameterised routes
+          for route in "${STATIC_ROUTES[@]}"; do
+            mkdir -p "$PUBLISH_DIR/$route"
+            cp "$INDEX" "$PUBLISH_DIR/$route/index.html"
+          done
+
       # Upload artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
